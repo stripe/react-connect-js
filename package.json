@@ -67,7 +67,7 @@
     "react-dom": "^18.2.0"
   },
   "dependencies": {
-    "@stripe/connect-js": "/Users/jojo/stripe-public/react-connect-js/stripe-connect-js-1.0.0.tgz",
+    "@stripe/connect-js": "{{Path to connect-js tarball}}",
     "@types/react": "^18.0.37",
     "@types/react-dom": "^18.0.11",
     "eslint-plugin-react": "^7.32.2",

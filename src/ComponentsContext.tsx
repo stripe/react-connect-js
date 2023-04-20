@@ -8,6 +8,7 @@ export type ComponentsContextPayload = {
 export const ComponentsContext = React.createContext<ComponentsContextPayload | null>(
   null
 );
+
 ComponentsContext.displayName = 'ComponentsContext';
 
 export const ComponentsContextConsumer = ComponentsContext.Consumer;
