@@ -1,58 +1,85 @@
-import { StripeConnectInstance } from "@stripe/connect-js";
 import React from "react";
 import { useComponentsContext } from "./ComponentsContext";
+import { createComponent } from "./createComponent";
+import { useAttachAttribute } from "./utils/useAttachAttribute";
+import {
+  ConnectElementEventNames,
+  useAttachEvent,
+} from "./utils/useAttachEvent";
 
-export const StripeConnectPayments = (): HTMLElement | null => {
-  console.log("in payments test");
-  const { connectInstance } = useComponentsContext();
-  const payments = connectInstance.create("stripe-connect-payments");
-  console.log(payments);
-  return payments;
+export const StripeConnectPayments = (): JSX.Element => {
+  return createComponent("stripe-connect-payments");
 };
 
-export const StripeConnectPayouts = (): HTMLElement | null => {
-  const { connectInstance } = useComponentsContext();
-  return connectInstance.create("stripe-connect-payouts");
+export const StripeConnectPayouts = (): JSX.Element => {
+  return createComponent("stripe-connect-payouts");
+};
+
+export const StripeConnectAccountManagement = (): JSX.Element => {
+  return createComponent("stripe-connect-account-management");
+};
+
+export const StripeConnectInstantPayouts = (): JSX.Element => {
+  return createComponent("stripe-connect-instant-payouts");
 };
 
 export const StripeConnectPaymentDetails = ({
   chargeId,
-  visible,
-  close,
+  visible = false,
+  onClose,
+  inline = false,
 }: {
   chargeId: string;
-  visible: boolean;
-  close: () => void;
-}): HTMLElement | null => {
+  visible?: boolean;
+  onClose: () => void;
+  inline?: boolean;
+}): JSX.Element | null => {
+  const [
+    paymentDetails,
+    setPaymentDetails,
+  ] = React.useState<HTMLElement | null>(null);
   const { connectInstance } = useComponentsContext();
-  const paymentDetails = connectInstance.create(
-    "stripe-connect-payment-details"
-  );
-  paymentDetails?.addEventListener("close", () => {
-    close();
-  });
-  return paymentDetails;
-};
+  const wrapperDivRef = React.useRef<HTMLDivElement | null>(null);
+  const wrapper = <div ref={wrapperDivRef}></div>;
 
-export const StripeConnectAccountManagement = (): HTMLElement | null => {
-  const { connectInstance } = useComponentsContext();
-  return connectInstance.create("stripe-connect-account-management");
+  React.useLayoutEffect(() => {
+    const component = connectInstance.create("stripe-connect-payment-details");
+    setPaymentDetails(component);
+    if (wrapperDivRef.current !== null && component !== null) {
+      wrapperDivRef.current.replaceChildren(component);
+    }
+  }, []);
+
+  useAttachEvent(paymentDetails, ConnectElementEventNames.close, onClose);
+  useAttachAttribute(paymentDetails, "charge-id", chargeId);
+  useAttachAttribute(paymentDetails, "visible", visible);
+
+  return wrapper;
 };
 
 export const StripeConnectAccountOnboarding = (
-  onboardingComplete: () => void
-): HTMLElement | null => {
+  onOnboardingComplete: () => void
+): JSX.Element | null => {
+  const [onboarding, setOnboarding] = React.useState<HTMLElement | null>(null);
   const { connectInstance } = useComponentsContext();
-  const onboarding = connectInstance.create(
-    "stripe-connect-account-onboarding"
-  );
-  onboarding?.addEventListener("onboardingcomplete", (ev) => {
-    onboardingComplete();
-  });
-  return onboarding;
-};
+  const wrapperDivRef = React.useRef<HTMLDivElement | null>(null);
+  const wrapper = <div ref={wrapperDivRef}></div>;
 
-export const StripeConnectNotificationBanner = (): HTMLElement | null => {
-  const { connectInstance } = useComponentsContext();
-  return connectInstance.create("stripe-connect-instant-payouts");
+  React.useLayoutEffect(() => {
+    const component = connectInstance.create(
+      "stripe-connect-account-onboarding"
+    );
+    setOnboarding(component);
+    if (wrapperDivRef.current !== null && component !== null) {
+      wrapperDivRef.current.replaceChildren(component);
+    }
+  }, []);
+
+  useAttachEvent(
+    onboarding,
+    ConnectElementEventNames.onboardingComplete,
+    onOnboardingComplete
+  );
+
+  return wrapper;
 };
