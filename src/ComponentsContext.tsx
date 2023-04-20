@@ -1,5 +1,5 @@
-import React from "react";
-import * as connectJs from "@stripe/connect-js";
+import React from 'react';
+import * as connectJs from '@stripe/connect-js';
 
 export type ComponentsContextPayload = {
   connectInstance: connectJs.StripeConnectInstance;
@@ -8,7 +8,7 @@ export type ComponentsContextPayload = {
 export const ComponentsContext = React.createContext<ComponentsContextPayload | null>(
   null
 );
-ComponentsContext.displayName = "ComponentsContext";
+ComponentsContext.displayName = 'ComponentsContext';
 
 export const ComponentsContextConsumer = ComponentsContext.Consumer;
 export const ComponentsContextProvider = ComponentsContext.Provider;

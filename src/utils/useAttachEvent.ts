@@ -1,16 +1,16 @@
-import React from "react";
+import React from 'react';
 
 export enum ConnectElementEventNames {
-  onboardingComplete = "onboardingcomplete",
-  close = "close",
-  instantPayoutCreated = "instantpayoutcreated",
+  onboardingComplete = 'onboardingcomplete',
+  close = 'close',
+  instantPayoutCreated = 'instantpayoutcreated',
 }
 
 export const useAttachEvent = (
   component: HTMLElement | null,
   eventName: ConnectElementEventNames,
   listener: () => void
-) => {
+): void => {
   React.useEffect(() => {
     if (component) {
       component.addEventListener(eventName, listener);
