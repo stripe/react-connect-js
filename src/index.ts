@@ -1,5 +1,2 @@
-function helloNpm() {
-  return "hello NPM";
-}
-
-module.exports = helloNpm;
+export * from "./Components";
+export * from "./ComponentsContext";

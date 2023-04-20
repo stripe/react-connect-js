@@ -5,6 +5,7 @@
   "main": "dist/react-connect.js",
   "module": "dist/react-connect.esm.js",
   "types": "dist/react-connect.d.ts",
+  "type":"module",
   "scripts": {
     "test": "yarn run lint && yarn run lint:prettier && yarn run test:unit && yarn run typecheck",
     "test:unit": "jest",
@@ -54,11 +55,23 @@
     "jest": "^24.9.0",
     "prettier": "^1.19.1",
     "rimraf": "^2.6.2",
-    "rollup": "^1.29.0",
+    "rollup": "~2.66",
     "rollup-plugin-babel": "^4.4.0",
     "rollup-plugin-typescript2": "^0.25.3",
     "ts-jest": "^24.3.0",
     "typescript": "^4.1.2",
     "zx": "^4.2.0"
+  },
+  "dependencies": {
+    "@stripe/connect-js": "/Users/jojo/stripe-public/react-connect-js/stripe-connect-js-1.0.0.tgz",
+    "@types/react": "^18.0.37",
+    "@types/react-dom": "^18.0.11",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-replace": "^2.2.0",
+    "rollup-plugin-terser": "^7.0.2",
+    "rollup-plugin-ts": "^3.2.0"
   }
 }
