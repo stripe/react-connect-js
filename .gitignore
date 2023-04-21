@@ -4,3 +4,5 @@ dist
 es
 lib
 *.log
+.yalc
+yalc.lock
