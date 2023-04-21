@@ -1,24 +1,25 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import React from 'react';
-import {useComponentsContext} from './ComponentsContext';
-import {CreateComponent} from './CreateComponent';
+import {useCreateComponent} from './useCreateComponent';
 import {useAttachAttribute} from './utils/useAttachAttribute';
 import {ConnectElementEventNames, useAttachEvent} from './utils/useAttachEvent';
 
 export const StripeConnectPayments = (): JSX.Element => {
-  return CreateComponent('stripe-connect-payments');
+  const {wrapper} = useCreateComponent('stripe-connect-payments');
+  return wrapper;
 };
 
 export const StripeConnectPayouts = (): JSX.Element => {
-  return CreateComponent('stripe-connect-payouts');
+  const {wrapper} = useCreateComponent('stripe-connect-payouts');
+  return wrapper;
 };
 
 export const StripeConnectAccountManagement = (): JSX.Element => {
-  return CreateComponent('stripe-connect-account-management');
+  const {wrapper} = useCreateComponent('stripe-connect-account-management');
+  return wrapper;
 };
 
 export const StripeConnectInstantPayouts = (): JSX.Element => {
-  return CreateComponent('stripe-connect-instant-payouts');
+  const {wrapper} = useCreateComponent('stripe-connect-instant-payouts');
+  return wrapper;
 };
 
 export const StripeConnectPaymentDetails = ({
@@ -30,21 +31,9 @@ export const StripeConnectPaymentDetails = ({
   onClose: () => void;
   visible?: boolean;
 }): JSX.Element | null => {
-  const [
-    paymentDetails,
-    setPaymentDetails,
-  ] = React.useState<HTMLElement | null>(null);
-  const {connectInstance} = useComponentsContext();
-  const wrapperDivRef = React.useRef<HTMLDivElement | null>(null);
-  const wrapper = <div ref={wrapperDivRef}></div>;
-
-  React.useLayoutEffect(() => {
-    const component = connectInstance.create('stripe-connect-payment-details');
-    setPaymentDetails(component);
-    if (wrapperDivRef.current !== null && component !== null) {
-      wrapperDivRef.current.replaceChildren(component);
-    }
-  }, []);
+  const {wrapper, component: paymentDetails} = useCreateComponent(
+    'stripe-connect-payment-details'
+  );
 
   useAttachEvent(paymentDetails, ConnectElementEventNames.close, onClose);
   useAttachAttribute(paymentDetails, 'charge-id', chargeId);
@@ -56,20 +45,9 @@ export const StripeConnectPaymentDetails = ({
 export const StripeConnectAccountOnboarding = (
   onOnboardingComplete: () => void
 ): JSX.Element | null => {
-  const [onboarding, setOnboarding] = React.useState<HTMLElement | null>(null);
-  const {connectInstance} = useComponentsContext();
-  const wrapperDivRef = React.useRef<HTMLDivElement | null>(null);
-  const wrapper = <div ref={wrapperDivRef}></div>;
-
-  React.useLayoutEffect(() => {
-    const component = connectInstance.create(
-      'stripe-connect-account-onboarding'
-    );
-    setOnboarding(component);
-    if (wrapperDivRef.current !== null && component !== null) {
-      wrapperDivRef.current.replaceChildren(component);
-    }
-  }, []);
+  const {wrapper, component: onboarding} = useCreateComponent(
+    'stripe-connect-payment-details'
+  );
 
   useAttachEvent(
     onboarding,
