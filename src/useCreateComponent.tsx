@@ -21,5 +21,5 @@ export const useCreateComponent = (
     }
   }, []);
 
-  return {wrapper: wrapper, component: component};
+  return {wrapper, component};
 };

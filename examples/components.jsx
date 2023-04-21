@@ -8,7 +8,6 @@ import {
   ComponentsContextProvider,
 } from '@stripe/react-connect-js';
 
-const stripePromise = loadConnect();
 const stripeConnect = await loadConnect();
 
 const connectInstance = stripeConnect.initialize({
