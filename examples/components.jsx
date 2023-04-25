@@ -2,10 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {loadConnect} from '@stripe/connect-js';
 import {
-  StripeConnectPayments,
-  StripeConnectPayouts,
-  StripeConnectPaymentDetails,
-  ComponentsContextProvider,
+  ConnectPayments,
+  ConnectPayouts,
+  ConnectPaymentDetails,
+  ComponentsProvider
 } from '@stripe/react-connect-js';
 
 const stripeConnect = await loadConnect();
@@ -20,17 +20,17 @@ const connectInstance = stripeConnect.initialize({
 
 const App = () => {
   return (
-    <ComponentsContextProvider value={{connectInstance: connectInstance}}>
-      <StripeConnectPayouts />
-      <StripeConnectPayments />
-      <StripeConnectPaymentDetails
+    <ConnectComponentsProvider value={{connectInstance: connectInstance}}>
+      <ConnectPayouts />
+      <ConnectPayments />
+      <ConnectPaymentDetails
         onClose={() => {
           console.log('closed');
         }}
         chargeId="pi_3MuO0YGac4z90jID0RJQbUpF"
         visible
       />
-    </ComponentsContextProvider>
+    </ConnectComponentsProvider>
   );
 };
 
