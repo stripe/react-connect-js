@@ -2,27 +2,32 @@ import {useCreateComponent} from './useCreateComponent';
 import {useAttachAttribute} from './utils/useAttachAttribute';
 import {ConnectElementEventNames, useAttachEvent} from './utils/useAttachEvent';
 
-export const StripeConnectPayments = (): JSX.Element => {
+export const ConnectPayments = (): JSX.Element => {
   const {wrapper} = useCreateComponent('stripe-connect-payments');
   return wrapper;
 };
 
-export const StripeConnectPayouts = (): JSX.Element => {
+export const ConnectPayouts = (): JSX.Element => {
   const {wrapper} = useCreateComponent('stripe-connect-payouts');
   return wrapper;
 };
 
-export const StripeConnectAccountManagement = (): JSX.Element => {
+export const ConnectAccountManagement = (): JSX.Element => {
   const {wrapper} = useCreateComponent('stripe-connect-account-management');
   return wrapper;
 };
 
-export const StripeConnectInstantPayouts = (): JSX.Element => {
+export const ConnectInstantPayouts = (): JSX.Element => {
   const {wrapper} = useCreateComponent('stripe-connect-instant-payouts');
   return wrapper;
 };
 
-export const StripeConnectPaymentDetails = ({
+export const ConnectNotificationBanner = (): JSX.Element => {
+  const {wrapper} = useCreateComponent('stripe-connect-notification-banner');
+  return wrapper;
+};
+
+export const ConnectPaymentDetails = ({
   chargeId,
   onClose,
   visible = false,
@@ -42,11 +47,11 @@ export const StripeConnectPaymentDetails = ({
   return wrapper;
 };
 
-export const StripeConnectAccountOnboarding = (
+export const ConnectAccountOnboarding = (
   onOnboardingComplete: () => void
 ): JSX.Element | null => {
   const {wrapper, component: onboarding} = useCreateComponent(
-    'stripe-connect-payment-details'
+    'stripe-connect-account-onboarding'
   );
 
   useAttachEvent(
