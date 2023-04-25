@@ -1,13 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import * as React from 'react';
 import {ConnectElementTagName} from '@stripe/connect-js';
-import React from 'react';
-import {useComponentsContext} from './ComponentsContext';
+import {useConnectComponents} from './ConnectComponents';
 
 export const useCreateComponent = (
   tagName: ConnectElementTagName
 ): {wrapper: JSX.Element; component: HTMLElement | null} => {
   const [component, setComponent] = React.useState<HTMLElement | null>(null);
-  const {connectInstance} = useComponentsContext();
+  const {connectInstance} = useConnectComponents();
   const wrapperDivRef = React.useRef<HTMLDivElement | null>(null);
   const wrapper = <div ref={wrapperDivRef}></div>;
 

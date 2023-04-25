@@ -1,2 +1,2 @@
 export * from './Components';
-export * from './ComponentsContext';
+export * from './ConnectComponents';
