@@ -5,7 +5,7 @@ import {
   ConnectPayments,
   ConnectPayouts,
   ConnectPaymentDetails,
-  ComponentsProvider
+  ConnectComponentsProvider
 } from '@stripe/react-connect-js';
 
 const stripeConnect = await loadConnect();
@@ -20,7 +20,7 @@ const connectInstance = stripeConnect.initialize({
 
 const App = () => {
   return (
-    <ConnectComponentsProvider value={{connectInstance: connectInstance}}>
+    <ConnectComponentsProvider connectInstance={connectInstance}>
       <ConnectPayouts />
       <ConnectPayments />
       <ConnectPaymentDetails

@@ -11,7 +11,21 @@ export const ConnectComponentsContext =
 ConnectComponentsContext.displayName = 'ConnectComponents';
 
 export const ConnectComponentsConsumer = ConnectComponentsContext.Consumer;
-export const ConnectComponentsProvider = ConnectComponentsContext.Provider;
+
+export const ConnectComponentsProvider = ({
+  connectInstance,
+  children,
+}: {
+  connectInstance: connectJs.StripeConnectInstance;
+  children: any;
+}): JSX.Element => {
+  return (
+    <ConnectComponentsContext.Provider value={{connectInstance}}>
+      {children}
+    </ConnectComponentsContext.Provider>
+  );
+};
+
 export const useConnectComponents = (): ConnectComponentsPayload => {
   const context = React.useContext(ConnectComponentsContext);
   if (!context) {
