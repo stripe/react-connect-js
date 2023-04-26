@@ -5,7 +5,6 @@
   "main": "dist/react-connect.js",
   "module": "dist/react-connect.esm.js",
   "types": "dist/react-connect.d.ts",
-  "type": "module",
   "scripts": {
     "test": "yarn run lint && yarn run lint:prettier && yarn run test:unit && yarn run typecheck",
     "test:unit": "jest",
@@ -15,10 +14,10 @@
     "build": "yarn run clean && yarn run rollup -c",
     "checkimport": "scripts/check-imports",
     "clean": "rimraf dist",
-    "prettier:fix": "prettier './**/*.js' './**/*.ts' './**/*.tsx' './**/*.css' './**/*.md' --write",
-    "prepublishOnly": "echo \"\nPlease use ./scripts/publish instead\n\" && exit 1",
+    "prettier": "prettier './**/*.js' './**/*.ts' './**/*.tsx' './**/*.md' --write",
     "doctoc": "doctoc README.md",
-    "storybook": "start-storybook -p 6006 "
+    "storybook": "start-storybook -p 6006 ",
+    "local-test": "yalc add @stripe/connect-js@1.0.0 && yalc publish"
   },
   "repository": {
     "type": "git",
@@ -67,7 +66,7 @@
     "react-dom": "^18.2.0"
   },
   "dependencies": {
-    "@stripe/connect-js": "{{Path to connect-js tarball}}",
+    "@stripe/connect-js": "file:.yalc/@stripe/connect-js",
     "@types/react": "^18.0.37",
     "@types/react-dom": "^18.0.11",
     "eslint-plugin-react": "^7.32.2",

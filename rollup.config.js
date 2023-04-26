@@ -4,7 +4,7 @@ import resolve from "rollup-plugin-node-resolve";
 import { terser } from "rollup-plugin-terser";
 import replace from "rollup-plugin-replace";
 import ts from "rollup-plugin-ts";
-import pkg from "./package.json" assert { type: "json" };
+import pkg from "./package.json";
 
 const PLUGINS = [
   ts({
