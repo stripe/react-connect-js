@@ -9,6 +9,11 @@ This project is a thin React wrapper around
 It allows you to add embedded UIs to any React app, and manages the state and
 lifecycle of embedded UIs for you.
 
+### Components
+
+The list of supported components and their required parameters can be found
+[here](https://stripe.com/docs/connect/get-started-connect-embedded-components#supported-connect-embedded-components)
+
 ### Minimal example
 
 First, install React Connect.js and

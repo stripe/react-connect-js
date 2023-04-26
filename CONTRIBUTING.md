@@ -2,7 +2,7 @@
 
 Contributions of any kind are welcome! If you've found a bug or have a feature
 request, please feel free to
-[open an issue](https://github.com/stripe/stripe-connect-furever/issues).
+[open an issue](https://github.com/stripe/react-connect-js/issues).
 
 To make changes yourself, follow these steps:
 
