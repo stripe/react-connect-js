@@ -1,0 +1,10 @@
+{
+  "version": "v1",
+  "packages": {
+    "@stripe/connect-js": {
+      "version": "1.0.0",
+      "signature": "d54601fca4f12fe8d3e870f94a902b0e",
+      "file": true
+    }
+  }
+}
