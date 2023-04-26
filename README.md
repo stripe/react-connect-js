@@ -63,6 +63,10 @@ const App = () => (
 ReactDOM.render(<App />, document.body);
 ```
 
+We’ve placed a random API key in this example. Replace it with your
+[actual publishable API keys](https://dashboard.stripe.com/account/apikeys) to
+test this code through your Connect account.
+
 ### Contributing
 
 If you would like to contribute to React Connect.js, please make sure to read
