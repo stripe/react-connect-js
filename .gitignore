@@ -4,3 +4,4 @@ dist
 es
 lib
 *.log
+.yalc
