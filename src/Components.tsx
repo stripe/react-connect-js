@@ -47,9 +47,11 @@ export const ConnectPaymentDetails = ({
   return wrapper;
 };
 
-export const ConnectAccountOnboarding = (
-  onOnboardingComplete: () => void
-): JSX.Element | null => {
+export const ConnectAccountOnboarding = ({
+  onOnboardingComplete,
+}: {
+  onOnboardingComplete: () => void;
+}): JSX.Element | null => {
   const {wrapper, component: onboarding} = useCreateComponent(
     'stripe-connect-account-onboarding'
   );
