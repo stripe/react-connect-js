@@ -5,6 +5,12 @@
   "main": "dist/react-connect.js",
   "module": "dist/react-connect.esm.js",
   "types": "dist/react-connect.d.ts",
+  "files": [
+    "dist",
+    "src",
+    "node_modules",
+    ".yalc"
+  ],
   "scripts": {
     "test": "yarn run lint && yarn run lint:prettier && yarn run test:unit && yarn run typecheck",
     "test:unit": "jest",
@@ -72,12 +78,11 @@
     "zx": "^4.2.0"
   },
   "peerDependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
-  },
-  "dependencies": {
     "@stripe/connect-js": "file:.yalc/@stripe/connect-js",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
+
+  },
+  "dependencies": {
   }
 }

@@ -63,6 +63,10 @@ const App = () => (
 ReactDOM.render(<App />, document.body);
 ```
 
+The `stripeConnect.initalize` function returns a `ConnectInstance` once you
+initialize it with a publishable key and a client secret returned from the
+[Account Session API](https://stripe.com/docs/api/account_sessions/create) call.
+
 We’ve placed a random API key in this example. Replace it with your
 [actual publishable API keys](https://dashboard.stripe.com/account/apikeys) to
 test this code through your Connect account.
