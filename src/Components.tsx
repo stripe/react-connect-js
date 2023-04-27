@@ -30,11 +30,11 @@ export const ConnectNotificationBanner = (): JSX.Element => {
 export const ConnectPaymentDetails = ({
   chargeId,
   onClose,
-  visible = false,
+  visible = undefined,
 }: {
   chargeId: string;
   onClose: () => void;
-  visible?: boolean;
+  visible?: boolean | undefined;
 }): JSX.Element | null => {
   const {wrapper, component: paymentDetails} = useCreateComponent(
     'stripe-connect-payment-details'

@@ -5,3 +5,5 @@ es
 lib
 *.log
 .yalc
+yalc.lock
+yarn.lock

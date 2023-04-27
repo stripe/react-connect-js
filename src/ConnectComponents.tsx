@@ -1,16 +1,14 @@
 import * as React from 'react';
 import * as connectJs from '@stripe/connect-js';
 
-export type ConnectComponentsPayload = {
+type ConnectComponentsPayload = {
   connectInstance: connectJs.StripeConnectInstance;
 };
 
-export const ConnectComponentsContext =
+const ConnectComponentsContext =
   React.createContext<ConnectComponentsPayload | null>(null);
 
 ConnectComponentsContext.displayName = 'ConnectComponents';
-
-export const ConnectComponentsConsumer = ConnectComponentsContext.Consumer;
 
 export const ConnectComponentsProvider = ({
   connectInstance,
