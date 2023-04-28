@@ -1,7 +1,7 @@
 import React from 'react';
 
 export enum ConnectElementEventNames {
-  onboardingComplete = 'onboardingcomplete',
+  onboardingExited = 'onboardingexited',
   close = 'close',
   instantPayoutCreated = 'instantpayoutcreated',
 }
