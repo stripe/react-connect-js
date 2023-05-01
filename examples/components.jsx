@@ -11,7 +11,7 @@ import {
 const stripeConnect = await loadConnect();
 
 const connectInstance = stripeConnect.initialize({
-  publishableKey: '{{your key here}}',
+  publishableKey: '{{your publishable key}}',
   clientSecret: '{{your client secret}}',
   appearance: {
     colorPrimary: '#228403', //optional appearance param
@@ -27,7 +27,7 @@ const App = () => {
         onClose={() => {
           console.log('closed');
         }}
-        chargeId="pi_3MuO0YGac4z90jID0RJQbUpF"
+        chargeId="pi_test123"
         visible
       />
     </ConnectComponentsProvider>
