@@ -1,7 +1,7 @@
 {
   "name": "@stripe/react-connect-js",
   "version": "1.0.0",
-  "description": "React components for Connect.js and Connect embedded UIs",
+  "description": "React components for Connect.js and Connect embedded components",
   "main": "dist/react-connect.js",
   "module": "dist/react-connect.esm.js",
   "types": "dist/react-connect.d.ts",
