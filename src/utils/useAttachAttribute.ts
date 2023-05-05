@@ -6,7 +6,7 @@ export const useAttachAttribute = (
   value: string | boolean | undefined
 ): void => {
   React.useEffect(() => {
-    if (component && value) {
+    if (component && value !== undefined) {
       component.setAttribute(attribute, value.toString());
     }
   }, [component, attribute, value]);
