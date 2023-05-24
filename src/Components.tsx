@@ -28,13 +28,6 @@ export const ConnectNotificationBanner = (): JSX.Element => {
   return wrapper;
 };
 
-export const ConnectTransactions = (): JSX.Element => {
-  const {wrapper} = useCreateComponent(
-    'stripe-connect-transactions' as ConnectElementTagName
-  );
-  return wrapper;
-};
-
 export const ConnectPaymentDetails = ({
   chargeId,
   onClose,
