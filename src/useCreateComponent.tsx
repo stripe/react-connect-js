@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import * as React from 'react';
-import {ConnectElementTagName} from '@stripe/connect-js';
 import {useConnectComponents} from './ConnectComponents';
+import {ConnectElementTagName} from '@stripe/connect-js';
 
 export const useCreateComponent = (
   tagName: ConnectElementTagName
