@@ -8,7 +8,7 @@ export enum ConnectElementEventNames {
 
 export const useAttachEvent = (
   component: HTMLElement | null,
-  eventName: ConnectElementEventNames | string,
+  eventName: ConnectElementEventNames,
   listener: () => void
 ): void => {
   React.useEffect(() => {
