@@ -1,3 +1,4 @@
+import {ConnectElementTagName} from '@stripe/connect-js';
 import {useCreateComponent} from './useCreateComponent';
 import {useAttachAttribute} from './utils/useAttachAttribute';
 import {ConnectElementEventNames, useAttachEvent} from './utils/useAttachEvent';
@@ -28,7 +29,9 @@ export const ConnectNotificationBanner = (): JSX.Element => {
 };
 
 export const ConnectTransactions = (): JSX.Element => {
-  const {wrapper} = useCreateComponent('stripe-connect-transactions');
+  const {wrapper} = useCreateComponent(
+    'stripe-connect-transactions' as ConnectElementTagName
+  );
   return wrapper;
 };
 
