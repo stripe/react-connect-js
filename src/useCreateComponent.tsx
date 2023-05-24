@@ -1,9 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import * as React from 'react';
 import {useConnectComponents} from './ConnectComponents';
+import {ConnectElementTagName} from '@stripe/connect-js';
 
 export const useCreateComponent = (
-  tagName: string
+  tagName: ConnectElementTagName
 ): {wrapper: JSX.Element; component: HTMLElement | null} => {
   const [component, setComponent] = React.useState<HTMLElement | null>(null);
   const {connectInstance} = useConnectComponents();
