@@ -4,7 +4,7 @@ import {useConnectComponents} from './ConnectComponents';
 import {ConnectElementTagName} from '@stripe/connect-js';
 
 export const useCreateComponent = (
-  tagName: ConnectElementTagName
+  tagName: string
 ): {wrapper: JSX.Element; component: HTMLElement | null} => {
   const [component, setComponent] = React.useState<HTMLElement | null>(null);
   const {connectInstance} = useConnectComponents();
@@ -13,7 +13,9 @@ export const useCreateComponent = (
 
   React.useLayoutEffect(() => {
     if (wrapperDivRef.current !== null && component === null) {
-      const newComponent = connectInstance.create(tagName);
+      const newComponent = connectInstance.create(
+        tagName as ConnectElementTagName
+      );
       setComponent(newComponent);
       if (newComponent !== null) {
         wrapperDivRef.current.replaceChildren(newComponent);
