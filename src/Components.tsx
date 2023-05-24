@@ -1,4 +1,3 @@
-import {ConnectElementTagName} from '@stripe/connect-js';
 import {useCreateComponent} from './useCreateComponent';
 import {useAttachAttribute} from './utils/useAttachAttribute';
 import {ConnectElementEventNames, useAttachEvent} from './utils/useAttachEvent';
