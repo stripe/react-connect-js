@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "esnext", // Let Babel deal with transpiling new language features
+    "target": "ES6", // Let Babel deal with transpiling new language features
     "module": "esnext",
     "moduleResolution": "node",
     "jsx": "react",
