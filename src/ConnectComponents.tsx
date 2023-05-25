@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as connectJs from '@stripe/connect-js';
 
 type ConnectComponentsPayload = {
-  connectInstance: connectJs.StripeConnectInstance;
+  connectInstance: connectJs.StripeConnectInstance | null;
 };
 
 const ConnectComponentsContext =
@@ -14,11 +14,25 @@ export const ConnectComponentsProvider = ({
   connectInstance,
   children,
 }: {
-  connectInstance: connectJs.StripeConnectInstance;
+  connectInstance:
+    | Promise<connectJs.StripeConnectInstance>
+    | connectJs.StripeConnectInstance
+    | null;
   children: any;
 }): JSX.Element => {
+  const [resolvedConnectInstance, setResolvedConnectInstance] =
+    React.useState<connectJs.StripeConnectInstance | null>(null);
+
+  React.useEffect(() => {
+    (async () => {
+      setResolvedConnectInstance(await connectInstance);
+    })();
+  }, [connectInstance]);
+
   return (
-    <ConnectComponentsContext.Provider value={{connectInstance}}>
+    <ConnectComponentsContext.Provider
+      value={{connectInstance: resolvedConnectInstance}}
+    >
       {children}
     </ConnectComponentsContext.Provider>
   );
