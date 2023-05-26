@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import * as React from 'react';
 import {useConnectComponents} from './ConnectComponents';
 import {ConnectElementTagName} from '@stripe/connect-js';
@@ -12,14 +11,18 @@ export const useCreateComponent = (
   const wrapper = <div ref={wrapperDivRef}></div>;
 
   React.useLayoutEffect(() => {
-    if (wrapperDivRef.current !== null && component === null) {
+    if (
+      wrapperDivRef.current !== null &&
+      connectInstance &&
+      component === null
+    ) {
       const newComponent = connectInstance.create(tagName);
       setComponent(newComponent);
       if (newComponent !== null) {
         wrapperDivRef.current.replaceChildren(newComponent);
       }
     }
-  }, []);
+  }, [component, connectInstance, tagName]);
 
   return {wrapper, component};
 };

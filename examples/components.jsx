@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import {loadConnect} from '@stripe/connect-js';
 import {
   ConnectPayments,
@@ -8,15 +7,19 @@ import {
   ConnectComponentsProvider
 } from '@stripe/react-connect-js';
 
-const stripeConnect = await loadConnect();
+const loadConnectJs = async () => {
+  const stripeConnect = await loadConnect();
 
-const connectInstance = stripeConnect.initialize({
-  publishableKey: '{{your publishable key}}',
-  clientSecret: '{{your client secret}}',
-  appearance: {
-    colorPrimary: '#228403', //optional appearance param
-  },
-});
+  return stripeConnect.initialize({
+    publishableKey: '{{your publishable key}}',
+    clientSecret: '{{your client secret}}',
+    appearance: {
+      colorPrimary: '#228403', //optional appearance param
+    },
+  });
+};
+
+const connectInstance = loadConnectJs();
 
 const App = () => {
   return (
