@@ -40,7 +40,9 @@ import ReactDOM from 'react-dom';
 import {loadConnect} from '@stripe/connect-js';
 import {
   ConnectPayments,
-  ConnectAccountOnboarding,
+  ConnectPayouts,
+  ConnectPaymentDetails,
+  ConnectComponentsProvider
 } from '@stripe/react-connect-js';
 
 const stripeConnect = await loadConnect();
@@ -56,10 +58,13 @@ const connectInstance = stripeConnect.initialize({
 const App = () => (
   <ConnectComponentsProvider connectInstance={connectInstance}>
     <ConnectPayments />
-    <ConnectAccountOnboarding
-      onOnboardingComplete={() => {
-        console.log('complete');
+    <ConnectPayouts />
+    <ConnectPaymentDetails
+      onClose={() => {
+        console.log('closed');
       }}
+      chargeId="pi_test123"
+      visible
     />
   </ConnectComponentsProvider>
 );
@@ -71,7 +76,7 @@ The `stripeConnect.initalize` function returns a `ConnectInstance` once you
 initialize it with a publishable key and a client secret returned from the
 [Account Session API](https://stripe.com/docs/api/account_sessions/create) call.
 
-We’ve placed a random API key in this example. Replace it with your
+We’ve placed a placeholder API key in this example. Replace it with your
 [actual publishable API keys](https://dashboard.stripe.com/account/apikeys) to
 test this code through your Connect account.
 
