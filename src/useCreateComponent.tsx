@@ -13,7 +13,7 @@ export const useCreateComponent = (
 
   React.useLayoutEffect(() => {
     if (wrapperDivRef.current !== null && component === null) {
-      const newComponent = connectInstance.create(tagName);
+      const newComponent = connectInstance.create(tagName: tagName, reactSdk: true);
       setComponent(newComponent);
       if (newComponent !== null) {
         wrapperDivRef.current.replaceChildren(newComponent);
