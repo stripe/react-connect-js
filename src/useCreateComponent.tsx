@@ -14,7 +14,7 @@ export const useCreateComponent = (
 
   React.useLayoutEffect(() => {
     if (wrapperDivRef.current !== null && component === null) {
-      connectInstance.setReactSdkAnalytics(version);
+      (connectInstance as any).setReactSdkAnalytics(version);
       const newComponent = connectInstance.create(tagName);
       setComponent(newComponent);
       if (newComponent !== null) {
