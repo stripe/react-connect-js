@@ -2,7 +2,16 @@
 import {version} from '.././package.json';
 import * as React from 'react';
 import {useConnectComponents} from './ConnectComponents';
-import {ConnectElementTagName} from '@stripe/connect-js';
+import {
+  ConnectElementTagName,
+  IStripeConnectUpdateParams,
+} from '@stripe/connect-js';
+
+interface IConnectJSWithPrivateMethods {
+  create: (tagName: ConnectElementTagName) => HTMLElement | null;
+  update: (options: IStripeConnectUpdateParams) => void;
+  setReactSdkAnalytics: (version: string) => void;
+}
 
 export const useCreateComponent = (
   tagName: ConnectElementTagName
@@ -14,7 +23,13 @@ export const useCreateComponent = (
 
   React.useLayoutEffect(() => {
     if (wrapperDivRef.current !== null && component === null) {
-      (connectInstance as any).setReactSdkAnalytics(version);
+      try {
+        (connectInstance as IConnectJSWithPrivateMethods).setReactSdkAnalytics(
+          version
+        );
+      } catch (e) {
+        console.log('Error setting React Sdk version with error message: ', e);
+      }
       const newComponent = connectInstance.create(tagName);
       setComponent(newComponent);
       if (newComponent !== null) {
