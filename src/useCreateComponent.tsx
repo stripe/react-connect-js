@@ -1,4 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import {version} from '.././package.json';
 import * as React from 'react';
 import {useConnectComponents} from './ConnectComponents';
 import {ConnectElementTagName} from '@stripe/connect-js';
@@ -13,7 +14,8 @@ export const useCreateComponent = (
 
   React.useLayoutEffect(() => {
     if (wrapperDivRef.current !== null && component === null) {
-      const newComponent = connectInstance.create(tagName: tagName, reactSdk: true);
+      connectInstance.setReactSdkAnalytics(version);
+      const newComponent = connectInstance.create(tagName);
       setComponent(newComponent);
       if (newComponent !== null) {
         wrapperDivRef.current.replaceChildren(newComponent);
