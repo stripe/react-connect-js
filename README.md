@@ -42,7 +42,7 @@ import {
   ConnectPayments,
   ConnectPayouts,
   ConnectPaymentDetails,
-  ConnectComponentsProvider,
+  ConnectComponentsProvider
 } from '@stripe/react-connect-js';
 
 const stripeConnect = await loadConnect();
