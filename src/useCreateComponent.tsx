@@ -24,9 +24,9 @@ export const useCreateComponent = (
   React.useLayoutEffect(() => {
     if (wrapperDivRef.current !== null && component === null) {
       try {
-        (connectInstance as IConnectJSWithPrivateMethods).setReactSdkAnalytics(
-          version
-        );
+        (
+          connectInstance as unknown as IConnectJSWithPrivateMethods
+        ).setReactSdkAnalytics(version);
       } catch (e) {
         console.log('Error setting React Sdk version with error message: ', e);
       }
