@@ -32,18 +32,29 @@ export const ConnectPaymentDetails = ({
 };
 
 export const ConnectAccountOnboarding = ({
-  onOnboardingExited,
+  onExit,
+  recipientTermsOfServiceUrl,
+  fullTermsOfServiceUrl,
 }: {
-  onOnboardingExited: () => void;
+  onExit: () => void;
+  recipientTermsOfServiceUrl?: string;
+  fullTermsOfServiceUrl?: string;
 }): JSX.Element | null => {
   const {wrapper, component: onboarding} =
     useCreateComponent('account-onboarding');
 
-  useAttachEvent(
+  useAttachAttribute(
     onboarding,
-    ConnectElementEventNames.onboardingExited,
-    onOnboardingExited
+    'recipient-terms-of-service-url',
+    recipientTermsOfServiceUrl
   );
+  useAttachAttribute(
+    onboarding,
+    'full-terms-of-service-url',
+    fullTermsOfServiceUrl
+  );
+
+  useAttachEvent(onboarding, ConnectElementEventNames.exit, onExit);
 
   return wrapper;
 };
