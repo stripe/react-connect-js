@@ -1,7 +1,7 @@
 import React from 'react';
 
 export enum ConnectElementEventNames {
-  exit = 'onExit',
+  exit = 'exit',
   close = 'close',
   instantPayoutCreated = 'instantpayoutcreated',
 }
