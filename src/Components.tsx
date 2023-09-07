@@ -59,6 +59,7 @@ export const ConnectAccountOnboarding = ({
   );
 
   useAttachAttribute(onboarding, 'privacy-policy-url', privacyPolicyUrl);
+  
   useAttachAttribute(
     onboarding,
     'skip-terms-of-service-collection',
