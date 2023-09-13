@@ -81,7 +81,7 @@
     "zx": "^4.2.0"
   },
   "peerDependencies": {
-    "@stripe/connect-js": "^1.0.4",
+    "@stripe/connect-js": "^2.0.1",
     "react": "^16.8.0",
     "react-dom": "^16.8.0"
   }
