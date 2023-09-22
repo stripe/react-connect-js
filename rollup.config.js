@@ -15,7 +15,8 @@ const PLUGINS = [
     extensions: ['.ts', '.js', '.tsx', '.jsx'],
   }),
   replace({
-    _VERSION: JSON.stringify(pkg.version),
+    // This string is replaced by the npm package version when bundling
+    _NPM_PACKAGE_VERSION_: pkg.version,
   }),
   json(),
 ];
