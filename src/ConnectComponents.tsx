@@ -19,19 +19,26 @@ export const ConnectComponentsProvider = ({
   children: any;
   initParams?: connectJs.IStripeConnectInitParams | undefined;
 }): JSX.Element => {
-  if (connectInstance === null && !initParams) {
+  const [storedConnectInstance, setStoredConnectInstance] =
+    React.useState<connectJs.StripeConnectInstance>(connectInstance);
+  React.useEffect(() => {
+    if (connectInstance === null && initParams) {
+      const createInstance = async () => {
+        const connectWrapper = await connectJs.loadConnect();
+        setStoredConnectInstance(await connectWrapper.initialize(initParams));
+      };
+      createInstance();
+    }
+  }, [connectInstance]);
+
+  if (storedConnectInstance === null && !initParams) {
     throw new Error();
   }
 
-  if (connectInstance === null && initParams) {
-    async () => {
-      const connectWrapper = await connectJs.loadConnect();
-      connectInstance = await connectWrapper.initialize(initParams);
-    };
-  }
-
   return (
-    <ConnectComponentsContext.Provider value={{connectInstance}}>
+    <ConnectComponentsContext.Provider
+      value={{connectInstance: storedConnectInstance}}
+    >
       {children}
     </ConnectComponentsContext.Provider>
   );

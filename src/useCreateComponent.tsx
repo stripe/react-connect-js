@@ -22,7 +22,11 @@ export const useCreateComponent = (
   const wrapper = <div ref={wrapperDivRef}></div>;
 
   React.useLayoutEffect(() => {
-    if (wrapperDivRef.current !== null && component === null) {
+    if (
+      wrapperDivRef.current !== null &&
+      component === null &&
+      connectInstance !== null
+    ) {
       try {
         (
           connectInstance as unknown as IConnectJSWithPrivateMethods
@@ -36,7 +40,7 @@ export const useCreateComponent = (
         wrapperDivRef.current.replaceChildren(newComponent);
       }
     }
-  }, []);
+  }, [connectInstance]);
 
   return {wrapper, component};
 };
