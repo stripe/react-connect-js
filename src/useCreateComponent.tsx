@@ -1,5 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import {version} from '.././package.json';
 import * as React from 'react';
 import {useConnectComponents} from './ConnectComponents';
 import {
@@ -24,9 +23,9 @@ export const useCreateComponent = (
   React.useLayoutEffect(() => {
     if (wrapperDivRef.current !== null && component === null) {
       try {
-        (
-          connectInstance as unknown as IConnectJSWithPrivateMethods
-        ).setReactSdkAnalytics(version);
+        (connectInstance as unknown as IConnectJSWithPrivateMethods)
+          // This will be replaced by the npm package version when bundling
+          .setReactSdkAnalytics('_NPM_PACKAGE_VERSION_');
       } catch (e) {
         console.log('Error setting React Sdk version with error message: ', e);
       }
