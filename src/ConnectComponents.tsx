@@ -21,6 +21,11 @@ export const ConnectComponentsProvider = ({
 }): JSX.Element => {
   const [storedConnectInstance, setStoredConnectInstance] =
     React.useState<connectJs.StripeConnectInstance>(connectInstance);
+
+  if (storedConnectInstance === null && !initParams) {
+    throw new Error();
+  }
+
   React.useEffect(() => {
     if (connectInstance === null && initParams) {
       const createInstance = async () => {
@@ -29,11 +34,7 @@ export const ConnectComponentsProvider = ({
       };
       createInstance();
     }
-  }, [connectInstance]);
-
-  if (storedConnectInstance === null && !initParams) {
-    throw new Error();
-  }
+  }, [connectInstance, initParams]);
 
   return (
     <ConnectComponentsContext.Provider
