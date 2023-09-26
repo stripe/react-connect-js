@@ -6,8 +6,13 @@ export const useAttachAttribute = (
   value: string | boolean | undefined
 ): void => {
   React.useEffect(() => {
-    if (component && value !== undefined) {
+    if (!component) return;
+
+    if (value !== undefined) {
       component.setAttribute(attribute, value.toString());
+    } else {
+      // RemoveAttribute is a no-op if the attribute is not present
+      component.removeAttribute(attribute);
     }
   }, [component, attribute, value]);
 };
