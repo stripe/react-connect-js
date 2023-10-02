@@ -59,7 +59,7 @@ export const ConnectAccountOnboarding = ({
   );
 
   useAttachAttribute(onboarding, 'privacy-policy-url', privacyPolicyUrl);
-  
+
   useAttachAttribute(
     onboarding,
     'skip-terms-of-service-collection',
@@ -68,5 +68,10 @@ export const ConnectAccountOnboarding = ({
 
   useAttachEvent(onboarding, ConnectElementEventNames.exit, onExit);
 
+  return wrapper;
+};
+
+export const ConnectPaymentMethodSettings = (): JSX.Element => {
+  const {wrapper} = useCreateComponent('payment-method-settings');
   return wrapper;
 };
