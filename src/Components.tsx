@@ -70,8 +70,3 @@ export const ConnectAccountOnboarding = ({
 
   return wrapper;
 };
-
-export const ConnectPaymentMethodSettings = (): JSX.Element => {
-  const {wrapper} = useCreateComponent('payment-method-settings');
-  return wrapper;
-};
