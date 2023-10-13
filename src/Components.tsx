@@ -75,3 +75,18 @@ export const ConnectPaymentMethodSettings = (): JSX.Element => {
   const {wrapper} = useCreateComponent('payment-method-settings');
   return wrapper;
 };
+
+export const ConnectAccountManagement = (): JSX.Element => {
+  const {wrapper} = useCreateComponent('account-management');
+  return wrapper;
+};
+
+export const ConnectInstantPayouts = (): JSX.Element => {
+  const {wrapper} = useCreateComponent('instant-payouts');
+  return wrapper;
+};
+
+export const ConnectNotificationBanner = (): JSX.Element => {
+  const {wrapper} = useCreateComponent('notification-banner');
+  return wrapper;
+};
