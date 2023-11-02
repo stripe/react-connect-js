@@ -17,6 +17,9 @@ export const ConnectPaymentDetails = ({
   onClose,
   visible = undefined,
 }: {
+  /**
+   * @param payment the ID of `payment`, `charge`, or `paymentIntent` to be displayed.
+   */
   payment: string;
   onClose: () => void;
   visible?: boolean | undefined;
