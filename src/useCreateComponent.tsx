@@ -35,7 +35,7 @@ export const useCreateComponent = (
         wrapperDivRef.current.replaceChildren(newComponent);
       }
     }
-  }, []);
+  }, [connectInstance, tagName]);
 
   return {wrapper, component};
 };
