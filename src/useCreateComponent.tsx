@@ -32,7 +32,11 @@ export const useCreateComponent = (
       const newComponent = connectInstance.create(tagName);
       setComponent(newComponent);
       if (newComponent !== null) {
-        wrapperDivRef.current.replaceChildren(newComponent);
+        while (wrapperDivRef.current.firstChild) {
+          wrapperDivRef.current.removeChild(wrapperDivRef.current.firstChild);
+        }
+
+        wrapperDivRef.current.appendChild( newComponent );
       }
     }
   }, []);
