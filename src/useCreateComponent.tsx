@@ -27,7 +27,11 @@ export const useCreateComponent = (
             e
           );
         }
-        wrapperDivRef.current.replaceChildren(newComponent);
+        while (wrapperDivRef.current.firstChild) {
+          wrapperDivRef.current.removeChild(wrapperDivRef.current.firstChild);
+        }
+
+        wrapperDivRef.current.appendChild( newComponent );
       }
     }
   }, [connectInstance, tagName]);
