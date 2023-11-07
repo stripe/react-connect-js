@@ -13,11 +13,14 @@ export const ConnectPayouts = (): JSX.Element => {
 };
 
 export const ConnectPaymentDetails = ({
-  chargeId,
+  payment,
   onClose,
   visible = undefined,
 }: {
-  chargeId: string;
+  /**
+   * @param payment the ID of `payment`, `charge`, or `paymentIntent` to be displayed.
+   */
+  payment: string;
   onClose: () => void;
   visible?: boolean | undefined;
 }): JSX.Element | null => {
@@ -25,7 +28,7 @@ export const ConnectPaymentDetails = ({
     useCreateComponent('payment-details');
 
   useAttachEvent(paymentDetails, ConnectElementEventNames.close, onClose);
-  useAttachAttribute(paymentDetails, 'charge-id', chargeId);
+  useAttachAttribute(paymentDetails, 'payment', payment);
   useAttachAttribute(paymentDetails, 'visible', visible);
 
   return wrapper;
