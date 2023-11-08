@@ -1,16 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import * as React from 'react';
 import {useConnectComponents} from './ConnectComponents';
-import {
-  ConnectElementTagName,
-  IStripeConnectUpdateParams,
-} from '@stripe/connect-js';
-
-interface IConnectJSWithPrivateMethods {
-  create: (tagName: ConnectElementTagName) => HTMLElement | null;
-  update: (options: IStripeConnectUpdateParams) => void;
-  setReactSdkAnalytics: (version: string) => void;
-}
+import {ConnectElementTagName} from '@stripe/connect-js';
 
 export const useCreateComponent = (
   tagName: ConnectElementTagName
@@ -22,16 +13,20 @@ export const useCreateComponent = (
 
   React.useLayoutEffect(() => {
     if (wrapperDivRef.current !== null && component === null) {
-      try {
-        (connectInstance as unknown as IConnectJSWithPrivateMethods)
-          // This will be replaced by the npm package version when bundling
-          .setReactSdkAnalytics('_NPM_PACKAGE_VERSION_');
-      } catch (e) {
-        console.log('Error setting React Sdk version with error message: ', e);
-      }
       const newComponent = connectInstance.create(tagName);
       setComponent(newComponent);
       if (newComponent !== null) {
+        try {
+          newComponent.setAttribute(
+            'reactSdkAnalytics',
+            '_NPM_PACKAGE_VERSION_'
+          );
+        } catch (e) {
+          console.log(
+            'Error setting React Sdk version with error message: ',
+            e
+          );
+        }
         while (wrapperDivRef.current.firstChild) {
           wrapperDivRef.current.removeChild(wrapperDivRef.current.firstChild);
         }
