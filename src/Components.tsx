@@ -91,3 +91,62 @@ export const ConnectNotificationBanner = (): JSX.Element => {
   const {wrapper} = useCreateComponent('notification-banner');
   return wrapper;
 };
+
+export const ConnectIssuingCard = ({
+  defaultCard,
+  cardArtFileLink,
+  cardSwitching,
+  fetchEphemeralKey,
+}: {
+  defaultCard?: string;
+  cardArtFileLink?: string;
+  cardSwitching?: boolean;
+  fetchEphemeralKey?: (fetchParams: {
+    nonce: string;
+    issuingCard: string;
+  }) => Promise<{
+    ephemeralKeySecret: string;
+    nonce: string;
+    issuingCard: string;
+  }>;
+}): JSX.Element => {
+  const {wrapper, component: issuingCard} = useCreateComponent('issuing-card');
+
+  React.useEffect(() => {
+    if (!issuingCard) return;
+    issuingCard.setDefaultCard(defaultCard);
+    issuingCard.setCardArtFileLink(cardArtFileLink);
+    issuingCard.setCardSwitching(cardSwitching);
+    issuingCard.setFetchEphemeralKey(fetchEphemeralKey);
+  }, [
+    issuingCard,
+    defaultCard,
+    cardArtFileLink,
+    cardSwitching,
+    fetchEphemeralKey,
+  ]);
+
+  return wrapper;
+};
+
+export const ConnectIssuingCardsList = ({
+  fetchEphemeralKey,
+}: {
+  fetchEphemeralKey?: (fetchParams: {
+    nonce: string;
+    issuingCard: string;
+  }) => Promise<{
+    ephemeralKeySecret: string;
+    nonce: string;
+    issuingCard: string;
+  }>;
+}): JSX.Element => {
+  const {wrapper, component: issuingCardsList} =
+    useCreateComponent('issuing-cards-list');
+
+  React.useEffect(() => {
+    if (!issuingCardsList) return;
+    issuingCardsList.setFetchEphemeralKey(fetchEphemeralKey);
+  }, [issuingCardsList, fetchEphemeralKey]);
+  return wrapper;
+};
