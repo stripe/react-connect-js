@@ -1,6 +1,7 @@
 import React from 'react';
 import {useCreateComponent} from './useCreateComponent';
 import {useAttachAttribute} from './utils/useAttachAttribute';
+import {useUpdateWithSetter} from './utils/useUpdateWithSetter';
 
 export const ConnectPayments = (): JSX.Element => {
   const {wrapper} = useCreateComponent('payments');
@@ -53,21 +54,19 @@ export const ConnectAccountOnboarding = ({
   const {wrapper, component: onboarding} =
     useCreateComponent('account-onboarding');
 
-  React.useEffect(() => {
-    if (!onboarding) return;
-    onboarding.setRecipientTermsOfServiceUrl(recipientTermsOfServiceUrl);
-    onboarding.setFullTermsOfServiceUrl(fullTermsOfServiceUrl);
-    onboarding.setPrivacyPolicyUrl(privacyPolicyUrl);
-    onboarding.setSkipTermsOfServiceCollection(skipTermsOfServiceCollection);
-    onboarding.setOnExit(onExit);
-  }, [
-    fullTermsOfServiceUrl,
-    onExit,
-    onboarding,
-    privacyPolicyUrl,
-    recipientTermsOfServiceUrl,
-    skipTermsOfServiceCollection,
-  ]);
+  useUpdateWithSetter(onboarding, recipientTermsOfServiceUrl, (comp, val) =>
+    comp.setRecipientTermsOfServiceUrl(val)
+  );
+  useUpdateWithSetter(onboarding, fullTermsOfServiceUrl, (comp, val) =>
+    comp.setFullTermsOfServiceUrl(val)
+  );
+  useUpdateWithSetter(onboarding, privacyPolicyUrl, (comp, val) =>
+    comp.setPrivacyPolicyUrl(val)
+  );
+  useUpdateWithSetter(onboarding, skipTermsOfServiceCollection, (comp, val) =>
+    comp.setSkipTermsOfServiceCollection(val)
+  );
+  useUpdateWithSetter(onboarding, onExit, (comp, val) => comp.setOnExit(val));
 
   return wrapper;
 };
@@ -96,57 +95,37 @@ export const ConnectIssuingCard = ({
   defaultCard,
   cardArtFileLink,
   cardSwitching,
-  fetchEphemeralKey,
 }: {
   defaultCard?: string;
   cardArtFileLink?: string;
   cardSwitching?: boolean;
-  fetchEphemeralKey?: (fetchParams: {
-    nonce: string;
-    issuingCard: string;
-  }) => Promise<{
-    ephemeralKeySecret: string;
-    nonce: string;
-    issuingCard: string;
-  }>;
 }): JSX.Element => {
   const {wrapper, component: issuingCard} = useCreateComponent('issuing-card');
 
-  React.useEffect(() => {
-    if (!issuingCard) return;
-    issuingCard.setDefaultCard(defaultCard);
-    issuingCard.setCardArtFileLink(cardArtFileLink);
-    issuingCard.setCardSwitching(cardSwitching);
-    issuingCard.setFetchEphemeralKey(fetchEphemeralKey);
-  }, [
-    issuingCard,
-    defaultCard,
-    cardArtFileLink,
-    cardSwitching,
-    fetchEphemeralKey,
-  ]);
+  useUpdateWithSetter(issuingCard, defaultCard, (comp, val) =>
+    comp.setDefaultCard(val)
+  );
+  useUpdateWithSetter(issuingCard, cardArtFileLink, (comp, val) =>
+    comp.setCardArtFileLink(val)
+  );
+  useUpdateWithSetter(issuingCard, cardSwitching, (comp, val) =>
+    comp.setCardSwitching(val)
+  );
 
   return wrapper;
 };
 
 export const ConnectIssuingCardsList = ({
-  fetchEphemeralKey,
+  cardArtFileLink,
 }: {
-  fetchEphemeralKey?: (fetchParams: {
-    nonce: string;
-    issuingCard: string;
-  }) => Promise<{
-    ephemeralKeySecret: string;
-    nonce: string;
-    issuingCard: string;
-  }>;
+  cardArtFileLink?: string;
 }): JSX.Element => {
   const {wrapper, component: issuingCardsList} =
     useCreateComponent('issuing-cards-list');
 
-  React.useEffect(() => {
-    if (!issuingCardsList) return;
-    issuingCardsList.setFetchEphemeralKey(fetchEphemeralKey);
-  }, [issuingCardsList, fetchEphemeralKey]);
+  useUpdateWithSetter(issuingCardsList, cardArtFileLink, (comp, val) =>
+    comp.setCardArtFileLink(val)
+  );
+
   return wrapper;
 };
