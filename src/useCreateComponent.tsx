@@ -1,12 +1,17 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import * as React from 'react';
 import {useConnectComponents} from './ConnectComponents';
-import {ConnectElementTagName} from '@stripe/connect-js';
+import {
+  ConnectElementTagName,
+  ConnectHTMLElementRecord,
+} from '@stripe/connect-js';
 
-export const useCreateComponent = (
-  tagName: ConnectElementTagName
-): {wrapper: JSX.Element; component: HTMLElement | null} => {
-  const [component, setComponent] = React.useState<HTMLElement | null>(null);
+export const useCreateComponent = <T extends ConnectElementTagName>(
+  tagName: T
+): {wrapper: JSX.Element; component: ConnectHTMLElementRecord[T] | null} => {
+  const [component, setComponent] = React.useState<
+    ConnectHTMLElementRecord[T] | null
+  >(null);
   const {connectInstance} = useConnectComponents();
   const wrapperDivRef = React.useRef<HTMLDivElement | null>(null);
   const wrapper = <div ref={wrapperDivRef}></div>;
@@ -31,7 +36,7 @@ export const useCreateComponent = (
           wrapperDivRef.current.removeChild(wrapperDivRef.current.firstChild);
         }
 
-        wrapperDivRef.current.appendChild( newComponent );
+        wrapperDivRef.current.appendChild(newComponent);
       }
     }
   }, [connectInstance, tagName]);

@@ -1,6 +1,5 @@
 import {useCreateComponent} from './useCreateComponent';
-import {useAttachAttribute} from './utils/useAttachAttribute';
-import {ConnectElementEventNames, useAttachEvent} from './utils/useAttachEvent';
+import {useUpdateWithSetter} from './utils/useUpdateWithSetter';
 
 export const ConnectAccountOnboarding = ({
   onExit,
@@ -18,26 +17,11 @@ export const ConnectAccountOnboarding = ({
   const {wrapper, component: onboarding} =
     useCreateComponent('account-onboarding');
 
-  useAttachAttribute(
-    onboarding,
-    'recipient-terms-of-service-url',
-    recipientTermsOfServiceUrl
-  );
-  useAttachAttribute(
-    onboarding,
-    'full-terms-of-service-url',
-    fullTermsOfServiceUrl
-  );
-
-  useAttachAttribute(onboarding, 'privacy-policy-url', privacyPolicyUrl);
-
-  useAttachAttribute(
-    onboarding,
-    'skip-terms-of-service-collection',
-    skipTermsOfServiceCollection
-  );
-
-  useAttachEvent(onboarding, ConnectElementEventNames.exit, onExit);
+  useUpdateWithSetter(onboarding, recipientTermsOfServiceUrl, (comp, val) => comp.setRecipientTermsOfServiceUrl(val));
+  useUpdateWithSetter(onboarding, fullTermsOfServiceUrl, (comp, val) => comp.setFullTermsOfServiceUrl(val));
+  useUpdateWithSetter(onboarding, privacyPolicyUrl, (comp, val) => comp.setPrivacyPolicyUrl(val));
+  useUpdateWithSetter(onboarding, skipTermsOfServiceCollection, (comp, val) => comp.setSkipTermsOfServiceCollection(val));
+  useUpdateWithSetter(onboarding, onExit, (comp, val) => comp.setOnExit(val));
 
   return wrapper;
 };
