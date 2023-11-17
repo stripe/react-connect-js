@@ -1,6 +1,5 @@
-import React from 'react';
 import {useCreateComponent} from './useCreateComponent';
-import {useAttachAttribute} from './utils/useAttachAttribute';
+import {useUpdateWithSetter} from './utils/useUpdateWithSetter';
 
 export const ConnectAccountOnboarding = ({
   onExit,
@@ -18,21 +17,11 @@ export const ConnectAccountOnboarding = ({
   const {wrapper, component: onboarding} =
     useCreateComponent('account-onboarding');
 
-  React.useEffect(() => {
-    if (!onboarding) return;
-    onboarding.setRecipientTermsOfServiceUrl(recipientTermsOfServiceUrl);
-    onboarding.setFullTermsOfServiceUrl(fullTermsOfServiceUrl);
-    onboarding.setPrivacyPolicyUrl(privacyPolicyUrl);
-    onboarding.setSkipTermsOfServiceCollection(skipTermsOfServiceCollection);
-    onboarding.setOnExit(onExit);
-  }, [
-    fullTermsOfServiceUrl,
-    onExit,
-    onboarding,
-    privacyPolicyUrl,
-    recipientTermsOfServiceUrl,
-    skipTermsOfServiceCollection,
-  ]);
+  useUpdateWithSetter(onboarding, recipientTermsOfServiceUrl, (comp, val) => comp.setRecipientTermsOfServiceUrl(val));
+  useUpdateWithSetter(onboarding, fullTermsOfServiceUrl, (comp, val) => comp.setFullTermsOfServiceUrl(val));
+  useUpdateWithSetter(onboarding, privacyPolicyUrl, (comp, val) => comp.setPrivacyPolicyUrl(val));
+  useUpdateWithSetter(onboarding, skipTermsOfServiceCollection, (comp, val) => comp.setSkipTermsOfServiceCollection(val));
+  useUpdateWithSetter(onboarding, onExit, (comp, val) => comp.setOnExit(val));
 
   return wrapper;
 };
