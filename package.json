@@ -1,6 +1,6 @@
 {
   "name": "@stripe/react-connect-js",
-  "version": "2.0.4",
+  "version": "3.0.1",
   "description": "React components for Connect.js and Connect embedded components",
   "main": "dist/react-connect.js",
   "module": "dist/react-connect.esm.js",
