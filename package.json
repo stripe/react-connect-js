@@ -23,7 +23,9 @@
     "prettier": "prettier './**/*.js' './**/*.ts' './**/*.tsx' './**/*.md' --write",
     "doctoc": "doctoc README.md",
     "storybook": "start-storybook -p 6006 ",
-    "local-install-publish": "yalc add @stripe/connect-js@1.0.0 && yalc publish"
+    "local-install-publish": "yalc add @stripe/connect-js@1.0.0 && yalc publish",
+    "validate-change": "yarn run test",
+    "validate-changes": "yarn run test"
   },
   "repository": {
     "type": "git",
