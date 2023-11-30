@@ -16,7 +16,7 @@ to request beta access.
 ### Components
 
 The list of supported components and their required parameters can be found
-[here](https://stripe.com/docs/connect/get-started-connect-embedded-components#supported-connect-embedded-components)
+[here](https://stripe.com/docs/connect/supported-embedded-components)
 
 ### Minimal example
 
