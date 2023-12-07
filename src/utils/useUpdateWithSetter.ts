@@ -7,8 +7,8 @@ export const useUpdateWithSetter = <
     | string
     | boolean
     | (() => void)
-    | undefined
     | FetchEphemeralKeyFunction
+    | undefined
 >(
   component: T | null,
   value: V,
