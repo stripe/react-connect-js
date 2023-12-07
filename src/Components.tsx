@@ -2,7 +2,7 @@ import React from 'react';
 import {useCreateComponent} from './useCreateComponent';
 import {useAttachAttribute} from './utils/useAttachAttribute';
 import {useUpdateWithSetter} from './utils/useUpdateWithSetter';
-import { FetchEphemeralKeyFunction } from './types';
+import {FetchEphemeralKeyFunction} from './types';
 
 export const ConnectPayments = (): JSX.Element => {
   const {wrapper} = useCreateComponent('payments');
