@@ -2,6 +2,7 @@ import React from 'react';
 import {useCreateComponent} from './useCreateComponent';
 import {useAttachAttribute} from './utils/useAttachAttribute';
 import {useUpdateWithSetter} from './utils/useUpdateWithSetter';
+import {FetchEphemeralKeyFunction} from './types';
 
 export const ConnectPayments = (): JSX.Element => {
   const {wrapper} = useCreateComponent('payments');
@@ -95,10 +96,12 @@ export const ConnectIssuingCard = ({
   defaultCard,
   cardArtFileLink,
   cardSwitching,
+  fetchEphemeralKey,
 }: {
   defaultCard?: string;
   cardArtFileLink?: string;
   cardSwitching?: boolean;
+  fetchEphemeralKey?: FetchEphemeralKeyFunction;
 }): JSX.Element => {
   const {wrapper, component: issuingCard} = useCreateComponent('issuing-card');
 
@@ -110,6 +113,9 @@ export const ConnectIssuingCard = ({
   );
   useUpdateWithSetter(issuingCard, cardSwitching, (comp, val) =>
     comp.setCardSwitching(val)
+  );
+  useUpdateWithSetter(issuingCard, fetchEphemeralKey, (comp, val) =>
+    comp.setFetchEphemeralKey(val)
   );
 
   return wrapper;
