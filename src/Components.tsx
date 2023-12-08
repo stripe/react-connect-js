@@ -123,8 +123,10 @@ export const ConnectIssuingCard = ({
 
 export const ConnectIssuingCardsList = ({
   cardArtFileLink,
+  fetchEphemeralKey,
 }: {
   cardArtFileLink?: string;
+  fetchEphemeralKey?: FetchEphemeralKeyFunction;
 }): JSX.Element => {
   const {wrapper, component: issuingCardsList} =
     useCreateComponent('issuing-cards-list');
@@ -132,6 +134,9 @@ export const ConnectIssuingCardsList = ({
   useUpdateWithSetter(issuingCardsList, cardArtFileLink, (comp, val) =>
     comp.setCardArtFileLink(val)
   );
+  useUpdateWithSetter(issuingCardsList, fetchEphemeralKey, (comp, val) =>
+  comp.setFetchEphemeralKey(val)
+);
 
   return wrapper;
 };
