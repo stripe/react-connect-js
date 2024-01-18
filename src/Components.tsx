@@ -33,18 +33,25 @@ export const ConnectPaymentDetails = ({
   return wrapper;
 };
 
+export type CollectionOptions = {
+  fields: "currently_due" | "eventually_due";
+  futureRequirements?: "omit" | "include";
+}
+
 export const ConnectAccountOnboarding = ({
   onExit,
   recipientTermsOfServiceUrl,
   fullTermsOfServiceUrl,
   privacyPolicyUrl,
   skipTermsOfServiceCollection,
+  collectionOptions,
 }: {
   onExit: () => void;
   recipientTermsOfServiceUrl?: string;
   fullTermsOfServiceUrl?: string;
   privacyPolicyUrl?: string;
   skipTermsOfServiceCollection?: boolean;
+  collectionOptions?: CollectionOptions;
 }): JSX.Element | null => {
   const {wrapper, component: onboarding} =
     useCreateComponent('account-onboarding');
@@ -60,6 +67,9 @@ export const ConnectAccountOnboarding = ({
   );
   useUpdateWithSetter(onboarding, skipTermsOfServiceCollection, (comp, val) =>
     comp.setSkipTermsOfServiceCollection(val)
+  );
+  useUpdateWithSetter(onboarding, collectionOptions, (comp, val) =>
+    comp.setCollectionOptions(val)
   );
   useUpdateWithSetter(onboarding, onExit, (comp, val) => comp.setOnExit(val));
 
