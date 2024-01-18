@@ -1,5 +1,5 @@
 import React from 'react';
-import {FetchEphemeralKeyFunction} from '../types';
+import {CollectionOptions, FetchEphemeralKeyFunction} from '../types';
 
 export const useUpdateWithSetter = <
   T extends HTMLElement,
@@ -8,6 +8,7 @@ export const useUpdateWithSetter = <
     | boolean
     | (() => void)
     | FetchEphemeralKeyFunction
+    | CollectionOptions
     | undefined
 >(
   component: T | null,

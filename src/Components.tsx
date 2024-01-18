@@ -2,7 +2,7 @@ import React from 'react';
 import {useCreateComponent} from './useCreateComponent';
 import {useAttachAttribute} from './utils/useAttachAttribute';
 import {useUpdateWithSetter} from './utils/useUpdateWithSetter';
-import {FetchEphemeralKeyFunction} from './types';
+import {CollectionOptions, FetchEphemeralKeyFunction} from './types';
 
 export const ConnectPayments = (): JSX.Element => {
   const {wrapper} = useCreateComponent('payments');
@@ -45,12 +45,14 @@ export const ConnectAccountOnboarding = ({
   fullTermsOfServiceUrl,
   privacyPolicyUrl,
   skipTermsOfServiceCollection,
+  collectionOptions,
 }: {
   onExit: () => void;
   recipientTermsOfServiceUrl?: string;
   fullTermsOfServiceUrl?: string;
   privacyPolicyUrl?: string;
   skipTermsOfServiceCollection?: boolean;
+  collectionOptions?: CollectionOptions;
 }): JSX.Element | null => {
   const {wrapper, component: onboarding} =
     useCreateComponent('account-onboarding');
@@ -66,6 +68,9 @@ export const ConnectAccountOnboarding = ({
   );
   useUpdateWithSetter(onboarding, skipTermsOfServiceCollection, (comp, val) =>
     comp.setSkipTermsOfServiceCollection(val)
+  );
+  useUpdateWithSetter(onboarding, collectionOptions, (comp, val) =>
+    comp.setCollectionOptions(val)
   );
   useUpdateWithSetter(onboarding, onExit, (comp, val) => comp.setOnExit(val));
 
@@ -135,8 +140,8 @@ export const ConnectIssuingCardsList = ({
     comp.setCardArtFileLink(val)
   );
   useUpdateWithSetter(issuingCardsList, fetchEphemeralKey, (comp, val) =>
-  comp.setFetchEphemeralKey(val)
-);
+    comp.setFetchEphemeralKey(val)
+  );
 
   return wrapper;
 };
