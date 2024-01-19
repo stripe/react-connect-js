@@ -37,7 +37,7 @@ See more examples in the /examples folder
 ```jsx
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {loadConnect} from '@stripe/connect-js';
+import {loadConnectAndInitialize} from '@stripe/connect-js';
 import {
   ConnectPayments,
   ConnectPayouts,
@@ -45,14 +45,17 @@ import {
   ConnectComponentsProvider,
 } from '@stripe/react-connect-js';
 
-const stripeConnect = await loadConnect();
-
-const connectInstance = stripeConnect.initialize({
-  publishableKey: '{{your key here}}',
-  clientSecret: '{{your client secret}}',
+const fetchClientSecret = async () => {
+  // Fetch the AccountSession client secret by making an API call to your service
+};
+const connectInstance = loadConnectAndInitialize({
+  publishableKey: '{{pk test123}}',
+  fetchClientSecret: fetchClientSecret,
   appearance: {
-    colorPrimary: '#228403', //optional appearance param
-  },
+    variables: {
+      colorPrimary: '#228403', //optional appearance param,
+    },
+  }
 });
 
 const App = () => (
