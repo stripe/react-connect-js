@@ -66,8 +66,7 @@ const App = () => (
       onClose={() => {
         console.log('closed');
       }}
-      chargeId="pi_test123"
-      visible
+      payment="pi_test123"
     />
   </ConnectComponentsProvider>
 );

@@ -1,6 +1,5 @@
 import React from 'react';
 import {useCreateComponent} from './useCreateComponent';
-import {useAttachAttribute} from './utils/useAttachAttribute';
 import {useUpdateWithSetter} from './utils/useUpdateWithSetter';
 import {CollectionOptions, FetchEphemeralKeyFunction} from './types';
 
@@ -16,26 +15,23 @@ export const ConnectPayouts = (): JSX.Element => {
 
 export const ConnectPaymentDetails = ({
   payment,
-  onClose,
-  visible = undefined,
+  onClose
 }: {
   /**
    * @param payment the ID of `payment`, `charge`, or `paymentIntent` to be displayed.
    */
   payment: string;
   onClose: () => void;
-  visible?: boolean | undefined;
 }): JSX.Element | null => {
   const {wrapper, component: paymentDetails} =
     useCreateComponent('payment-details');
 
-  useAttachAttribute(paymentDetails, 'visible', visible);
-  React.useEffect(() => {
-    if (!paymentDetails) return;
-    paymentDetails.setPayment(payment);
-    paymentDetails.setOnClose(onClose);
-  }, [paymentDetails, payment, onClose]);
-
+  useUpdateWithSetter(paymentDetails, payment, (comp, val) =>
+    comp.setPayment(val)
+  );
+  useUpdateWithSetter(paymentDetails, onClose, (comp, val) =>
+    comp.setOnClose(val)
+  );
   return wrapper;
 };
 
