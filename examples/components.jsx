@@ -1,21 +1,23 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import {loadConnect} from '@stripe/connect-js';
 import {
   ConnectPayments,
   ConnectPayouts,
   ConnectPaymentDetails,
-  ConnectComponentsProvider
+  ConnectComponentsProvider,
+  loadConnectAndInitialize
 } from '@stripe/react-connect-js';
 
-const stripeConnect = await loadConnect();
-
-const connectInstance = stripeConnect.initialize({
+const fetchClientSecret = async () => {
+  // Fetch the AccountSession client secret by making an API call to your service
+};
+const connectInstance = loadConnectAndInitialize({
   publishableKey: '{{your publishable key}}',
-  clientSecret: '{{your client secret}}',
+  fetchClientSecret: fetchClientSecret,
   appearance: {
-    colorPrimary: '#228403', //optional appearance param
-  },
+    variables: {
+      colorPrimary: '#228403', //optional appearance param,
+    },
+  }
 });
 
 const App = () => {
@@ -27,8 +29,7 @@ const App = () => {
         onClose={() => {
           console.log('closed');
         }}
-        chargeId="pi_test123"
-        visible
+        payment="pi_test123"
       />
     </ConnectComponentsProvider>
   );
