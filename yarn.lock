@@ -1378,13 +1378,6 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@rollup/plugin-json@^6.0.0":
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/@rollup/plugin-json/-/plugin-json-6.0.0.tgz#199fea6670fd4dfb1f4932250569b14719db234a"
-  integrity sha512-i/4C5Jrdr1XUarRhVu27EEwjt4GObltD7c+MkCIpO2QIbojw8MUs+CCTqOphQi3Qtg1FLmYt+l+6YeoIf51J7w==
-  dependencies:
-    "@rollup/pluginutils" "^5.0.1"
-
 "@rollup/plugin-replace@^2.3.1":
   version "2.4.2"
   resolved "https://registry.yarnpkg.com/@rollup/plugin-replace/-/plugin-replace-2.4.2.tgz#a2d539314fbc77c244858faa523012825068510a"
@@ -1402,7 +1395,7 @@
     estree-walker "^1.0.1"
     picomatch "^2.2.2"
 
-"@rollup/pluginutils@^5.0.1", "@rollup/pluginutils@^5.0.2":
+"@rollup/pluginutils@^5.0.2":
   version "5.0.4"
   resolved "https://registry.yarnpkg.com/@rollup/pluginutils/-/pluginutils-5.0.4.tgz#74f808f9053d33bafec0cc98e7b835c9667d32ba"
   integrity sha512-0KJnIoRI8A+a1dqOYLxH8vBf8bphDmty5QvIm2hqm7oFCFYKCAZWWd2hXgMibaPsNDhI0AtpYfQZJG47pt/k4g==
@@ -1430,12 +1423,10 @@
   dependencies:
     "@sinonjs/commons" "^3.0.0"
 
-"@stripe/connect-js@3.3.0-beta-1":
-  version "3.3.0-beta-1"
-  resolved "https://registry.yarnpkg.com/@stripe/connect-js/-/connect-js-3.3.0-beta-1.tgz#2763b976904ffc349fdaf16486d32025482e16c6"
-  integrity sha512-aE4ws7oDvjk6/BpDzlhIbeoPzzsrC4d2jtNy85iBu3EV3mkCu7zDX2pEGessM4fLm+UXECzN2TqG3nQ+K6ex+w==
-  dependencies:
-    "@rollup/plugin-json" "^6.0.0"
+"@stripe/connect-js@3.3.1-beta-1":
+  version "3.3.1-beta-1"
+  resolved "https://registry.yarnpkg.com/@stripe/connect-js/-/connect-js-3.3.1-beta-1.tgz#3767cea2dd994c18e0fd8bf64fc8a871d2e3ac75"
+  integrity sha512-06KQajg3ls4b3R152Q9f9T12R4hDWSI476l3XNJ20Ves/9xfavAyAbVJbcHXKFb4Dc45DfnJwnqV1VI8WyQi0w==
 
 "@tootallnate/once@2":
   version "2.0.0"
