@@ -75,3 +75,9 @@ export const ConnectAccountOnboarding = ({
 
   return wrapper;
 };
+
+export const ConnectDocuments = (): JSX.Element => {
+  const {wrapper} = useCreateComponent('documents');
+  return wrapper;
+};
+
