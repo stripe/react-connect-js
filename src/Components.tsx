@@ -140,3 +140,8 @@ export const ConnectIssuingCardsList = ({
 
   return wrapper;
 };
+
+export const ConnectDocuments = (): JSX.Element => {
+  const {wrapper} = useCreateComponent('documents');
+  return wrapper;
+};
