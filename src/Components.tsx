@@ -1,5 +1,6 @@
 import {useCreateComponent} from './useCreateComponent';
 import {useUpdateWithSetter} from './utils/useUpdateWithSetter';
+import {useAttachAttribute} from './utils/useAttachAttribute';
 import {CollectionOptions, FetchEphemeralKeyFunction} from './types';
 
 export const ConnectPayments = (): JSX.Element => {
@@ -137,6 +138,32 @@ export const ConnectIssuingCardsList = ({
   useUpdateWithSetter(issuingCardsList, fetchEphemeralKey, (comp, val) =>
     comp.setFetchEphemeralKey(val)
   );
+
+  return wrapper;
+};
+
+export const ConnectFinancialAccount = ({
+  financialAccount
+}: {
+  financialAccount: string;
+}): JSX.Element => {
+  const {wrapper, component: financialAccountComponent} =
+    useCreateComponent('financial-account');
+
+  useAttachAttribute(financialAccountComponent, 'financial-account', financialAccount);
+
+  return wrapper;
+}
+
+export const ConnectFinancialAccountTransactions = ({
+  financialAccount
+}: {
+  financialAccount: string;
+}): JSX.Element => {
+  const {wrapper, component: financialAccountTransactionsComponent} =
+    useCreateComponent('financial-account-transactions');
+
+  useAttachAttribute(financialAccountTransactionsComponent, 'financial-account', financialAccount);
 
   return wrapper;
 };
