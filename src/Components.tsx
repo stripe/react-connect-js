@@ -1,6 +1,5 @@
 import {useCreateComponent} from './useCreateComponent';
 import {useUpdateWithSetter} from './utils/useUpdateWithSetter';
-import {useAttachAttribute} from './utils/useAttachAttribute';
 import {CollectionOptions, FetchEphemeralKeyFunction} from './types';
 
 export const ConnectPayments = (): JSX.Element => {
@@ -150,7 +149,9 @@ export const ConnectFinancialAccount = ({
   const {wrapper, component: financialAccountComponent} =
     useCreateComponent('financial-account');
 
-  useAttachAttribute(financialAccountComponent, 'financial-account', financialAccount);
+  useUpdateWithSetter(financialAccountComponent, financialAccount, (comp, val) =>
+    comp.setFinancialAccount(val)
+  );
 
   return wrapper;
 }
@@ -163,7 +164,9 @@ export const ConnectFinancialAccountTransactions = ({
   const {wrapper, component: financialAccountTransactionsComponent} =
     useCreateComponent('financial-account-transactions');
 
-  useAttachAttribute(financialAccountTransactionsComponent, 'financial-account', financialAccount);
+  useUpdateWithSetter(financialAccountTransactionsComponent, financialAccount, (comp, val) =>
+    comp.setFinancialAccount(val)
+  );
 
   return wrapper;
 };
