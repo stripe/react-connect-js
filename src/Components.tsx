@@ -141,6 +141,36 @@ export const ConnectIssuingCardsList = ({
   return wrapper;
 };
 
+export const ConnectFinancialAccount = ({
+  financialAccount
+}: {
+  financialAccount: string;
+}): JSX.Element => {
+  const {wrapper, component: financialAccountComponent} =
+    useCreateComponent('financial-account');
+
+  useUpdateWithSetter(financialAccountComponent, financialAccount, (comp, val) =>
+    comp.setFinancialAccount(val)
+  );
+
+  return wrapper;
+}
+
+export const ConnectFinancialAccountTransactions = ({
+  financialAccount
+}: {
+  financialAccount: string;
+}): JSX.Element => {
+  const {wrapper, component: financialAccountTransactionsComponent} =
+    useCreateComponent('financial-account-transactions');
+
+  useUpdateWithSetter(financialAccountTransactionsComponent, financialAccount, (comp, val) =>
+    comp.setFinancialAccount(val)
+  );
+
+  return wrapper;
+};
+
 export const ConnectDocuments = (): JSX.Element => {
   const {wrapper} = useCreateComponent('documents');
   return wrapper;
