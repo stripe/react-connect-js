@@ -1,5 +1,5 @@
 import React from 'react';
-import { CollectionOptions } from '../Components';
+import {CollectionOptions} from '../Components';
 
 export const useUpdateWithSetter = <
   T extends HTMLElement,
