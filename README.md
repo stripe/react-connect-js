@@ -55,7 +55,7 @@ const connectInstance = loadConnectAndInitialize({
     variables: {
       colorPrimary: '#228403', //optional appearance param,
     },
-  }
+  },
 });
 
 const App = () => (
