@@ -14,7 +14,7 @@ export const ConnectPayouts = (): JSX.Element => {
 
 export const ConnectPaymentDetails = ({
   payment,
-  onClose
+  onClose,
 }: {
   /**
    * @param payment the ID of `payment`, `charge`, or `paymentIntent` to be displayed.
@@ -77,8 +77,16 @@ export const ConnectPaymentMethodSettings = (): JSX.Element => {
   return wrapper;
 };
 
-export const ConnectAccountManagement = (): JSX.Element => {
-  const {wrapper} = useCreateComponent('account-management');
+export const ConnectAccountManagement = ({
+  collectionOptions,
+}: {
+  collectionOptions?: CollectionOptions;
+}): JSX.Element => {
+  const {wrapper, component: management} =
+    useCreateComponent('account-management');
+  useUpdateWithSetter(management, collectionOptions, (comp, val) =>
+    comp.setCollectionOptions(val)
+  );
   return wrapper;
 };
 
@@ -142,30 +150,34 @@ export const ConnectIssuingCardsList = ({
 };
 
 export const ConnectFinancialAccount = ({
-  financialAccount
+  financialAccount,
 }: {
   financialAccount: string;
 }): JSX.Element => {
   const {wrapper, component: financialAccountComponent} =
     useCreateComponent('financial-account');
 
-  useUpdateWithSetter(financialAccountComponent, financialAccount, (comp, val) =>
-    comp.setFinancialAccount(val)
+  useUpdateWithSetter(
+    financialAccountComponent,
+    financialAccount,
+    (comp, val) => comp.setFinancialAccount(val)
   );
 
   return wrapper;
-}
+};
 
 export const ConnectFinancialAccountTransactions = ({
-  financialAccount
+  financialAccount,
 }: {
   financialAccount: string;
 }): JSX.Element => {
   const {wrapper, component: financialAccountTransactionsComponent} =
     useCreateComponent('financial-account-transactions');
 
-  useUpdateWithSetter(financialAccountTransactionsComponent, financialAccount, (comp, val) =>
-    comp.setFinancialAccount(val)
+  useUpdateWithSetter(
+    financialAccountTransactionsComponent,
+    financialAccount,
+    (comp, val) => comp.setFinancialAccount(val)
   );
 
   return wrapper;
