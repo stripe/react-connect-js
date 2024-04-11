@@ -83,9 +83,6 @@ export const ConnectAccountManagement = ({
 }): JSX.Element => {
   const {wrapper, component: management} =
     useCreateComponent('account-management');
-  useUpdateWithSetter(management, collectionOptions, (comp, val) =>
-    comp.setCollectionOptions(val)
-  );
   return wrapper;
 };
 
