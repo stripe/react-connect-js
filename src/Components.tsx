@@ -76,12 +76,8 @@ export const ConnectAccountOnboarding = ({
   return wrapper;
 };
 
-export const ConnectAccountManagement = ({
-  collectionOptions,
-}: {
-  collectionOptions?: CollectionOptions;
-}): JSX.Element => {
-  const {wrapper, component: management} =
+export const ConnectAccountManagement = (): JSX.Element => {
+  const {wrapper} =
     useCreateComponent('account-management');
   return wrapper;
 };
