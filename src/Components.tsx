@@ -13,7 +13,7 @@ export const ConnectPayouts = (): JSX.Element => {
 
 export const ConnectPaymentDetails = ({
   payment,
-  onClose
+  onClose,
 }: {
   /**
    * @param payment the ID of `payment`, `charge`, or `paymentIntent` to be displayed.
@@ -34,9 +34,9 @@ export const ConnectPaymentDetails = ({
 };
 
 export type CollectionOptions = {
-  fields: "currently_due" | "eventually_due";
-  futureRequirements?: "omit" | "include";
-}
+  fields: 'currently_due' | 'eventually_due';
+  futureRequirements?: 'omit' | 'include';
+};
 
 export const ConnectAccountOnboarding = ({
   onExit,
@@ -76,8 +76,17 @@ export const ConnectAccountOnboarding = ({
   return wrapper;
 };
 
+export const ConnectAccountManagement = (): JSX.Element => {
+  const {wrapper} = useCreateComponent('account-management');
+  return wrapper;
+};
+
+export const ConnectNotificationBanner = (): JSX.Element => {
+  const {wrapper} = useCreateComponent('notification-banner');
+  return wrapper;
+};
+
 export const ConnectDocuments = (): JSX.Element => {
   const {wrapper} = useCreateComponent('documents');
   return wrapper;
 };
-
