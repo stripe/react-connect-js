@@ -77,8 +77,7 @@ export const ConnectAccountOnboarding = ({
 };
 
 export const ConnectAccountManagement = (): JSX.Element => {
-  const {wrapper} =
-    useCreateComponent('account-management');
+  const {wrapper} = useCreateComponent('account-management');
   return wrapper;
 };
 
