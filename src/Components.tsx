@@ -90,3 +90,13 @@ export const ConnectDocuments = (): JSX.Element => {
   const {wrapper} = useCreateComponent('documents');
   return wrapper;
 };
+
+export const ConnectPayoutsList = (): JSX.Element => {
+  const {wrapper} = useCreateComponent('payouts-list');
+  return wrapper;
+};
+
+export const ConnectBalances = (): JSX.Element => {
+  const {wrapper} = useCreateComponent('balances');
+  return wrapper;
+};
