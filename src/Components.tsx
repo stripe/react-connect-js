@@ -183,6 +183,11 @@ export const ConnectFinancialAccountTransactions = ({
   return wrapper;
 };
 
+export const ConnectCapitalOverview = (): JSX.Element => {
+  const {wrapper} = useCreateComponent('capital-overview');
+  return wrapper;
+};
+
 export const ConnectDocuments = (): JSX.Element => {
   const {wrapper} = useCreateComponent('documents');
   return wrapper;
