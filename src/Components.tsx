@@ -193,12 +193,12 @@ export const ConnectDocuments = (): JSX.Element => {
   return wrapper;
 };
 
-export const TaxRegistrations = (): JSX.Element => {
+export const ConnectTaxRegistrations = (): JSX.Element => {
   const {wrapper} = useCreateComponent('tax-registrations');
   return wrapper;
 };
 
-export const TaxSettings = (): JSX.Element => {
+export const ConnectTaxSettings = (): JSX.Element => {
   const {wrapper} = useCreateComponent('tax-settings');
   return wrapper;
 };
