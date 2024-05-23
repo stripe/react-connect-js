@@ -76,13 +76,31 @@ export const ConnectAccountOnboarding = ({
   return wrapper;
 };
 
-export const ConnectAccountManagement = (): JSX.Element => {
-  const {wrapper} = useCreateComponent('account-management');
+export const ConnectAccountManagement = ({
+  collectionOptions,
+}: {
+  collectionOptions?: CollectionOptions;
+}): JSX.Element | null => {
+  const {wrapper, component: accountManagement} = useCreateComponent('account-management');
+
+  useUpdateWithSetter(accountManagement, collectionOptions, (comp, val) =>
+    comp.setCollectionOptions(val)
+  );
+
   return wrapper;
 };
 
-export const ConnectNotificationBanner = (): JSX.Element => {
-  const {wrapper} = useCreateComponent('notification-banner');
+export const ConnectNotificationBanner = ({
+  collectionOptions,
+}: {
+  collectionOptions?: CollectionOptions;
+}): JSX.Element | null => {
+  const {wrapper, component: notificationBanner} = useCreateComponent('notification-banner');
+
+  useUpdateWithSetter(notificationBanner, collectionOptions, (comp, val) =>
+    comp.setCollectionOptions(val)
+  );
+
   return wrapper;
 };
 
