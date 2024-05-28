@@ -2,6 +2,39 @@ import {useCreateComponent} from './useCreateComponent';
 import {useUpdateWithSetter} from './utils/useUpdateWithSetter';
 import {CollectionOptions, FetchEphemeralKeyFunction} from './types';
 
+
+export const ConnectAppInstall = ({
+  app,
+  onAppInstallStateFetch,
+  onAppInstallStateChange,
+}: {
+  app: string;
+  onAppInstallStateFetch: () => void;
+  onAppInstallStateChange: () => void;
+
+}): JSX.Element | null => {
+  const {wrapper, component: appInstall} = useCreateComponent('app-install');
+  useUpdateWithSetter(appInstall, app, (comp, val) =>
+    comp.setApps(val)
+  );
+  useUpdateWithSetter(appInstall, onAppInstallStateFetch, (comp, val) =>
+    comp.setOnClose(val)
+  );
+  useUpdateWithSetter(appInstall, onAppInstallStateChange, (comp, val) =>
+    comp.setOnClose(val)
+  );
+  return wrapper;
+}
+
+export const ConnectAppViewport = ({app}: {app: string}): JSX.Element => {
+  const {wrapper, component: appViewport} = useCreateComponent('app-viewport');
+  useUpdateWithSetter(appViewport, app, (comp, val) =>
+    comp.setApps(val)
+  );
+  return wrapper;
+}
+
+
 export const ConnectPayments = (): JSX.Element => {
   const {wrapper} = useCreateComponent('payments');
   return wrapper;
