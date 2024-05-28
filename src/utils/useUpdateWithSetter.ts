@@ -7,6 +7,7 @@ export const useUpdateWithSetter = <
   V extends
     | string
     | boolean
+    | Record<string, string>
     | (() => void)
     | FetchEphemeralKeyFunction
     | CollectionOptions
