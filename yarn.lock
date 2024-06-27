@@ -1439,10 +1439,10 @@
   dependencies:
     "@sinonjs/commons" "^3.0.0"
 
-"@stripe/connect-js@3.3.7-beta-1":
-  version "3.3.7-beta-1"
-  resolved "https://registry.yarnpkg.com/@stripe/connect-js/-/connect-js-3.3.7-beta-1.tgz#929e5ba1a2c115e5b9c5499f89ac1a229af0a412"
-  integrity sha512-O0Ss20vE4WadrkC4+8FYU5BXnm86bPbZrIshj+M6z6j+xEMua9jF/8XB7FGFBbTz1EjULGePJfia/Xb/nW38tQ==
+"@stripe/connect-js@3.3.9-beta-1":
+  version "3.3.9-beta-1"
+  resolved "https://registry.yarnpkg.com/@stripe/connect-js/-/connect-js-3.3.9-beta-1.tgz#4224d056c68577c0ac745cefceb4217d3d652b61"
+  integrity sha512-qIzyXCit0+riO5O/WCk21aH60uZNSBYRtp4c8ZWoQCmxXx/nVTrbacewFnnyK8JvYefKrHUaP/8Pjngn3bFEpA==
 
 "@tootallnate/once@2":
   version "2.0.0"

@@ -97,14 +97,17 @@ export const ConnectInstantPayouts = (): JSX.Element => {
 
 export const ConnectNotificationBanner = ({
   collectionOptions,
+  onNotificationsChange,
 }: {
   collectionOptions?: CollectionOptions;
+  onNotificationsChange?: () => void;
 }): JSX.Element | null => {
   const {wrapper, component: notificationBanner} = useCreateComponent('notification-banner');
 
   useUpdateWithSetter(notificationBanner, collectionOptions, (comp, val) =>
     comp.setCollectionOptions(val)
   );
+  useUpdateWithSetter(notificationBanner, onNotificationsChange, (comp, val) => comp.setOnNotificationsChange(val));
 
   return wrapper;
 };
