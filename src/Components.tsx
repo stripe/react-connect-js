@@ -34,9 +34,14 @@ export const ConnectPaymentDetails = ({
 };
 
 export type CollectionOptions = {
-  fields: 'currently_due' | 'eventually_due';
+  fields: 'currently_due' | 'eventually_due' ;
   futureRequirements?: 'omit' | 'include';
 };
+
+export type NotificationCount = {
+  total: number;
+  actionRequired: number;
+}
 
 export const ConnectAccountOnboarding = ({
   onExit,
@@ -95,7 +100,7 @@ export const ConnectNotificationBanner = ({
   onNotificationsChange,
 }: {
   collectionOptions?: CollectionOptions;
-  onNotificationsChange?: () => void;
+  onNotificationsChange?: ({total, actionRequired}: NotificationCount) => void;
 }): JSX.Element | null => {
   const {wrapper, component: notificationBanner} = useCreateComponent('notification-banner');
 
@@ -103,7 +108,6 @@ export const ConnectNotificationBanner = ({
     comp.setCollectionOptions(val)
   );
   useUpdateWithSetter(notificationBanner, onNotificationsChange, (comp, val) => comp.setOnNotificationsChange(val));
-
 
   return wrapper;
 };
