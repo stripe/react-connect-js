@@ -34,7 +34,7 @@ export const ConnectPaymentDetails = ({
 };
 
 export type CollectionOptions = {
-  fields: 'currently_due' | 'eventually_due' ;
+  fields: 'currently_due' | 'eventually_due';
   futureRequirements?: 'omit' | 'include';
 };
 
