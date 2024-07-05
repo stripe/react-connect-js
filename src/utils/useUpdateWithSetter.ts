@@ -1,5 +1,5 @@
 import React from 'react';
-import {CollectionOptions,NotificationCount} from '../Components';
+import {CollectionOptions, NotificationCount} from '../Components';
 
 export const useUpdateWithSetter = <
   T extends HTMLElement,
