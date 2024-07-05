@@ -34,6 +34,11 @@ export const ConnectPaymentDetails = ({
   return wrapper;
 };
 
+export type NotificationCount = {
+  total: number;
+  actionRequired: number;
+}
+
 export const ConnectAccountOnboarding = ({
   onExit,
   recipientTermsOfServiceUrl,
@@ -100,7 +105,7 @@ export const ConnectNotificationBanner = ({
   onNotificationsChange,
 }: {
   collectionOptions?: CollectionOptions;
-  onNotificationsChange?: () => void;
+  onNotificationsChange?: ({total, actionRequired}: NotificationCount) => void;
 }): JSX.Element | null => {
   const {wrapper, component: notificationBanner} = useCreateComponent('notification-banner');
 

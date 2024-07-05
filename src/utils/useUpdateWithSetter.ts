@@ -1,5 +1,6 @@
 import React from 'react';
 import {CollectionOptions, FetchEphemeralKeyFunction} from '../types';
+import {NotificationCount} from '../Components';
 
 export const useUpdateWithSetter = <
   T extends HTMLElement,
@@ -9,6 +10,7 @@ export const useUpdateWithSetter = <
     | (() => void)
     | FetchEphemeralKeyFunction
     | CollectionOptions
+    | ((notificationCount: NotificationCount) => void)
     | undefined
 >(
   component: T | null,
