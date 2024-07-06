@@ -1,5 +1,6 @@
 import React from 'react';
-import {CollectionOptions, NotificationCount} from '../Components';
+import {CollectionOptions} from '../Components';
+import { NotificationCount } from '@stripe/connect-js';
 
 export const useUpdateWithSetter = <
   T extends HTMLElement,
