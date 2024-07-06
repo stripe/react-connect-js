@@ -1,6 +1,7 @@
 import {useCreateComponent} from './useCreateComponent';
 import {useUpdateWithSetter} from './utils/useUpdateWithSetter';
 import {CollectionOptions, FetchEphemeralKeyFunction} from './types';
+import {NotificationCount} from '@stripe/connect-js';
 
 export const ConnectPayments = (): JSX.Element => {
   const {wrapper} = useCreateComponent('payments');
@@ -33,11 +34,6 @@ export const ConnectPaymentDetails = ({
   );
   return wrapper;
 };
-
-export type NotificationCount = {
-  total: number;
-  actionRequired: number;
-}
 
 export const ConnectAccountOnboarding = ({
   onExit,

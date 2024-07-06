@@ -1,6 +1,6 @@
 import React from 'react';
 import {CollectionOptions, FetchEphemeralKeyFunction} from '../types';
-import {NotificationCount} from '../Components';
+import {NotificationCount} from '@stripe/connect-js';
 
 export const useUpdateWithSetter = <
   T extends HTMLElement,
