@@ -1,6 +1,6 @@
 import {useCreateComponent} from './useCreateComponent';
 import {useUpdateWithSetter} from './utils/useUpdateWithSetter';
-import { NotificationCount } from '@stripe/connect-js';
+import {NotificationCount} from '@stripe/connect-js';
 
 export const ConnectPayments = (): JSX.Element => {
   const {wrapper} = useCreateComponent('payments');
