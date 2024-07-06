@@ -1,5 +1,6 @@
 import {useCreateComponent} from './useCreateComponent';
 import {useUpdateWithSetter} from './utils/useUpdateWithSetter';
+import { NotificationCount } from '@stripe/connect-js';
 
 export const ConnectPayments = (): JSX.Element => {
   const {wrapper} = useCreateComponent('payments');
@@ -37,11 +38,6 @@ export type CollectionOptions = {
   fields: 'currently_due' | 'eventually_due';
   futureRequirements?: 'omit' | 'include';
 };
-
-export type NotificationCount = {
-  total: number;
-  actionRequired: number;
-}
 
 export const ConnectAccountOnboarding = ({
   onExit,
