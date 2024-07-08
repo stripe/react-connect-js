@@ -1,5 +1,6 @@
 import {useCreateComponent} from './useCreateComponent';
 import {useUpdateWithSetter} from './utils/useUpdateWithSetter';
+import {NotificationCount} from '@stripe/connect-js';
 
 export const ConnectPayments = (): JSX.Element => {
   const {wrapper} = useCreateComponent('payments');
@@ -95,7 +96,7 @@ export const ConnectNotificationBanner = ({
   onNotificationsChange,
 }: {
   collectionOptions?: CollectionOptions;
-  onNotificationsChange?: () => void;
+  onNotificationsChange?: ({total, actionRequired}: NotificationCount) => void;
 }): JSX.Element | null => {
   const {wrapper, component: notificationBanner} = useCreateComponent('notification-banner');
 
@@ -103,7 +104,6 @@ export const ConnectNotificationBanner = ({
     comp.setCollectionOptions(val)
   );
   useUpdateWithSetter(notificationBanner, onNotificationsChange, (comp, val) => comp.setOnNotificationsChange(val));
-
 
   return wrapper;
 };

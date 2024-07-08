@@ -1,9 +1,10 @@
 import React from 'react';
 import {CollectionOptions} from '../Components';
+import {NotificationCount} from '@stripe/connect-js';
 
 export const useUpdateWithSetter = <
   T extends HTMLElement,
-  V extends string | boolean | (() => void) | CollectionOptions | undefined
+  V extends string | boolean | (() => void) | CollectionOptions | ((notificationCount: NotificationCount) => void) |undefined 
 >(
   component: T | null,
   value: V,
