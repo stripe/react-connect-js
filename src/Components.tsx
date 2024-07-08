@@ -1,6 +1,7 @@
 import {useCreateComponent} from './useCreateComponent';
 import {useUpdateWithSetter} from './utils/useUpdateWithSetter';
 import {CollectionOptions, FetchEphemeralKeyFunction} from './types';
+import {NotificationCount} from '@stripe/connect-js';
 
 export const ConnectPayments = (): JSX.Element => {
   const {wrapper} = useCreateComponent('payments');
@@ -100,7 +101,7 @@ export const ConnectNotificationBanner = ({
   onNotificationsChange,
 }: {
   collectionOptions?: CollectionOptions;
-  onNotificationsChange?: () => void;
+  onNotificationsChange?: ({total, actionRequired}: NotificationCount) => void;
 }): JSX.Element | null => {
   const {wrapper, component: notificationBanner} = useCreateComponent('notification-banner');
 
