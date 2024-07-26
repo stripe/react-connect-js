@@ -1,7 +1,7 @@
 import {useCreateComponent} from './useCreateComponent';
 import {useUpdateWithSetter} from './utils/useUpdateWithSetter';
 import {CollectionOptions, FetchEphemeralKeyFunction} from './types';
-import {NotificationCount} from '@stripe/connect-js';
+import {NotificationCount, InstallState} from '@stripe/connect-js';
 
 export const ConnectAppInstall = ({
   app,
@@ -9,19 +9,19 @@ export const ConnectAppInstall = ({
   onAppInstallStateChange,
 }: {
   app: string;
-  onAppInstallStateFetch: () => void;
-  onAppInstallStateChange: () => void;
+  onAppInstallStateFetch?: (({appId, state}: InstallState) => void) | undefined;
+  onAppInstallStateChange?:
+    | (({appId, state}: InstallState) => void)
+    | undefined;
 }): JSX.Element | null => {
   const {wrapper, component: appInstall} = useCreateComponent('app-install');
   useUpdateWithSetter(appInstall, app, (comp, val) => comp.setApp(val));
-
   useUpdateWithSetter(appInstall, onAppInstallStateFetch, (comp, val) =>
     comp.setOnAppInstallStateFetched(val)
   );
   useUpdateWithSetter(appInstall, onAppInstallStateChange, (comp, val) =>
     comp.setOnAppInstallStateChanged(val)
   );
-
   return wrapper;
 };
 
@@ -30,7 +30,7 @@ export const ConnectAppViewport = ({
   appData,
 }: {
   app: string;
-  appData: Record<string, string>;
+  appData?: Record<string, string>;
 }): JSX.Element | null => {
   const {wrapper, component: appViewport} = useCreateComponent('app-viewport');
   useUpdateWithSetter(appViewport, app, (comp, val) => comp.setApp(val));

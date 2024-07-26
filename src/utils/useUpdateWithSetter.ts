@@ -1,6 +1,6 @@
 import React from 'react';
 import {CollectionOptions, FetchEphemeralKeyFunction} from '../types';
-import {NotificationCount} from '@stripe/connect-js';
+import {InstallState, NotificationCount} from '@stripe/connect-js';
 
 export const useUpdateWithSetter = <
   T extends HTMLElement,
@@ -12,6 +12,7 @@ export const useUpdateWithSetter = <
     | FetchEphemeralKeyFunction
     | CollectionOptions
     | ((notificationCount: NotificationCount) => void)
+    | ((installState: InstallState) => void)
     | undefined
 >(
   component: T | null,
