@@ -122,3 +122,13 @@ export const ConnectBalances = (): JSX.Element => {
   const {wrapper} = useCreateComponent('balances');
   return wrapper;
 };
+
+export const ConnectTaxRegistrations = (): JSX.Element => {
+  const {wrapper} = useCreateComponent('tax-registrations');
+  return wrapper;
+};
+
+export const ConnectTaxSettings = (): JSX.Element => {
+  const {wrapper} = useCreateComponent('tax-settings');
+  return wrapper;
+};
