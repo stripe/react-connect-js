@@ -1,7 +1,44 @@
 import {useCreateComponent} from './useCreateComponent';
 import {useUpdateWithSetter} from './utils/useUpdateWithSetter';
 import {CollectionOptions, FetchEphemeralKeyFunction} from './types';
-import {NotificationCount} from '@stripe/connect-js';
+import {NotificationCount, InstallState} from '@stripe/connect-js';
+
+export const ConnectAppInstall = ({
+  app,
+  onAppInstallStateFetch,
+  onAppInstallStateChange,
+}: {
+  app: string;
+  onAppInstallStateFetch?: (({appId, state}: InstallState) => void) | undefined;
+  onAppInstallStateChange?:
+    | (({appId, state}: InstallState) => void)
+    | undefined;
+}): JSX.Element | null => {
+  const {wrapper, component: appInstall} = useCreateComponent('app-install');
+  useUpdateWithSetter(appInstall, app, (comp, val) => comp.setApp(val));
+  useUpdateWithSetter(appInstall, onAppInstallStateFetch, (comp, val) =>
+    comp.setOnAppInstallStateFetched(val)
+  );
+  useUpdateWithSetter(appInstall, onAppInstallStateChange, (comp, val) =>
+    comp.setOnAppInstallStateChanged(val)
+  );
+  return wrapper;
+};
+
+export const ConnectAppViewport = ({
+  app,
+  appData,
+}: {
+  app: string;
+  appData?: Record<string, string>;
+}): JSX.Element | null => {
+  const {wrapper, component: appViewport} = useCreateComponent('app-viewport');
+  useUpdateWithSetter(appViewport, app, (comp, val) => comp.setApp(val));
+  useUpdateWithSetter(appViewport, appData, (comp, val) =>
+    comp.setAppData(val)
+  );
+  return wrapper;
+};
 
 export const ConnectPayments = (): JSX.Element => {
   const {wrapper} = useCreateComponent('payments');
@@ -103,12 +140,16 @@ export const ConnectNotificationBanner = ({
   collectionOptions?: CollectionOptions;
   onNotificationsChange?: ({total, actionRequired}: NotificationCount) => void;
 }): JSX.Element | null => {
-  const {wrapper, component: notificationBanner} = useCreateComponent('notification-banner');
+  const {wrapper, component: notificationBanner} = useCreateComponent(
+    'notification-banner'
+  );
 
   useUpdateWithSetter(notificationBanner, collectionOptions, (comp, val) =>
     comp.setCollectionOptions(val)
   );
-  useUpdateWithSetter(notificationBanner, onNotificationsChange, (comp, val) => comp.setOnNotificationsChange(val));
+  useUpdateWithSetter(notificationBanner, onNotificationsChange, (comp, val) =>
+    comp.setOnNotificationsChange(val)
+  );
 
   return wrapper;
 };
