@@ -1,27 +1,56 @@
 import {useCreateComponent} from './useCreateComponent';
 import {useUpdateWithSetter} from './utils/useUpdateWithSetter';
-import {NotificationCount} from '@stripe/connect-js';
+import {LoadError, LoaderStart, NotificationCount} from '@stripe/connect-js';
 
-export const ConnectPayments = (): JSX.Element => {
-  const {wrapper} = useCreateComponent('payments');
+export type CommonComponentProps = {
+  onLoaderStart: ({elementTagName}: LoaderStart) => void;
+  onLoadError: ({error, elementTagName}: LoadError) => void;
+};
+
+export const ConnectPayments = ({
+  onLoadError,
+  onLoaderStart,
+}: CommonComponentProps): JSX.Element => {
+  const {wrapper, component: payments} = useCreateComponent('payments');
+
+  useUpdateWithSetter(payments, onLoaderStart, (comp, val) => {
+    comp.setOnLoaderStart(val);
+  });
+  useUpdateWithSetter(payments, onLoadError, (comp, val) => {
+    comp.setOnLoadError(val);
+  });
+
   return wrapper;
 };
 
-export const ConnectPayouts = (): JSX.Element => {
-  const {wrapper} = useCreateComponent('payouts');
+export const ConnectPayouts = ({
+  onLoadError,
+  onLoaderStart,
+}: CommonComponentProps): JSX.Element => {
+  const {wrapper, component: payouts} = useCreateComponent('payouts');
+
+  useUpdateWithSetter(payouts, onLoaderStart, (comp, val) => {
+    comp.setOnLoaderStart(val);
+  });
+  useUpdateWithSetter(payouts, onLoadError, (comp, val) => {
+    comp.setOnLoadError(val);
+  });
+
   return wrapper;
 };
 
 export const ConnectPaymentDetails = ({
   payment,
   onClose,
+  onLoadError,
+  onLoaderStart,
 }: {
   /**
    * @param payment the ID of `payment`, `charge`, or `paymentIntent` to be displayed.
    */
   payment: string;
   onClose: () => void;
-}): JSX.Element | null => {
+} & CommonComponentProps): JSX.Element | null => {
   const {wrapper, component: paymentDetails} =
     useCreateComponent('payment-details');
 
@@ -31,6 +60,12 @@ export const ConnectPaymentDetails = ({
   useUpdateWithSetter(paymentDetails, onClose, (comp, val) =>
     comp.setOnClose(val)
   );
+  useUpdateWithSetter(paymentDetails, onLoaderStart, (comp, val) => {
+    comp.setOnLoaderStart(val);
+  });
+  useUpdateWithSetter(paymentDetails, onLoadError, (comp, val) => {
+    comp.setOnLoadError(val);
+  });
   return wrapper;
 };
 
@@ -46,6 +81,8 @@ export const ConnectAccountOnboarding = ({
   privacyPolicyUrl,
   skipTermsOfServiceCollection,
   collectionOptions,
+  onLoadError,
+  onLoaderStart,
 }: {
   onExit: () => void;
   recipientTermsOfServiceUrl?: string;
@@ -53,7 +90,7 @@ export const ConnectAccountOnboarding = ({
   privacyPolicyUrl?: string;
   skipTermsOfServiceCollection?: boolean;
   collectionOptions?: CollectionOptions;
-}): JSX.Element | null => {
+} & CommonComponentProps): JSX.Element | null => {
   const {wrapper, component: onboarding} =
     useCreateComponent('account-onboarding');
 
@@ -73,20 +110,35 @@ export const ConnectAccountOnboarding = ({
     comp.setCollectionOptions(val)
   );
   useUpdateWithSetter(onboarding, onExit, (comp, val) => comp.setOnExit(val));
+  useUpdateWithSetter(onboarding, onLoaderStart, (comp, val) => {
+    comp.setOnLoaderStart(val);
+  });
+  useUpdateWithSetter(onboarding, onLoadError, (comp, val) => {
+    comp.setOnLoadError(val);
+  });
 
   return wrapper;
 };
 
 export const ConnectAccountManagement = ({
   collectionOptions,
+  onLoadError,
+  onLoaderStart,
 }: {
   collectionOptions?: CollectionOptions;
-}): JSX.Element | null => {
-  const {wrapper, component: accountManagement} = useCreateComponent('account-management');
+} & CommonComponentProps): JSX.Element | null => {
+  const {wrapper, component: accountManagement} =
+    useCreateComponent('account-management');
 
   useUpdateWithSetter(accountManagement, collectionOptions, (comp, val) =>
     comp.setCollectionOptions(val)
   );
+  useUpdateWithSetter(accountManagement, onLoaderStart, (comp, val) => {
+    comp.setOnLoaderStart(val);
+  });
+  useUpdateWithSetter(accountManagement, onLoadError, (comp, val) => {
+    comp.setOnLoadError(val);
+  });
 
   return wrapper;
 };
@@ -94,41 +146,107 @@ export const ConnectAccountManagement = ({
 export const ConnectNotificationBanner = ({
   collectionOptions,
   onNotificationsChange,
+  onLoadError,
+  onLoaderStart,
 }: {
   collectionOptions?: CollectionOptions;
   onNotificationsChange?: ({total, actionRequired}: NotificationCount) => void;
-}): JSX.Element | null => {
-  const {wrapper, component: notificationBanner} = useCreateComponent('notification-banner');
+} & CommonComponentProps): JSX.Element | null => {
+  const {wrapper, component: notificationBanner} = useCreateComponent(
+    'notification-banner'
+  );
 
   useUpdateWithSetter(notificationBanner, collectionOptions, (comp, val) =>
     comp.setCollectionOptions(val)
   );
-  useUpdateWithSetter(notificationBanner, onNotificationsChange, (comp, val) => comp.setOnNotificationsChange(val));
+  useUpdateWithSetter(notificationBanner, onNotificationsChange, (comp, val) =>
+    comp.setOnNotificationsChange(val)
+  );
+  useUpdateWithSetter(notificationBanner, onLoaderStart, (comp, val) => {
+    comp.setOnLoaderStart(val);
+  });
+  useUpdateWithSetter(notificationBanner, onLoadError, (comp, val) => {
+    comp.setOnLoadError(val);
+  });
 
   return wrapper;
 };
 
-export const ConnectDocuments = (): JSX.Element => {
-  const {wrapper} = useCreateComponent('documents');
+export const ConnectDocuments = ({
+  onLoadError,
+  onLoaderStart,
+}: CommonComponentProps): JSX.Element => {
+  const {wrapper, component: documents} = useCreateComponent('documents');
+
+  useUpdateWithSetter(documents, onLoaderStart, (comp, val) => {
+    comp.setOnLoaderStart(val);
+  });
+  useUpdateWithSetter(documents, onLoadError, (comp, val) => {
+    comp.setOnLoadError(val);
+  });
+
   return wrapper;
 };
 
-export const ConnectPayoutsList = (): JSX.Element => {
-  const {wrapper} = useCreateComponent('payouts-list');
+export const ConnectPayoutsList = ({
+  onLoadError,
+  onLoaderStart,
+}: CommonComponentProps): JSX.Element => {
+  const {wrapper, component: payoutsList} = useCreateComponent('payouts-list');
+
+  useUpdateWithSetter(payoutsList, onLoaderStart, (comp, val) => {
+    comp.setOnLoaderStart(val);
+  });
+  useUpdateWithSetter(payoutsList, onLoadError, (comp, val) => {
+    comp.setOnLoadError(val);
+  });
   return wrapper;
 };
 
-export const ConnectBalances = (): JSX.Element => {
-  const {wrapper} = useCreateComponent('balances');
+export const ConnectBalances = ({
+  onLoadError,
+  onLoaderStart,
+}: CommonComponentProps): JSX.Element => {
+  const {wrapper, component: balances} = useCreateComponent('balances');
+
+  useUpdateWithSetter(balances, onLoaderStart, (comp, val) => {
+    comp.setOnLoaderStart(val);
+  });
+  useUpdateWithSetter(balances, onLoadError, (comp, val) => {
+    comp.setOnLoadError(val);
+  });
+
   return wrapper;
 };
 
-export const ConnectTaxRegistrations = (): JSX.Element => {
-  const {wrapper} = useCreateComponent('tax-registrations');
+export const ConnectTaxRegistrations = ({
+  onLoadError,
+  onLoaderStart,
+}: CommonComponentProps): JSX.Element => {
+  const {wrapper, component: taxRegistrations} =
+    useCreateComponent('tax-registrations');
+
+  useUpdateWithSetter(taxRegistrations, onLoaderStart, (comp, val) => {
+    comp.setOnLoaderStart(val);
+  });
+  useUpdateWithSetter(taxRegistrations, onLoadError, (comp, val) => {
+    comp.setOnLoadError(val);
+  });
+
   return wrapper;
 };
 
-export const ConnectTaxSettings = (): JSX.Element => {
-  const {wrapper} = useCreateComponent('tax-settings');
+export const ConnectTaxSettings = ({
+  onLoadError,
+  onLoaderStart,
+}: CommonComponentProps): JSX.Element => {
+  const {wrapper, component: taxSettings} = useCreateComponent('tax-settings');
+
+  useUpdateWithSetter(taxSettings, onLoaderStart, (comp, val) => {
+    comp.setOnLoaderStart(val);
+  });
+  useUpdateWithSetter(taxSettings, onLoadError, (comp, val) => {
+    comp.setOnLoadError(val);
+  });
   return wrapper;
 };
