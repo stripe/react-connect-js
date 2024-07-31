@@ -1,7 +1,12 @@
 import {useCreateComponent} from './useCreateComponent';
 import {useUpdateWithSetter} from './utils/useUpdateWithSetter';
 import {CollectionOptions, FetchEphemeralKeyFunction} from './types';
-import {LoadError, LoaderStart, NotificationCount, InstallState} from '@stripe/connect-js';
+import {
+  LoadError,
+  LoaderStart,
+  NotificationCount,
+  InstallState,
+} from '@stripe/connect-js';
 
 export type CommonComponentProps = {
   onLoaderStart: ({elementTagName}: LoaderStart) => void;
@@ -61,6 +66,22 @@ export const ConnectAppViewport = ({
   return wrapper;
 };
 
+export const ConnectBalances = ({
+  onLoadError,
+  onLoaderStart,
+}: CommonComponentProps): JSX.Element => {
+  const {wrapper, component: balances} = useCreateComponent('balances');
+
+  useUpdateWithSetter(balances, onLoaderStart, (comp, val) => {
+    comp.setOnLoaderStart(val);
+  });
+  useUpdateWithSetter(balances, onLoadError, (comp, val) => {
+    comp.setOnLoadError(val);
+  });
+
+  return wrapper;
+};
+
 export const ConnectPayments = ({
   onLoadError,
   onLoaderStart,
@@ -87,6 +108,22 @@ export const ConnectPayouts = ({
     comp.setOnLoaderStart(val);
   });
   useUpdateWithSetter(payouts, onLoadError, (comp, val) => {
+    comp.setOnLoadError(val);
+  });
+
+  return wrapper;
+};
+
+export const ConnectPayoutsList = ({
+  onLoadError,
+  onLoaderStart,
+}: CommonComponentProps): JSX.Element => {
+  const {wrapper, component: payoutsList} = useCreateComponent('payouts-list');
+
+  useUpdateWithSetter(payoutsList, onLoaderStart, (comp, val) => {
+    comp.setOnLoaderStart(val);
+  });
+  useUpdateWithSetter(payoutsList, onLoadError, (comp, val) => {
     comp.setOnLoadError(val);
   });
 
@@ -173,7 +210,9 @@ export const ConnectPaymentMethodSettings = ({
   onLoadError,
   onLoaderStart,
 }: CommonComponentProps): JSX.Element => {
-  const {wrapper, component: paymentMethodSettings} = useCreateComponent('payment-method-settings');
+  const {wrapper, component: paymentMethodSettings} = useCreateComponent(
+    'payment-method-settings'
+  );
 
   useUpdateWithSetter(paymentMethodSettings, onLoaderStart, (comp, val) => {
     comp.setOnLoaderStart(val);
@@ -212,9 +251,10 @@ export const ConnectInstantPayouts = ({
   onLoadError,
   onLoaderStart,
 }: CommonComponentProps): JSX.Element => {
-  const {wrapper, component: instantPayouts} = useCreateComponent('instant-payouts');
+  const {wrapper, component: instantPayouts} =
+    useCreateComponent('instant-payouts');
 
-    useUpdateWithSetter(instantPayouts, onLoaderStart, (comp, val) => {
+  useUpdateWithSetter(instantPayouts, onLoaderStart, (comp, val) => {
     comp.setOnLoaderStart(val);
   });
   useUpdateWithSetter(instantPayouts, onLoadError, (comp, val) => {
@@ -339,7 +379,6 @@ export const ConnectFinancialAccount = ({
     comp.setOnLoadError(val);
   });
 
-
   return wrapper;
 };
 
@@ -358,12 +397,20 @@ export const ConnectFinancialAccountTransactions = ({
     financialAccount,
     (comp, val) => comp.setFinancialAccount(val)
   );
-  useUpdateWithSetter(financialAccountTransactionsComponent, onLoaderStart, (comp, val) => {
-    comp.setOnLoaderStart(val);
-  });
-  useUpdateWithSetter(financialAccountTransactionsComponent, onLoadError, (comp, val) => {
-    comp.setOnLoadError(val);
-  });
+  useUpdateWithSetter(
+    financialAccountTransactionsComponent,
+    onLoaderStart,
+    (comp, val) => {
+      comp.setOnLoaderStart(val);
+    }
+  );
+  useUpdateWithSetter(
+    financialAccountTransactionsComponent,
+    onLoadError,
+    (comp, val) => {
+      comp.setOnLoadError(val);
+    }
+  );
 
   return wrapper;
 };
@@ -372,7 +419,8 @@ export const ConnectCapitalOverview = ({
   onLoadError,
   onLoaderStart,
 }: CommonComponentProps): JSX.Element => {
-  const {wrapper, component: capitalOverview} = useCreateComponent('capital-overview');
+  const {wrapper, component: capitalOverview} =
+    useCreateComponent('capital-overview');
 
   useUpdateWithSetter(capitalOverview, onLoaderStart, (comp, val) => {
     comp.setOnLoaderStart(val);
@@ -394,38 +442,6 @@ export const ConnectDocuments = ({
     comp.setOnLoaderStart(val);
   });
   useUpdateWithSetter(documents, onLoadError, (comp, val) => {
-    comp.setOnLoadError(val);
-  });
-
-  return wrapper;
-};
-
-export const ConnectPayoutsList = ({
-  onLoadError,
-  onLoaderStart,
-}: CommonComponentProps): JSX.Element => {
-  const {wrapper, component: payoutsList} = useCreateComponent('payouts-list');
-
-  useUpdateWithSetter(payoutsList, onLoaderStart, (comp, val) => {
-    comp.setOnLoaderStart(val);
-  });
-  useUpdateWithSetter(payoutsList, onLoadError, (comp, val) => {
-    comp.setOnLoadError(val);
-  });
-
-  return wrapper;
-};
-
-export const ConnectBalances = ({
-  onLoadError,
-  onLoaderStart,
-}: CommonComponentProps): JSX.Element => {
-  const {wrapper, component: balances} = useCreateComponent('balances');
-
-  useUpdateWithSetter(balances, onLoaderStart, (comp, val) => {
-    comp.setOnLoaderStart(val);
-  });
-  useUpdateWithSetter(balances, onLoadError, (comp, val) => {
     comp.setOnLoadError(val);
   });
 
