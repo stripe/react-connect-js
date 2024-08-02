@@ -9,8 +9,8 @@ import {
 } from '@stripe/connect-js';
 
 export type CommonComponentProps = {
-  onLoaderStart: ({elementTagName}: LoaderStart) => void;
-  onLoadError: ({error, elementTagName}: LoadError) => void;
+  onLoaderStart?: ({elementTagName}: LoaderStart) => void;
+  onLoadError?: ({error, elementTagName}: LoadError) => void;
 };
 
 export const ConnectAppInstall = ({
