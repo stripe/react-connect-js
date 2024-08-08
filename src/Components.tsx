@@ -207,11 +207,20 @@ export const ConnectAccountOnboarding = ({
 };
 
 export const ConnectPaymentMethodSettings = ({
+  paymentMethodConfiguration,
   onLoadError,
   onLoaderStart,
-}: CommonComponentProps): JSX.Element => {
+}: {
+  paymentMethodConfiguration?: string;
+} & CommonComponentProps): JSX.Element => {
   const {wrapper, component: paymentMethodSettings} = useCreateComponent(
     'payment-method-settings'
+  );
+
+  useUpdateWithSetter(
+    paymentMethodSettings,
+    paymentMethodConfiguration,
+    (comp, val) => comp.setPaymentMethodConfiguration(val)
   );
 
   useUpdateWithSetter(paymentMethodSettings, onLoaderStart, (comp, val) => {
