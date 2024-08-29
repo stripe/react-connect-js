@@ -441,6 +441,116 @@ export const ConnectCapitalOverview = ({
   return wrapper;
 };
 
+export const ConnectCapitalFinancing = ({
+  defaultFinancingOffer,
+  showFinancingSelector,
+  faqUrl,
+  supportUrl,
+  onFinancingsLoaded,
+  onLoadError,
+  onLoaderStart,
+}: {
+  defaultFinancingOffer?: string;
+  showFinancingSelector?: boolean;
+  faqUrl?: string;
+  supportUrl?: string;
+  onFinancingsLoaded?: ({total}: {total: number}) => void;
+} & CommonComponentProps): JSX.Element => {
+  const {wrapper, component: capitalFinancing} = 
+    useCreateComponent('capital-financing');
+
+  useUpdateWithSetter(
+    capitalFinancing,
+    defaultFinancingOffer,
+    (comp, val) => comp.setDefaultFinancingOffer(val)
+  );
+
+  useUpdateWithSetter(
+    capitalFinancing,
+    showFinancingSelector,
+    (comp, val) => comp.setShowFinancingSelector(val)
+  )
+
+  useUpdateWithSetter(
+    capitalFinancing,
+    faqUrl,
+    (comp, val) => comp.setFaqUrl(val)
+  )
+
+  useUpdateWithSetter(
+    capitalFinancing,
+    supportUrl,
+    (comp, val) => comp.setSupportUrl(val)
+  )
+
+  useUpdateWithSetter(
+    capitalFinancing,
+    onFinancingsLoaded,
+    (comp, val) => comp.setOnFinancingsLoaded(val)
+  )
+
+  useUpdateWithSetter(capitalFinancing, onLoaderStart, (comp, val) => {
+    comp.setOnLoaderStart(val);
+  });
+  useUpdateWithSetter(capitalFinancing, onLoadError, (comp, val) => {
+    comp.setOnLoadError(val);
+  });
+
+  return wrapper;
+};
+
+export const ConnectCapitalFinancingApplication = ({
+  onApplicationSubmitted,
+  onLoadError,
+  onLoaderStart,
+}: {
+  onApplicationSubmitted: () => void;
+} & CommonComponentProps): JSX.Element => {
+  const {wrapper, component: capitalFinancingApplication} =
+    useCreateComponent('capital-financing-application');
+
+  useUpdateWithSetter(
+    capitalFinancingApplication,
+    onApplicationSubmitted,
+    (comp, val) => comp.setOnApplicationSubmitted(val)
+  )
+
+  useUpdateWithSetter(capitalFinancingApplication, onLoaderStart, (comp, val) => {
+    comp.setOnLoaderStart(val);
+  });
+  useUpdateWithSetter(capitalFinancingApplication, onLoadError, (comp, val) => {
+    comp.setOnLoadError(val);
+  });
+
+  return wrapper;
+};
+
+export const ConnectCapitalFinancingPromotion = ({
+  onApplicationSubmitted,
+  onLoadError,
+  onLoaderStart,
+}: {
+  onApplicationSubmitted?: () => void;
+} & CommonComponentProps): JSX.Element => {
+  const {wrapper, component: capitalPromotion} =
+    useCreateComponent('capital-financing-promotion');
+  
+  useUpdateWithSetter(
+    capitalPromotion,
+    onApplicationSubmitted,
+    (comp, val) => comp.setOnApplicationSubmitted(val)
+  )
+
+  useUpdateWithSetter(capitalPromotion, onLoaderStart, (comp, val) => {
+    comp.setOnLoaderStart(val);
+  });
+  useUpdateWithSetter(capitalPromotion, onLoadError, (comp, val) => {
+    comp.setOnLoadError(val);
+  });
+
+  return wrapper;
+};
+
 export const ConnectDocuments = ({
   onLoadError,
   onLoaderStart,
