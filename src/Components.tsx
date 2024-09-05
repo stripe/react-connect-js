@@ -303,14 +303,12 @@ export const ConnectNotificationBanner = ({
 
 export const ConnectIssuingCard = ({
   defaultCard,
-  cardArtFileLink,
   cardSwitching,
   fetchEphemeralKey,
   onLoadError,
   onLoaderStart,
 }: {
   defaultCard?: string;
-  cardArtFileLink?: string;
   cardSwitching?: boolean;
   fetchEphemeralKey?: FetchEphemeralKeyFunction;
 } & CommonComponentProps): JSX.Element => {
@@ -318,9 +316,6 @@ export const ConnectIssuingCard = ({
 
   useUpdateWithSetter(issuingCard, defaultCard, (comp, val) =>
     comp.setDefaultCard(val)
-  );
-  useUpdateWithSetter(issuingCard, cardArtFileLink, (comp, val) =>
-    comp.setCardArtFileLink(val)
   );
   useUpdateWithSetter(issuingCard, cardSwitching, (comp, val) =>
     comp.setCardSwitching(val)
@@ -339,20 +334,15 @@ export const ConnectIssuingCard = ({
 };
 
 export const ConnectIssuingCardsList = ({
-  cardArtFileLink,
   fetchEphemeralKey,
   onLoadError,
   onLoaderStart,
 }: {
-  cardArtFileLink?: string;
   fetchEphemeralKey?: FetchEphemeralKeyFunction;
 } & CommonComponentProps): JSX.Element => {
   const {wrapper, component: issuingCardsList} =
     useCreateComponent('issuing-cards-list');
 
-  useUpdateWithSetter(issuingCardsList, cardArtFileLink, (comp, val) =>
-    comp.setCardArtFileLink(val)
-  );
   useUpdateWithSetter(issuingCardsList, fetchEphemeralKey, (comp, val) =>
     comp.setFetchEphemeralKey(val)
   );
