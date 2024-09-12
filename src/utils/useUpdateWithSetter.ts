@@ -1,5 +1,9 @@
 import React from 'react';
-import {CollectionOptions, FetchEphemeralKeyFunction} from '../types';
+import {
+  CollectionOptions,
+  FetchEphemeralKeyFunction,
+  FinancingProductType,
+} from '../types';
 import {
   LoadError,
   LoaderStart,
@@ -20,6 +24,7 @@ export const useUpdateWithSetter = <
     | ((loaderStart: LoaderStart) => void)
     | ((loaderError: LoadError) => void)
     | ((installState: InstallState) => void)
+    | ((productType: FinancingProductType) => void)
     | undefined
 >(
   component: T | null,
