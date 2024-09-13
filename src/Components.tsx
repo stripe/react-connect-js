@@ -4,6 +4,7 @@ import {
   CollectionOptions,
   FetchEphemeralKeyFunction,
   FinancingProductType,
+  FinancingPromotionLayoutType,
 } from './types';
 import {
   LoadError,
@@ -521,7 +522,7 @@ export const ConnectCapitalFinancingPromotion = ({
   onLoadError,
   onLoaderStart,
 }: {
-  layout?: 'full' | 'banner';
+  layout?: FinancingPromotionLayoutType;
   onEligibleFinancingOfferLoaded?: ({
     productType,
   }: FinancingProductType) => void;

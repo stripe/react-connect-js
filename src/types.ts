@@ -15,3 +15,5 @@ export type FetchEphemeralKeyFunction = (fetchParams: {
 export type FinancingProductType = {
   productType: 'standard' | 'refill' | 'none';
 };
+
+export type FinancingPromotionLayoutType = 'full' | 'banner';
