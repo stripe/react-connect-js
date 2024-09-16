@@ -11,3 +11,9 @@ export type FetchEphemeralKeyFunction = (fetchParams: {
   nonce: string;
   ephemeralKeySecret: string;
 }>;
+
+export type FinancingProductType = {
+  productType: 'standard' | 'refill' | 'none';
+};
+
+export type FinancingPromotionLayoutType = 'full' | 'banner';
