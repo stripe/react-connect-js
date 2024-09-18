@@ -9,9 +9,10 @@ This project is a thin React wrapper around
 It allows you to add embedded components to any React app, and manages the state
 and lifecycle of embedded components for you.
 
-Note: Connect embedded components is currently still in beta. Please
-[contact us](https://stripe.com/docs/connect/get-started-connect-embedded-components#access)
-to request beta access.
+Note: Some Connect embedded components are currently still in preview. These can
+be
+[viewed on our doc site](https://docs.stripe.com/connect/supported-embedded-components),
+where you can also request preview access.
 
 ### Components
 
