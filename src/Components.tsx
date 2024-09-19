@@ -5,8 +5,6 @@ import {
   FetchEphemeralKeyFunction,
   FinancingProductType,
   FinancingPromotionLayoutType,
-  IntervalType,
-  ReportName,
 } from './types';
 import {
   LoadError,
@@ -14,6 +12,8 @@ import {
   NotificationCount,
   InstallState,
   StepChange,
+  IntervalType,
+  ReportName,
 } from '@stripe/connect-js';
 
 export type CommonComponentProps = {
@@ -657,7 +657,6 @@ export const ConnectReportingChart = ({
   intervalStart,
   intervalEnd,
   intervalType,
-  onClose,
   onLoadError,
   onLoaderStart,
 }: {
@@ -671,9 +670,9 @@ export const ConnectReportingChart = ({
   intervalStart?: Date;
   intervalEnd?: Date;
   intervalType?: IntervalType;
-  onClose: () => void;
 } & CommonComponentProps): JSX.Element | null => {
-  const {wrapper, component: reportingChart} = useCreateComponent('reporting-chart');
+  const {wrapper, component: reportingChart} =
+    useCreateComponent('reporting-chart');
 
   useUpdateWithSetter(reportingChart, reportName, (comp, val) =>
     comp.setReportName(val)

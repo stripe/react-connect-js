@@ -17,7 +17,3 @@ export type FinancingProductType = {
 };
 
 export type FinancingPromotionLayoutType = 'full' | 'banner';
-
-export type IntervalType = 'day' | 'week' | 'month' | 'quarter' | 'year';
-
-export type ReportName = 'gross_volume' | 'net_volume';
