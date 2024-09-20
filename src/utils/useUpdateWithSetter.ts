@@ -9,6 +9,7 @@ import {
   LoaderStart,
   InstallState,
   NotificationCount,
+  StepChange,
 } from '@stripe/connect-js';
 
 export const useUpdateWithSetter = <
@@ -25,6 +26,7 @@ export const useUpdateWithSetter = <
     | ((loaderError: LoadError) => void)
     | ((installState: InstallState) => void)
     | ((productType: FinancingProductType) => void)
+    | ((StepChange: StepChange) => void)
     | undefined
 >(
   component: T | null,
