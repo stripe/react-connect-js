@@ -1,6 +1,11 @@
 import React from 'react';
 import {CollectionOptions} from '../Components';
-import {LoadError, LoaderStart, NotificationCount} from '@stripe/connect-js';
+import {
+  LoadError,
+  LoaderStart,
+  NotificationCount,
+  StepChange,
+} from '@stripe/connect-js';
 
 export const useUpdateWithSetter = <
   T extends HTMLElement,
@@ -12,6 +17,7 @@ export const useUpdateWithSetter = <
     | ((notificationCount: NotificationCount) => void)
     | ((loaderStart: LoaderStart) => void)
     | ((loaderError: LoadError) => void)
+    | ((stepChange: StepChange) => void)
     | undefined
 >(
   component: T | null,
