@@ -1,6 +1,11 @@
 import {useCreateComponent} from './useCreateComponent';
 import {useUpdateWithSetter} from './utils/useUpdateWithSetter';
-import {LoadError, LoaderStart, NotificationCount} from '@stripe/connect-js';
+import {
+  LoadError,
+  LoaderStart,
+  NotificationCount,
+  StepChange,
+} from '@stripe/connect-js';
 
 export type CommonComponentProps = {
   onLoaderStart?: ({elementTagName}: LoaderStart) => void;
@@ -83,8 +88,10 @@ export const ConnectAccountOnboarding = ({
   collectionOptions,
   onLoadError,
   onLoaderStart,
+  onStepChange,
 }: {
   onExit: () => void;
+  onStepChange?: (stepChange: StepChange) => void;
   recipientTermsOfServiceUrl?: string;
   fullTermsOfServiceUrl?: string;
   privacyPolicyUrl?: string;
@@ -116,6 +123,9 @@ export const ConnectAccountOnboarding = ({
   useUpdateWithSetter(onboarding, onLoadError, (comp, val) => {
     comp.setOnLoadError(val);
   });
+  useUpdateWithSetter(onboarding, onStepChange, (comp, val) =>
+    comp.setOnStepChange(val)
+  );
 
   return wrapper;
 };
