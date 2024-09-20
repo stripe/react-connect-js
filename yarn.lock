@@ -1454,7 +1454,7 @@
   dependencies:
     "@sinonjs/commons" "^3.0.0"
 
-"@stripe/connect-js@3.3.18-beta-1":
+"@stripe/connect-js@3.3.18-preview-1":
   version "3.3.18-preview-1"
   resolved "https://registry.yarnpkg.com/@stripe/connect-js/-/connect-js-3.3.18-preview-1.tgz#aab1cd46fa4b8e35d68f7bf6fa50e411302e0f4c"
   integrity sha512-j26EGOKZ8RIunh6QY+vq+asGxP/TjxLryRvnUNaeWQmDfK0kr6t7Vx2wj7lm6yNBVCAfIxtNSRfnTDGpkq0heQ==
