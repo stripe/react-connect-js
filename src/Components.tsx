@@ -350,15 +350,20 @@ export const ConnectIssuingCard = ({
 };
 
 export const ConnectIssuingCardsList = ({
+  showSpendControls,
   fetchEphemeralKey,
   onLoadError,
   onLoaderStart,
 }: {
+  showSpendControls?: boolean;
   fetchEphemeralKey?: FetchEphemeralKeyFunction;
 } & CommonComponentProps): JSX.Element => {
   const {wrapper, component: issuingCardsList} =
     useCreateComponent('issuing-cards-list');
 
+  useUpdateWithSetter(issuingCardsList, showSpendControls, (comp, val) =>
+    comp.setShowSpendControls(val)
+  );
   useUpdateWithSetter(issuingCardsList, fetchEphemeralKey, (comp, val) =>
     comp.setFetchEphemeralKey(val)
   );
