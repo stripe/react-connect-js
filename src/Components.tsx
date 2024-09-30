@@ -315,12 +315,14 @@ export const ConnectNotificationBanner = ({
 export const ConnectIssuingCard = ({
   defaultCard,
   cardSwitching,
+  showSpendControls,
   fetchEphemeralKey,
   onLoadError,
   onLoaderStart,
 }: {
   defaultCard?: string;
   cardSwitching?: boolean;
+  showSpendControls?: boolean;
   fetchEphemeralKey?: FetchEphemeralKeyFunction;
 } & CommonComponentProps): JSX.Element => {
   const {wrapper, component: issuingCard} = useCreateComponent('issuing-card');
@@ -330,6 +332,9 @@ export const ConnectIssuingCard = ({
   );
   useUpdateWithSetter(issuingCard, cardSwitching, (comp, val) =>
     comp.setCardSwitching(val)
+  );
+  useUpdateWithSetter(issuingCard, showSpendControls, (comp, val) =>
+    comp.setShowSpendControls(val)
   );
   useUpdateWithSetter(issuingCard, fetchEphemeralKey, (comp, val) =>
     comp.setFetchEphemeralKey(val)
@@ -345,15 +350,20 @@ export const ConnectIssuingCard = ({
 };
 
 export const ConnectIssuingCardsList = ({
+  showSpendControls,
   fetchEphemeralKey,
   onLoadError,
   onLoaderStart,
 }: {
+  showSpendControls?: boolean;
   fetchEphemeralKey?: FetchEphemeralKeyFunction;
 } & CommonComponentProps): JSX.Element => {
   const {wrapper, component: issuingCardsList} =
     useCreateComponent('issuing-cards-list');
 
+  useUpdateWithSetter(issuingCardsList, showSpendControls, (comp, val) =>
+    comp.setShowSpendControls(val)
+  );
   useUpdateWithSetter(issuingCardsList, fetchEphemeralKey, (comp, val) =>
     comp.setFetchEphemeralKey(val)
   );
