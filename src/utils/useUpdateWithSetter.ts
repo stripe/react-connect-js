@@ -12,12 +12,14 @@ export const useUpdateWithSetter = <
   V extends
     | string
     | boolean
+    | string[]
     | (() => void)
     | CollectionOptions
     | ((notificationCount: NotificationCount) => void)
     | ((loaderStart: LoaderStart) => void)
     | ((loaderError: LoadError) => void)
     | ((stepChange: StepChange) => void)
+    | (({id}: {id: string}) => void)
     | undefined
 >(
   component: T | null,

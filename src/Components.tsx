@@ -232,16 +232,34 @@ export const ConnectBalances = ({
 export const ConnectTaxRegistrations = ({
   onLoadError,
   onLoaderStart,
-}: CommonComponentProps): JSX.Element => {
+  displayCountries,
+  onAfterTaxRegistrationAdded,
+}: {
+  displayCountries?: string[];
+  onAfterTaxRegistrationAdded?: ({id}: {id: string}) => void;
+} & CommonComponentProps): JSX.Element => {
   const {wrapper, component: taxRegistrations} =
     useCreateComponent('tax-registrations');
 
   useUpdateWithSetter(taxRegistrations, onLoaderStart, (comp, val) => {
     comp.setOnLoaderStart(val);
   });
+
   useUpdateWithSetter(taxRegistrations, onLoadError, (comp, val) => {
     comp.setOnLoadError(val);
   });
+
+  useUpdateWithSetter(taxRegistrations, displayCountries, (comp, val) => {
+    comp.setDisplayCountries(val);
+  });
+
+  useUpdateWithSetter(
+    taxRegistrations,
+    onAfterTaxRegistrationAdded,
+    (comp, val) => {
+      comp.setOnAfterTaxRegistrationAdded(val);
+    }
+  );
 
   return wrapper;
 };
@@ -249,7 +267,14 @@ export const ConnectTaxRegistrations = ({
 export const ConnectTaxSettings = ({
   onLoadError,
   onLoaderStart,
-}: CommonComponentProps): JSX.Element => {
+  hideProductTaxCodeSelector,
+  displayHeadOfficeCountries,
+  onTaxSettingsUpdated,
+}: {
+  hideProductTaxCodeSelector?: boolean;
+  displayHeadOfficeCountries?: string[];
+  onTaxSettingsUpdated?: ({id}: {id: string}) => void;
+} & CommonComponentProps): JSX.Element => {
   const {wrapper, component: taxSettings} = useCreateComponent('tax-settings');
 
   useUpdateWithSetter(taxSettings, onLoaderStart, (comp, val) => {
@@ -258,5 +283,18 @@ export const ConnectTaxSettings = ({
   useUpdateWithSetter(taxSettings, onLoadError, (comp, val) => {
     comp.setOnLoadError(val);
   });
+
+  useUpdateWithSetter(taxSettings, hideProductTaxCodeSelector, (comp, val) => {
+    comp.setHideProductTaxCodeSelector(val);
+  });
+
+  useUpdateWithSetter(taxSettings, displayHeadOfficeCountries, (comp, val) => {
+    comp.setDisplayHeadOfficeCountries(val);
+  });
+
+  useUpdateWithSetter(taxSettings, onTaxSettingsUpdated, (comp, val) => {
+    comp.setOnTaxSettingsUpdated(val);
+  });
+
   return wrapper;
 };
