@@ -502,10 +502,14 @@ export const ConnectCapitalFinancing = ({
 
 export const ConnectCapitalFinancingApplication = ({
   onApplicationSubmitted,
+  privacyPolicyUrl,
+  howCapitalWorksUrl,
   onLoadError,
   onLoaderStart,
 }: {
   onApplicationSubmitted: () => void;
+  privacyPolicyUrl?: string;
+  howCapitalWorksUrl?: string;
 } & CommonComponentProps): JSX.Element => {
   const {wrapper, component: capitalFinancingApplication} = useCreateComponent(
     'capital-financing-application'
@@ -515,6 +519,16 @@ export const ConnectCapitalFinancingApplication = ({
     capitalFinancingApplication,
     onApplicationSubmitted,
     (comp, val) => comp.setOnApplicationSubmitted(val)
+  );
+  useUpdateWithSetter(
+    capitalFinancingApplication,
+    privacyPolicyUrl,
+    (comp, val) => comp.setPrivacyPolicyUrl(val)
+  );
+  useUpdateWithSetter(
+    capitalFinancingApplication,
+    howCapitalWorksUrl,
+    (comp, val) => comp.setHowCapitalWorksUrl(val)
   );
 
   useUpdateWithSetter(
@@ -535,6 +549,9 @@ export const ConnectCapitalFinancingPromotion = ({
   layout,
   onApplicationSubmitted,
   onEligibleFinancingOfferLoaded,
+  privacyPolicyUrl,
+  howCapitalWorksUrl,
+  eligibilityCriteriaUrl,
   onLoadError,
   onLoaderStart,
 }: {
@@ -542,6 +559,9 @@ export const ConnectCapitalFinancingPromotion = ({
   onEligibleFinancingOfferLoaded?: ({
     productType,
   }: FinancingProductType) => void;
+  privacyPolicyUrl?: string;
+  howCapitalWorksUrl?: string;
+  eligibilityCriteriaUrl?: string;
   onApplicationSubmitted?: () => void;
 } & CommonComponentProps): JSX.Element => {
   const {wrapper, component: capitalPromotion} = useCreateComponent(
@@ -550,6 +570,15 @@ export const ConnectCapitalFinancingPromotion = ({
 
   useUpdateWithSetter(capitalPromotion, layout, (comp, val) =>
     comp.setLayout(val)
+  );
+  useUpdateWithSetter(capitalPromotion, privacyPolicyUrl, (comp, val) =>
+    comp.setPrivacyPolicyUrl(val)
+  );
+  useUpdateWithSetter(capitalPromotion, howCapitalWorksUrl, (comp, val) =>
+    comp.setHowCapitalWorksUrl(val)
+  );
+  useUpdateWithSetter(capitalPromotion, eligibilityCriteriaUrl, (comp, val) =>
+    comp.setEligibilityCriteriaUrl(val)
   );
 
   useUpdateWithSetter(capitalPromotion, onApplicationSubmitted, (comp, val) =>
