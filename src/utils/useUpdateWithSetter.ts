@@ -27,6 +27,7 @@ export const useUpdateWithSetter = <
     | ((installState: InstallState) => void)
     | ((productType: FinancingProductType) => void)
     | ((StepChange: StepChange) => void)
+    | Date
     | undefined
 >(
   component: T | null,

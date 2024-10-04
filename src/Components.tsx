@@ -12,6 +12,8 @@ import {
   NotificationCount,
   InstallState,
   StepChange,
+  IntervalType,
+  ReportName,
 } from '@stripe/connect-js';
 
 export type CommonComponentProps = {
@@ -644,6 +646,54 @@ export const ConnectTaxSettings = ({
     comp.setOnLoaderStart(val);
   });
   useUpdateWithSetter(taxSettings, onLoadError, (comp, val) => {
+    comp.setOnLoadError(val);
+  });
+
+  return wrapper;
+};
+
+export const ConnectReportingChart = ({
+  reportName,
+  intervalStart,
+  intervalEnd,
+  intervalType,
+  onLoadError,
+  onLoaderStart,
+}: {
+  /**
+   * @param reportName The name of the report to render as a chart.
+   * @param intervalStart The start date of the report interval.
+   * @param intervalEnd The end date of the report interval.
+   * @param intervalType The type of the report interval.
+   */
+  reportName: ReportName;
+  intervalStart?: Date;
+  intervalEnd?: Date;
+  intervalType?: IntervalType;
+} & CommonComponentProps): JSX.Element | null => {
+  const {wrapper, component: reportingChart} =
+    useCreateComponent('reporting-chart');
+
+  useUpdateWithSetter(reportingChart, reportName, (comp, val) =>
+    comp.setReportName(val)
+  );
+
+  useUpdateWithSetter(reportingChart, intervalStart, (comp, val) =>
+    comp.setIntervalStart(val)
+  );
+
+  useUpdateWithSetter(reportingChart, intervalEnd, (comp, val) =>
+    comp.setIntervalEnd(val)
+  );
+
+  useUpdateWithSetter(reportingChart, intervalType, (comp, val) =>
+    comp.setIntervalType(val)
+  );
+
+  useUpdateWithSetter(reportingChart, onLoaderStart, (comp, val) => {
+    comp.setOnLoaderStart(val);
+  });
+  useUpdateWithSetter(reportingChart, onLoadError, (comp, val) => {
     comp.setOnLoadError(val);
   });
 
