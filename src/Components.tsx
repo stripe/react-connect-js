@@ -14,6 +14,7 @@ import {
   StepChange,
   IntervalType,
   ReportName,
+  RecipientDataSource,
 } from '@stripe/connect-js';
 
 export type CommonComponentProps = {
@@ -442,7 +443,7 @@ export const ConnectRecipients = ({
   onLoadError,
   onLoaderStart,
 }: {
-  dataSource: string;
+  dataSource: RecipientDataSource;
 } & CommonComponentProps): JSX.Element => {
   const {wrapper, component: recipientsComponent} =
     useCreateComponent('recipients');
