@@ -437,6 +437,31 @@ export const ConnectFinancialAccountTransactions = ({
   return wrapper;
 };
 
+export const ConnectRecipients = ({
+  dataSource,
+  onLoadError,
+  onLoaderStart,
+}: {
+  dataSource: string;
+} & CommonComponentProps): JSX.Element => {
+  const {wrapper, component: recipientsComponent} =
+    useCreateComponent('recipients');
+
+  useUpdateWithSetter(
+    recipientsComponent,
+    dataSource,
+    (comp, val) => comp.setDataSource(val)
+  );
+  useUpdateWithSetter(recipientsComponent, onLoaderStart, (comp, val) => {
+    comp.setOnLoaderStart(val);
+  });
+  useUpdateWithSetter(recipientsComponent, onLoadError, (comp, val) => {
+    comp.setOnLoadError(val);
+  });
+
+  return wrapper;
+};
+
 export const ConnectCapitalOverview = ({
   onLoadError,
   onLoaderStart,
