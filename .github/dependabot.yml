@@ -1,0 +1,16 @@
+version: 2
+updates:
+  - package-ecosystem: "npm" 
+    directory: "/"
+    schedule:
+      interval: "daily"
+    # Setting to 0 blocks updates for non-security related package dependencies updates
+    open-pull-requests-limit: 0
+    target-branch: "master"
+
+  - package-ecosystem: "npm" 
+    directory: "/"
+    schedule:
+      interval: "daily"
+    open-pull-requests-limit: 0
+    target-branch: "preview"
