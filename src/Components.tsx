@@ -14,6 +14,7 @@ import {
   StepChange,
   IntervalType,
   ReportName,
+  RecipientDataSource,
 } from '@stripe/connect-js';
 
 export type CommonComponentProps = {
@@ -433,6 +434,31 @@ export const ConnectFinancialAccountTransactions = ({
       comp.setOnLoadError(val);
     }
   );
+
+  return wrapper;
+};
+
+export const ConnectRecipients = ({
+  dataSource,
+  onLoadError,
+  onLoaderStart,
+}: {
+  dataSource: RecipientDataSource;
+} & CommonComponentProps): JSX.Element => {
+  const {wrapper, component: recipientsComponent} =
+    useCreateComponent('recipients');
+
+  useUpdateWithSetter(
+    recipientsComponent,
+    dataSource,
+    (comp, val) => comp.setDataSource(val)
+  );
+  useUpdateWithSetter(recipientsComponent, onLoaderStart, (comp, val) => {
+    comp.setOnLoaderStart(val);
+  });
+  useUpdateWithSetter(recipientsComponent, onLoadError, (comp, val) => {
+    comp.setOnLoadError(val);
+  });
 
   return wrapper;
 };
