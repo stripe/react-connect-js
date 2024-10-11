@@ -483,7 +483,7 @@ export const ConnectCapitalOverview = ({
 export const ConnectCapitalFinancing = ({
   defaultFinancingOffer,
   showFinancingSelector,
-  faqUrl,
+  howCapitalWorksUrl,
   supportUrl,
   onFinancingsLoaded,
   onLoadError,
@@ -491,7 +491,7 @@ export const ConnectCapitalFinancing = ({
 }: {
   defaultFinancingOffer?: string;
   showFinancingSelector?: boolean;
-  faqUrl?: string;
+  howCapitalWorksUrl?: string;
   supportUrl?: string;
   onFinancingsLoaded?: ({total}: {total: number}) => void;
 } & CommonComponentProps): JSX.Element => {
@@ -506,8 +506,8 @@ export const ConnectCapitalFinancing = ({
     comp.setShowFinancingSelector(val)
   );
 
-  useUpdateWithSetter(capitalFinancing, faqUrl, (comp, val) =>
-    comp.setFaqUrl(val)
+  useUpdateWithSetter(capitalFinancing, howCapitalWorksUrl, (comp, val) =>
+    comp.setHowCapitalWorksUrl(val)
   );
 
   useUpdateWithSetter(capitalFinancing, supportUrl, (comp, val) =>
