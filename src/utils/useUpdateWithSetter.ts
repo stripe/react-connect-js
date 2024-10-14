@@ -28,6 +28,12 @@ export const useUpdateWithSetter = <
 ): void => {
   React.useEffect(() => {
     if (!component) return;
-    onUpdated(component, value);
+
+    try {
+      onUpdated(component, value);
+    } catch (error) {
+      console.error('Error when calling setter! ', error);
+      return;
+    }
   }, [component, value, onUpdated]);
 };
