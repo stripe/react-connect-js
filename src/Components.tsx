@@ -5,6 +5,7 @@ import {
   LoaderStart,
   NotificationCount,
   StepChange,
+  PaymentsListDefaultFilters
 } from '@stripe/connect-js';
 
 export type CommonComponentProps = {
@@ -13,9 +14,10 @@ export type CommonComponentProps = {
 };
 
 export const ConnectPayments = ({
+  defaultFilters,
   onLoadError,
   onLoaderStart,
-}: CommonComponentProps): JSX.Element => {
+}: {defaultFilters?: PaymentsListDefaultFilters} & CommonComponentProps): JSX.Element => {
   const {wrapper, component: payments} = useCreateComponent('payments');
 
   useUpdateWithSetter(payments, onLoaderStart, (comp, val) => {
@@ -24,8 +26,9 @@ export const ConnectPayments = ({
   useUpdateWithSetter(payments, onLoadError, (comp, val) => {
     comp.setOnLoadError(val);
   });
-
-  return wrapper;
+  useUpdateWithSetter(payments, defaultFilters, (comp, val) => {
+    comp.setDefaultFilters(val);
+  });
 };
 
 export const ConnectPayouts = ({
