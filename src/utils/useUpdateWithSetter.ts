@@ -5,6 +5,7 @@ import {
   LoaderStart,
   NotificationCount,
   StepChange,
+  PaymentsListDefaultFilters
 } from '@stripe/connect-js';
 
 export const useUpdateWithSetter = <
@@ -13,6 +14,7 @@ export const useUpdateWithSetter = <
     | string
     | boolean
     | string[]
+    | PaymentsListDefaultFilters
     | (() => void)
     | CollectionOptions
     | ((notificationCount: NotificationCount) => void)
