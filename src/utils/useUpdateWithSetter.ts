@@ -10,6 +10,7 @@ import {
   InstallState,
   NotificationCount,
   StepChange,
+  PaymentsListDefaultFilters,
 } from '@stripe/connect-js';
 
 export const useUpdateWithSetter = <
@@ -22,6 +23,7 @@ export const useUpdateWithSetter = <
     | (() => void)
     | FetchEphemeralKeyFunction
     | CollectionOptions
+    | PaymentsListDefaultFilters
     | ((notificationCount: NotificationCount) => void)
     | ((loaderStart: LoaderStart) => void)
     | ((loaderError: LoadError) => void)
