@@ -29,6 +29,8 @@ export const ConnectPayments = ({
   useUpdateWithSetter(payments, defaultFilters, (comp, val) => {
     comp.setDefaultFilters(val);
   });
+
+  return wrapper;
 };
 
 export const ConnectPayouts = ({
