@@ -14,6 +14,7 @@ export const useUpdateWithSetter = <
     | string
     | boolean
     | string[]
+    | PaymentsListDefaultFilters
     | (() => void)
     | CollectionOptions
     | ((notificationCount: NotificationCount) => void)
@@ -21,7 +22,7 @@ export const useUpdateWithSetter = <
     | ((loaderError: LoadError) => void)
     | ((stepChange: StepChange) => void)
     | (({id}: {id: string}) => void)
-    | ((defaultFilters: PaymentsListDefaultFilters) => void)
+    // | ((defaultFilters: PaymentsListDefaultFilters) => void)
     | undefined
 >(
   component: T | null,
