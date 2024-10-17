@@ -17,6 +17,7 @@ export const useUpdateWithSetter = <
   V extends
     | string
     | boolean
+    | string[]
     | Record<string, string>
     | (() => void)
     | FetchEphemeralKeyFunction
@@ -28,6 +29,7 @@ export const useUpdateWithSetter = <
     | ((productType: FinancingProductType) => void)
     | ((StepChange: StepChange) => void)
     | Date
+    | (({id}: {id: string}) => void)
     | undefined
 >(
   component: T | null,
