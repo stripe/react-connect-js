@@ -69,6 +69,7 @@
     "jest-environment-jsdom": "^29.5.0",
     "jsdom": "^22.0.0",
     "prettier": "^2.8.7",
+    "react": "^16.14.0",
     "rimraf": "^2.6.2",
     "rollup": "~2.66",
     "rollup-plugin-babel": "^4.4.0",
