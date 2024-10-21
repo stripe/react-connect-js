@@ -359,11 +359,13 @@ export const ConnectIssuingCard = ({
 
 export const ConnectIssuingCardsList = ({
   showSpendControls,
+  issuingProgram,
   fetchEphemeralKey,
   onLoadError,
   onLoaderStart,
 }: {
   showSpendControls?: boolean;
+  issuingProgram?: string;
   fetchEphemeralKey?: FetchEphemeralKeyFunction;
 } & CommonComponentProps): JSX.Element => {
   const {wrapper, component: issuingCardsList} =
@@ -371,6 +373,9 @@ export const ConnectIssuingCardsList = ({
 
   useUpdateWithSetter(issuingCardsList, showSpendControls, (comp, val) =>
     comp.setShowSpendControls(val)
+  );
+  useUpdateWithSetter(issuingCardsList, issuingProgram, (comp, val) =>
+    comp.setIssuingProgram(val)
   );
   useUpdateWithSetter(issuingCardsList, fetchEphemeralKey, (comp, val) =>
     comp.setFetchEphemeralKey(val)
@@ -453,10 +458,8 @@ export const ConnectRecipients = ({
   const {wrapper, component: recipientsComponent} =
     useCreateComponent('recipients');
 
-  useUpdateWithSetter(
-    recipientsComponent,
-    dataSource,
-    (comp, val) => comp.setDataSource(val)
+  useUpdateWithSetter(recipientsComponent, dataSource, (comp, val) =>
+    comp.setDataSource(val)
   );
   useUpdateWithSetter(recipientsComponent, onLoaderStart, (comp, val) => {
     comp.setOnLoaderStart(val);
