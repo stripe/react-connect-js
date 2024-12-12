@@ -594,6 +594,7 @@ export const ConnectCapitalFinancingPromotion = ({
   layout?: FinancingPromotionLayoutType;
   onEligibleFinancingOfferLoaded?: ({
     productType,
+    activeFinancingCount,
   }: FinancingProductType) => void;
   privacyPolicyUrl?: string;
   howCapitalWorksUrl?: string;
