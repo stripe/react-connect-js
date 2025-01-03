@@ -5,8 +5,9 @@ import {
   LoaderStart,
   NotificationCount,
   StepChange,
-  PaymentsListDefaultFilters
+  PaymentsListDefaultFilters,
 } from '@stripe/connect-js';
+import {FetchEphemeralKeyFunction} from '../types';
 
 export const useUpdateWithSetter = <
   T extends HTMLElement,
@@ -16,6 +17,7 @@ export const useUpdateWithSetter = <
     | string[]
     | PaymentsListDefaultFilters
     | (() => void)
+    | FetchEphemeralKeyFunction
     | CollectionOptions
     | ((notificationCount: NotificationCount) => void)
     | ((loaderStart: LoaderStart) => void)

@@ -1,3 +1,4 @@
+import {FetchEphemeralKeyFunction} from './types';
 import {useCreateComponent} from './useCreateComponent';
 import {useUpdateWithSetter} from './utils/useUpdateWithSetter';
 import {
@@ -5,7 +6,7 @@ import {
   LoaderStart,
   NotificationCount,
   StepChange,
-  PaymentsListDefaultFilters
+  PaymentsListDefaultFilters,
 } from '@stripe/connect-js';
 
 export type CommonComponentProps = {
@@ -17,7 +18,9 @@ export const ConnectPayments = ({
   defaultFilters,
   onLoadError,
   onLoaderStart,
-}: {defaultFilters?: PaymentsListDefaultFilters} & CommonComponentProps): JSX.Element => {
+}: {
+  defaultFilters?: PaymentsListDefaultFilters;
+} & CommonComponentProps): JSX.Element => {
   const {wrapper, component: payments} = useCreateComponent('payments');
 
   useUpdateWithSetter(payments, onLoaderStart, (comp, val) => {
@@ -183,6 +186,134 @@ export const ConnectNotificationBanner = ({
   useUpdateWithSetter(notificationBanner, onLoadError, (comp, val) => {
     comp.setOnLoadError(val);
   });
+
+  return wrapper;
+};
+
+export const ConnectIssuingCard = ({
+  defaultCard,
+  cardSwitching,
+  showSpendControls,
+  fetchEphemeralKey,
+  onLoadError,
+  onLoaderStart,
+}: {
+  defaultCard?: string;
+  cardSwitching?: boolean;
+  showSpendControls?: boolean;
+  fetchEphemeralKey?: FetchEphemeralKeyFunction;
+} & CommonComponentProps): JSX.Element => {
+  const {wrapper, component: issuingCard} = useCreateComponent('issuing-card');
+
+  useUpdateWithSetter(issuingCard, defaultCard, (comp, val) =>
+    comp.setDefaultCard(val)
+  );
+  useUpdateWithSetter(issuingCard, cardSwitching, (comp, val) =>
+    comp.setCardSwitching(val)
+  );
+  useUpdateWithSetter(issuingCard, showSpendControls, (comp, val) =>
+    comp.setShowSpendControls(val)
+  );
+  useUpdateWithSetter(issuingCard, fetchEphemeralKey, (comp, val) =>
+    comp.setFetchEphemeralKey(val)
+  );
+  useUpdateWithSetter(issuingCard, onLoaderStart, (comp, val) => {
+    comp.setOnLoaderStart(val);
+  });
+  useUpdateWithSetter(issuingCard, onLoadError, (comp, val) => {
+    comp.setOnLoadError(val);
+  });
+
+  return wrapper;
+};
+
+export const ConnectIssuingCardsList = ({
+  showSpendControls,
+  issuingProgram,
+  fetchEphemeralKey,
+  onLoadError,
+  onLoaderStart,
+}: {
+  showSpendControls?: boolean;
+  issuingProgram?: string;
+  fetchEphemeralKey?: FetchEphemeralKeyFunction;
+} & CommonComponentProps): JSX.Element => {
+  const {wrapper, component: issuingCardsList} =
+    useCreateComponent('issuing-cards-list');
+
+  useUpdateWithSetter(issuingCardsList, showSpendControls, (comp, val) =>
+    comp.setShowSpendControls(val)
+  );
+  useUpdateWithSetter(issuingCardsList, issuingProgram, (comp, val) =>
+    comp.setIssuingProgram(val)
+  );
+  useUpdateWithSetter(issuingCardsList, fetchEphemeralKey, (comp, val) =>
+    comp.setFetchEphemeralKey(val)
+  );
+  useUpdateWithSetter(issuingCardsList, onLoaderStart, (comp, val) => {
+    comp.setOnLoaderStart(val);
+  });
+  useUpdateWithSetter(issuingCardsList, onLoadError, (comp, val) => {
+    comp.setOnLoadError(val);
+  });
+
+  return wrapper;
+};
+
+export const ConnectFinancialAccount = ({
+  financialAccount,
+  onLoadError,
+  onLoaderStart,
+}: {
+  financialAccount: string;
+} & CommonComponentProps): JSX.Element => {
+  const {wrapper, component: financialAccountComponent} =
+    useCreateComponent('financial-account');
+
+  useUpdateWithSetter(
+    financialAccountComponent,
+    financialAccount,
+    (comp, val) => comp.setFinancialAccount(val)
+  );
+  useUpdateWithSetter(financialAccountComponent, onLoaderStart, (comp, val) => {
+    comp.setOnLoaderStart(val);
+  });
+  useUpdateWithSetter(financialAccountComponent, onLoadError, (comp, val) => {
+    comp.setOnLoadError(val);
+  });
+
+  return wrapper;
+};
+
+export const ConnectFinancialAccountTransactions = ({
+  financialAccount,
+  onLoadError,
+  onLoaderStart,
+}: {
+  financialAccount: string;
+} & CommonComponentProps): JSX.Element => {
+  const {wrapper, component: financialAccountTransactionsComponent} =
+    useCreateComponent('financial-account-transactions');
+
+  useUpdateWithSetter(
+    financialAccountTransactionsComponent,
+    financialAccount,
+    (comp, val) => comp.setFinancialAccount(val)
+  );
+  useUpdateWithSetter(
+    financialAccountTransactionsComponent,
+    onLoaderStart,
+    (comp, val) => {
+      comp.setOnLoaderStart(val);
+    }
+  );
+  useUpdateWithSetter(
+    financialAccountTransactionsComponent,
+    onLoadError,
+    (comp, val) => {
+      comp.setOnLoadError(val);
+    }
+  );
 
   return wrapper;
 };
