@@ -6,6 +6,10 @@ export enum ConnectElementEventNames {
   instantPayoutCreated = 'instantpayoutcreated',
 }
 
+/**
+ * @deprecated The method should not be used as we are deprecating the use of events directly. Define a setter for
+ * your use case and use useUpdateWithSetter instead.
+ */
 export const useAttachEvent = (
   component: HTMLElement | null,
   eventName: ConnectElementEventNames,
