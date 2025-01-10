@@ -724,6 +724,31 @@ export const ConnectTaxSettings = ({
   return wrapper;
 };
 
+export const ConnectTaxThresholdMonitoring = ({
+  onLoadError,
+  onLoaderStart,
+  displayCountries,
+}: {
+  displayCountries?: string[];
+} & CommonComponentProps): JSX.Element => {
+  const {wrapper, component: taxSettings} = useCreateComponent(
+    'tax-threshold-monitoring'
+  );
+
+  useUpdateWithSetter(taxSettings, onLoaderStart, (comp, val) => {
+    comp.setOnLoaderStart(val);
+  });
+  useUpdateWithSetter(taxSettings, onLoadError, (comp, val) => {
+    comp.setOnLoadError(val);
+  });
+
+  useUpdateWithSetter(taxSettings, displayCountries, (comp, val) => {
+    comp.setDisplayCountries(val);
+  });
+
+  return wrapper;
+};
+
 export const ConnectReportingChart = ({
   reportName,
   intervalStart,
