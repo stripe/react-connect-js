@@ -32,6 +32,7 @@ export const useUpdateWithSetter = <
     | ((StepChange: StepChange) => void)
     | Date
     | (({id}: {id: string}) => void)
+    | (({taxCode}: {taxCode: string}) => void)
     | undefined
 >(
   component: T | null,

@@ -654,6 +654,45 @@ export const ConnectDocuments = ({
   return wrapper;
 };
 
+export const ConnectProductTaxCodeSelector = ({
+  onLoadError,
+  onLoaderStart,
+  onTaxCodeSelect,
+  hideDescription,
+  disabled,
+  initialTaxCode
+}: {
+  onTaxCodeSelect?: ({taxCode}: {taxCode: string}) => void;
+  hideDescription?: boolean;
+  disabled?: boolean;
+  initialTaxCode?: string;
+} & CommonComponentProps): JSX.Element => {
+  const {wrapper, component: productTaxCodeSelector} =
+    useCreateComponent('product-tax-code-selector');
+
+  useUpdateWithSetter(productTaxCodeSelector, onLoaderStart, (comp, val) => {
+    comp.setOnLoaderStart(val);
+  });
+  useUpdateWithSetter(productTaxCodeSelector, onLoadError, (comp, val) => {
+    comp.setOnLoadError(val);
+  });
+
+  useUpdateWithSetter(productTaxCodeSelector, onTaxCodeSelect, (comp, val) => {
+    comp.setOnTaxCodeSelect(val);
+  });
+  useUpdateWithSetter(productTaxCodeSelector, hideDescription, (comp, val) => {
+    comp.setHideDescription(val);
+  });
+  useUpdateWithSetter(productTaxCodeSelector, disabled, (comp, val) => {
+    comp.setDisabled(val);
+  });
+  useUpdateWithSetter(productTaxCodeSelector, initialTaxCode, (comp, val) => {
+    comp.setInitialTaxCode(val);
+  });
+
+  return wrapper;
+};
+
 export const ConnectTaxRegistrations = ({
   onLoadError,
   onLoaderStart,
