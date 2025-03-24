@@ -184,7 +184,7 @@ export const ConnectPaymentDisputes = ({
    * @param payment the ID of `payment`, `charge`, or `paymentIntent` to be displayed.
    */
   payment: string;
-  onDisputesLoaded: ({total}: {total: number}) => void;
+  onDisputesLoaded?: ({total}: {total: number}) => void;
 } & CommonComponentProps): JSX.Element | null => {
   const {wrapper, component} =
     useCreateComponent('payment-disputes');
