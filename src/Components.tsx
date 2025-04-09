@@ -728,6 +728,23 @@ export const ConnectTaxRegistrations = ({
   return wrapper;
 };
 
+export const ConnectExportTaxTransactions = ({
+  onLoadError,
+  onLoaderStart,
+}: CommonComponentProps): JSX.Element => {
+  const {wrapper, component: exportTaxTransactions} = 
+    useCreateComponent('export-tax-transactions');
+
+  useUpdateWithSetter(exportTaxTransactions, onLoaderStart, (comp, val) => {
+    comp.setOnLoaderStart(val);
+  });
+
+  useUpdateWithSetter(exportTaxTransactions, onLoadError, (comp, val) => {
+    comp.setOnLoadError(val);
+  });
+  return wrapper;
+};
+
 export const ConnectTaxSettings = ({
   onLoadError,
   onLoaderStart,
