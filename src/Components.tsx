@@ -174,6 +174,36 @@ export const ConnectPaymentDetails = ({
   return wrapper;
 };
 
+export const ConnectPaymentDisputes = ({
+  payment,
+  onDisputesLoaded,
+  onLoadError,
+  onLoaderStart,
+}: {
+  /**
+   * @param payment the ID of `payment`, `charge`, or `paymentIntent` to be displayed.
+   */
+  payment: string;
+  onDisputesLoaded?: ({total}: {total: number}) => void;
+} & CommonComponentProps): JSX.Element | null => {
+  const {wrapper, component} =
+    useCreateComponent('payment-disputes');
+
+  useUpdateWithSetter(component, payment, (comp, val) =>
+    comp.setPayment(val)
+  );
+  useUpdateWithSetter(component, onDisputesLoaded, (comp, val) =>
+    comp.setOnDisputesLoaded(val)
+  );
+  useUpdateWithSetter(component, onLoaderStart, (comp, val) => {
+    comp.setOnLoaderStart(val);
+  });
+  useUpdateWithSetter(component, onLoadError, (comp, val) => {
+    comp.setOnLoadError(val);
+  });
+  return wrapper;
+};
+
 export const ConnectAccountOnboarding = ({
   onExit,
   recipientTermsOfServiceUrl,
