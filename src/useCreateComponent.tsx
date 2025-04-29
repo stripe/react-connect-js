@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import * as React from 'react';
 import {useConnectComponents} from './ConnectComponents';
-import {
+import type {
   ConnectElementTagName,
   ConnectHTMLElementRecord,
 } from '@stripe/connect-js';

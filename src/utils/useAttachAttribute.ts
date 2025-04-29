@@ -1,7 +1,7 @@
 import React from 'react';
 
 /**
- * @deprecated The method should not be used as we are deprecating the use of attributes directly. 
+ * @deprecated The method should not be used as we are deprecating the use of attributes directly.
  * Define a setter for your use case and use useUpdateWithSetter instead.
  */
 export const useAttachAttribute = (
