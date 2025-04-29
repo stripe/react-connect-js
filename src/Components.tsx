@@ -1,12 +1,12 @@
 import {useCreateComponent} from './useCreateComponent';
 import {useUpdateWithSetter} from './utils/useUpdateWithSetter';
-import {
+import type {
   CollectionOptions,
   FetchEphemeralKeyFunction,
   FinancingProductType,
   FinancingPromotionLayoutType,
 } from './types';
-import {
+import type {
   LoadError,
   LoaderStart,
   NotificationCount,
