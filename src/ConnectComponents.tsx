@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as connectJs from '@stripe/connect-js';
+import type * as connectJs from '@stripe/connect-js';
 
 type ConnectComponentsPayload = {
   connectInstance: connectJs.StripeConnectInstance;
