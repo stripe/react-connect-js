@@ -1,13 +1,13 @@
 import React from 'react';
-import {CollectionOptions} from '../Components';
-import {
+import type {CollectionOptions} from '../Components';
+import type {
   LoadError,
   LoaderStart,
   NotificationCount,
   StepChange,
   PaymentsListDefaultFilters,
 } from '@stripe/connect-js';
-import {FetchEphemeralKeyFunction} from '../types';
+import type {FetchEphemeralKeyFunction} from '../types';
 
 export const useUpdateWithSetter = <
   T extends HTMLElement,

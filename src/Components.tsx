@@ -1,7 +1,7 @@
-import {FetchEphemeralKeyFunction} from './types';
+import type {FetchEphemeralKeyFunction} from './types';
 import {useCreateComponent} from './useCreateComponent';
 import {useUpdateWithSetter} from './utils/useUpdateWithSetter';
-import {
+import type {
   LoadError,
   LoaderStart,
   NotificationCount,
