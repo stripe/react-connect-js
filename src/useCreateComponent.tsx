@@ -15,7 +15,9 @@ export const useCreateComponent = <T extends ConnectElementTagName>(
   const {connectInstance} = useConnectComponents();
   const wrapperDivRef = React.useRef<HTMLDivElement | null>(null);
 
-  // We would prefer to use display: contents, but it's not well-supported
+  // We set width to 100% to preserve this functionality aspect of embedded components even though
+  // we are introducing a wrapper div for this element
+  // https://docs.corp.stripe.com/connect/get-started-connect-embedded-components#width-and-height
   const wrapper = <div style={{width: '100%'}} data-stripe-connect-js-wrapper ref={wrapperDivRef}></div>;
 
   React.useLayoutEffect(() => {
