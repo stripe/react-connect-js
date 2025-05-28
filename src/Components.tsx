@@ -204,6 +204,22 @@ export const ConnectPaymentDisputes = ({
   return wrapper;
 };
 
+export const ConnectDisputesList = ({
+  onLoadError,
+  onLoaderStart,
+}: CommonComponentProps): JSX.Element | null => {
+  const {wrapper, component} =
+    useCreateComponent('disputes-list');
+
+  useUpdateWithSetter(component, onLoaderStart, (comp, val) => {
+    comp.setOnLoaderStart(val);
+  });
+  useUpdateWithSetter(component, onLoadError, (comp, val) => {
+    comp.setOnLoadError(val);
+  });
+  return wrapper;
+};
+
 export const ConnectAccountOnboarding = ({
   onExit,
   recipientTermsOfServiceUrl,
