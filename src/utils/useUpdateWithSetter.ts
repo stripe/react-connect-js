@@ -24,6 +24,8 @@ export const useUpdateWithSetter = <
     | ((loaderError: LoadError) => void)
     | ((stepChange: StepChange) => void)
     | (({id}: {id: string}) => void)
+    | (({promotionShown}: {promotionShown: boolean}) => void)
+    | (({payoutId}: {payoutId: string}) => void)
     | undefined
 >(
   component: T | null,
