@@ -209,7 +209,7 @@ export const ConnectDisputesList = ({
   onLoaderStart,
 }: CommonComponentProps): JSX.Element | null => {
   const {wrapper, component} =
-    useCreateComponent('disputes-list');
+  useCreateComponent('disputes-list');
 
   useUpdateWithSetter(component, onLoaderStart, (comp, val) => {
     comp.setOnLoaderStart(val);
@@ -909,6 +909,47 @@ export const ConnectReportingChart = ({
   useUpdateWithSetter(reportingChart, onLoadError, (comp, val) => {
     comp.setOnLoadError(val);
   });
+
+  return wrapper;
+};
+
+export const ConnectInstantPayoutsPromotion = ({
+  onInstantPayoutsPromotionLoaded,
+  onInstantPayoutCreated,
+  onLoadError,
+  onLoaderStart,
+}: {
+  onInstantPayoutsPromotionLoaded?: ({
+    promotionShown,
+  }: {
+    promotionShown: boolean;
+  }) => void;
+  onInstantPayoutCreated?: ({payoutId}: {payoutId: string}) => void;
+} & CommonComponentProps): JSX.Element => {
+  const {wrapper, component: instantPayoutsPromotion} = useCreateComponent(
+    'instant-payouts-promotion'
+  );
+
+  useUpdateWithSetter(instantPayoutsPromotion, onLoaderStart, (comp, val) => {
+    comp.setOnLoaderStart(val);
+  });
+  useUpdateWithSetter(instantPayoutsPromotion, onLoadError, (comp, val) => {
+    comp.setOnLoadError(val);
+  });
+  useUpdateWithSetter(
+    instantPayoutsPromotion,
+    onInstantPayoutsPromotionLoaded,
+    (comp, val) => {
+      comp.setOnInstantPayoutsPromotionLoaded(val);
+    }
+  );
+  useUpdateWithSetter(
+    instantPayoutsPromotion,
+    onInstantPayoutCreated,
+    (comp, val) => {
+      comp.setOnInstantPayoutCreated(val);
+    }
+  );
 
   return wrapper;
 };

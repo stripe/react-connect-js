@@ -33,6 +33,8 @@ export const useUpdateWithSetter = <
     | Date
     | (({id}: {id: string}) => void)
     | ((taxCode: string) => void)
+    | (({promotionShown}: {promotionShown: boolean}) => void)
+    | (({payoutId}: {payoutId: string}) => void)
     | undefined
 >(
   component: T | null,
