@@ -584,12 +584,14 @@ export const ConnectCapitalFinancing = ({
 
 export const ConnectCapitalFinancingApplication = ({
   onApplicationSubmitted,
+  onApplicationStepChange,
   privacyPolicyUrl,
   howCapitalWorksUrl,
   onLoadError,
   onLoaderStart,
 }: {
   onApplicationSubmitted: () => void;
+  onApplicationStepChange?: ({step}: StepChange) => void;
   privacyPolicyUrl?: string;
   howCapitalWorksUrl?: string;
 } & CommonComponentProps): JSX.Element => {
@@ -602,6 +604,13 @@ export const ConnectCapitalFinancingApplication = ({
     onApplicationSubmitted,
     (comp, val) => comp.setOnApplicationSubmitted(val)
   );
+
+  useUpdateWithSetter(
+    capitalFinancingApplication,
+    onApplicationStepChange,
+    (comp, val) => comp.setOnApplicationStepChange(val)
+  );
+
   useUpdateWithSetter(
     capitalFinancingApplication,
     privacyPolicyUrl,
@@ -631,6 +640,7 @@ export const ConnectCapitalFinancingPromotion = ({
   layout,
   onApplicationSubmitted,
   onEligibleFinancingOfferLoaded,
+  onApplicationStepChange,
   privacyPolicyUrl,
   howCapitalWorksUrl,
   eligibilityCriteriaUrl,
@@ -646,6 +656,7 @@ export const ConnectCapitalFinancingPromotion = ({
   howCapitalWorksUrl?: string;
   eligibilityCriteriaUrl?: string;
   onApplicationSubmitted?: () => void;
+  onApplicationStepChange?: ({step}: StepChange) => void;
 } & CommonComponentProps): JSX.Element => {
   const {wrapper, component: capitalPromotion} = useCreateComponent(
     'capital-financing-promotion'
@@ -666,6 +677,9 @@ export const ConnectCapitalFinancingPromotion = ({
 
   useUpdateWithSetter(capitalPromotion, onApplicationSubmitted, (comp, val) =>
     comp.setOnApplicationSubmitted(val)
+  );
+  useUpdateWithSetter(capitalPromotion, onApplicationStepChange, (comp, val) =>
+    comp.setOnApplicationStepChange(val)
   );
 
   useUpdateWithSetter(
