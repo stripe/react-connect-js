@@ -209,7 +209,7 @@ export const ConnectDisputesList = ({
   onLoaderStart,
 }: CommonComponentProps): JSX.Element | null => {
   const {wrapper, component} =
-  useCreateComponent('disputes-list');
+    useCreateComponent('disputes-list');
 
   useUpdateWithSetter(component, onLoaderStart, (comp, val) => {
     comp.setOnLoaderStart(val);
