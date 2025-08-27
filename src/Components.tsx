@@ -521,3 +521,33 @@ export const ConnectInstantPayoutsPromotion = ({
 
   return wrapper;
 };
+
+export const ConnectPayoutDetails = ({
+  payout,
+  onClose,
+  onLoadError,
+  onLoaderStart,
+}: {
+  /**
+   * @param payout the ID of `payout` to be displayed.
+   */
+  payout: string;
+  onClose: () => void;
+} & CommonComponentProps): JSX.Element | null => {
+  const {wrapper, component: payoutDetails} =
+    useCreateComponent('payout-details');
+
+  useUpdateWithSetter(payoutDetails, payout, (comp, val) =>
+    comp.setPayout(val)
+  );
+  useUpdateWithSetter(payoutDetails, onClose, (comp, val) =>
+    comp.setOnClose(val)
+  );
+  useUpdateWithSetter(payoutDetails, onLoaderStart, (comp, val) => {
+    comp.setOnLoaderStart(val);
+  });
+  useUpdateWithSetter(payoutDetails, onLoadError, (comp, val) => {
+    comp.setOnLoadError(val);
+  });
+  return wrapper;
+};
