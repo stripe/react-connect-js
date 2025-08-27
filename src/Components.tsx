@@ -722,7 +722,7 @@ export const ConnectProductTaxCodeSelector = ({
   disabled,
   initialTaxCode
 }: {
-  onTaxCodeSelect?: (taxCode: string) => void;
+  onTaxCodeSelect?: (taxCode: string, { analyticsName }: { analyticsName: string }) => void;
   hideDescription?: boolean;
   disabled?: boolean;
   initialTaxCode?: string;
