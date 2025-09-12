@@ -1,12 +1,12 @@
 import {useCreateComponent} from './useCreateComponent';
 import {useUpdateWithSetter} from './utils/useUpdateWithSetter';
 import type {
-  CollectionOptions,
   FetchEphemeralKeyFunction,
   FinancingProductType,
   FinancingPromotionLayoutType,
 } from './types';
 import type {
+  CollectionOptions,
   LoadError,
   LoaderStart,
   NotificationCount,
@@ -18,6 +18,7 @@ import type {
   PaymentsListDefaultFilters
 } from '@stripe/connect-js';
 
+export type {CollectionOptions};
 export type CommonComponentProps = {
   onLoaderStart?: ({elementTagName}: LoaderStart) => void;
   onLoadError?: ({error, elementTagName}: LoadError) => void;

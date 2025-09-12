@@ -1,10 +1,10 @@
 import React from 'react';
 import type {
-  CollectionOptions,
   FetchEphemeralKeyFunction,
   FinancingProductType,
 } from '../types';
 import type {
+  CollectionOptions,
   LoadError,
   LoaderStart,
   InstallState,
