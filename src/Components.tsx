@@ -2,6 +2,7 @@ import type {FetchEphemeralKeyFunction} from './types';
 import {useCreateComponent} from './useCreateComponent';
 import {useUpdateWithSetter} from './utils/useUpdateWithSetter';
 import type {
+  CollectionOptions,
   LoadError,
   LoaderStart,
   NotificationCount,
@@ -9,6 +10,7 @@ import type {
   PaymentsListDefaultFilters,
 } from '@stripe/connect-js';
 
+export type {CollectionOptions};
 export type CommonComponentProps = {
   onLoaderStart?: ({elementTagName}: LoaderStart) => void;
   onLoadError?: ({error, elementTagName}: LoadError) => void;
@@ -126,11 +128,6 @@ export const ConnectDisputesList = ({
     comp.setOnLoadError(val);
   });
   return wrapper;
-};
-
-export type CollectionOptions = {
-  fields: 'currently_due' | 'eventually_due';
-  futureRequirements?: 'omit' | 'include';
 };
 
 export const ConnectAccountOnboarding = ({
