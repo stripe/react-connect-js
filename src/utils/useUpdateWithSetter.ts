@@ -32,7 +32,7 @@ export const useUpdateWithSetter = <
     | ((StepChange: StepChange) => void)
     | Date
     | (({id}: {id: string}) => void)
-    | ((taxCode: string, {analyticsName}: {analyticsName: string}) => void)
+    | ((taxCode: string | null, _: {analyticsName: string} | null) => void)
     | (({promotionShown}: {promotionShown: boolean}) => void)
     | (({payoutId}: {payoutId: string}) => void)
     | undefined
