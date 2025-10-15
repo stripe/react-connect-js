@@ -413,9 +413,11 @@ export const ConnectTaxRegistrations = ({
   onLoaderStart,
   displayCountries,
   onAfterTaxRegistrationAdded,
+  onAfterTaxRegistrationExpired,
 }: {
   displayCountries?: string[];
   onAfterTaxRegistrationAdded?: ({id}: {id: string}) => void;
+  onAfterTaxRegistrationExpired?: ({id}: {id: string}) => void;
 } & CommonComponentProps): JSX.Element => {
   const {wrapper, component: taxRegistrations} =
     useCreateComponent('tax-registrations');
@@ -437,6 +439,14 @@ export const ConnectTaxRegistrations = ({
     onAfterTaxRegistrationAdded,
     (comp, val) => {
       comp.setOnAfterTaxRegistrationAdded(val);
+    }
+  );
+
+  useUpdateWithSetter(
+    taxRegistrations,
+    onAfterTaxRegistrationExpired,
+    (comp, val) => {
+      comp.setOnAfterTaxRegistrationExpired(val);
     }
   );
 
