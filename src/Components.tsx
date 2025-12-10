@@ -994,3 +994,30 @@ export const ConnectPayoutDetails = ({
   });
   return wrapper;
 };
+
+export const ConnectCheckScanning = ({
+  handleCheckScanSubmitted,
+  onLoadError,
+  onLoaderStart,
+}: {
+  handleCheckScanSubmitted: ({checkScanToken}: {checkScanToken: string}) => Promise<void>;
+} & CommonComponentProps): JSX.Element => {
+  const {wrapper, component: checkScanning} =
+    useCreateComponent('check-scanning');
+
+  useUpdateWithSetter(
+    checkScanning,
+    handleCheckScanSubmitted,
+    (comp, val) => {
+      comp.setHandleCheckScanSubmitted(val);
+    }
+  );
+  useUpdateWithSetter(checkScanning, onLoaderStart, (comp, val) => {
+    comp.setOnLoaderStart(val);
+  });
+  useUpdateWithSetter(checkScanning, onLoadError, (comp, val) => {
+    comp.setOnLoadError(val);
+  });
+
+  return wrapper;
+};
