@@ -90,7 +90,7 @@
     "zx": "^4.2.0"
   },
   "peerDependencies": {
-    "@stripe/connect-js": ">=3.3.43-preview-2",
+    "@stripe/connect-js": ">=3.3.44-preview-1",
     "react": ">=16.8.0",
     "react-dom": ">=16.8.0"
   }
