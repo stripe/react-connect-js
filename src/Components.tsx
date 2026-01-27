@@ -221,6 +221,22 @@ export const ConnectDisputesList = ({
   return wrapper;
 };
 
+export const ConnectAgenticCommerceSettings = ({
+  onLoadError,
+  onLoaderStart,
+}: CommonComponentProps): JSX.Element | null => {
+  const {wrapper, component} =
+    useCreateComponent('agentic-commerce-settings');
+
+  useUpdateWithSetter(component, onLoaderStart, (comp, val) => {
+    comp.setOnLoaderStart(val);
+  });
+  useUpdateWithSetter(component, onLoadError, (comp, val) => {
+    comp.setOnLoadError(val);
+  });
+  return wrapper;
+};
+
 export const ConnectAccountOnboarding = ({
   onExit,
   recipientTermsOfServiceUrl,
