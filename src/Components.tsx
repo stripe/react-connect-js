@@ -1037,3 +1037,20 @@ export const ConnectCheckScanning = ({
 
   return wrapper;
 };
+
+export const ConnectNetworkCostPassThroughReport = ({
+  onLoadError,
+  onLoaderStart,
+}: CommonComponentProps): JSX.Element => {
+  const {wrapper, component: networkCostPassThroughReport} =
+    useCreateComponent('network-cost-passthrough-report');
+
+  useUpdateWithSetter(networkCostPassThroughReport, onLoaderStart, (comp, val) => {
+    comp.setOnLoaderStart(val);
+  });
+  useUpdateWithSetter(networkCostPassThroughReport, onLoadError, (comp, val) => {
+    comp.setOnLoadError(val);
+  });
+
+  return wrapper;
+};
