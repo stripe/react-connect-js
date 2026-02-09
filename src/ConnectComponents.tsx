@@ -16,7 +16,7 @@ export const ConnectComponentsProvider = ({
 }: {
   connectInstance: connectJs.StripeConnectInstance;
   children: any;
-}): JSX.Element => {
+}): React.JSX.Element => {
   return (
     <ConnectComponentsContext.Provider value={{connectInstance}}>
       {children}

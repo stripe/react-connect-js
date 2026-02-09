@@ -8,7 +8,7 @@ import type {
 
 export const useCreateComponent = <T extends ConnectElementTagName>(
   tagName: T
-): {wrapper: JSX.Element; component: ConnectHTMLElementRecord[T] | null} => {
+): {wrapper: React.JSX.Element; component: ConnectHTMLElementRecord[T] | null} => {
   const [component, setComponent] = React.useState<
     ConnectHTMLElementRecord[T] | null
   >(null);
