@@ -1043,3 +1043,62 @@ export const ConnectCheckScanning = ({
 
   return wrapper;
 };
+
+export const ConnectNetworkCostPassThroughReport = ({
+  onLoadError,
+  onLoaderStart,
+}: CommonComponentProps): JSX.Element => {
+  const {wrapper, component: networkCostPassThroughReport} =
+    useCreateComponent('network-cost-passthrough-report');
+
+  useUpdateWithSetter(networkCostPassThroughReport, onLoaderStart, (comp, val) => {
+    comp.setOnLoaderStart(val);
+  });
+  useUpdateWithSetter(networkCostPassThroughReport, onLoadError, (comp, val) => {
+    comp.setOnLoadError(val);
+  });
+
+  return wrapper;
+};
+
+export const ConnectTerminalHardwareOrders = ({
+  onLoadError,
+  onLoaderStart,
+}: CommonComponentProps): JSX.Element => {
+  const {wrapper, component: terminalHardwareOrders} = useCreateComponent(
+    'terminal-hardware-orders'
+  );
+
+  useUpdateWithSetter(terminalHardwareOrders, onLoaderStart, (comp, val) => {
+    comp.setOnLoaderStart(val);
+  });
+  useUpdateWithSetter(terminalHardwareOrders, onLoadError, (comp, val) => {
+    comp.setOnLoadError(val);
+  });
+
+  return wrapper;
+};
+
+export const ConnectTerminalHardwareShop = ({
+  onCheckoutFinished,
+  onLoadError,
+  onLoaderStart,
+}: {
+  onCheckoutFinished?: () => void
+} & CommonComponentProps): JSX.Element => {
+  const {wrapper, component: terminalHardwareShop} = useCreateComponent(
+    'terminal-hardware-shop'
+  );
+
+  useUpdateWithSetter(terminalHardwareShop, onCheckoutFinished, (comp, val) => {
+    comp.setOnCheckoutFinished(val)
+  });
+  useUpdateWithSetter(terminalHardwareShop, onLoaderStart, (comp, val) => {
+    comp.setOnLoaderStart(val);
+  });
+  useUpdateWithSetter(terminalHardwareShop, onLoadError, (comp, val) => {
+    comp.setOnLoadError(val);
+  });
+
+  return wrapper;
+};
