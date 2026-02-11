@@ -36,6 +36,7 @@ export const useUpdateWithSetter = <
     | (({promotionShown}: {promotionShown: boolean}) => void)
     | (({payoutId}: {payoutId: string}) => void)
     | (({checkScanToken}: {checkScanToken: string}) => Promise<void>)
+    | (({agreementId}: {agreementId: string}) => void)
     | undefined
 >(
   component: T | null,

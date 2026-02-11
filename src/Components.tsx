@@ -222,9 +222,12 @@ export const ConnectDisputesList = ({
 };
 
 export const ConnectAgenticCommerceSettings = ({
+  onAgreementUpdated,
   onLoadError,
   onLoaderStart,
-}: CommonComponentProps): JSX.Element | null => {
+}: {
+  onAgreementUpdated?: ({agreementId}: {agreementId: string}) => void;
+} & CommonComponentProps): JSX.Element | null => {
   const {wrapper, component} =
     useCreateComponent('agentic-commerce-settings');
 
@@ -233,6 +236,9 @@ export const ConnectAgenticCommerceSettings = ({
   });
   useUpdateWithSetter(component, onLoadError, (comp, val) => {
     comp.setOnLoadError(val);
+  });
+  useUpdateWithSetter(component, onAgreementUpdated, (comp, val) => {
+    comp.setOnAgreementUpdated(val);
   });
   return wrapper;
 };
