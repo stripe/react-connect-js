@@ -1,3 +1,4 @@
+import type * as React from 'react';
 import type {FetchEphemeralKeyFunction} from './types';
 import {useCreateComponent} from './useCreateComponent';
 import {useUpdateWithSetter} from './utils/useUpdateWithSetter';
@@ -22,7 +23,7 @@ export const ConnectPayments = ({
   onLoaderStart,
 }: {
   defaultFilters?: PaymentsListDefaultFilters;
-} & CommonComponentProps): JSX.Element => {
+} & CommonComponentProps): React.JSX.Element => {
   const {wrapper, component: payments} = useCreateComponent('payments');
 
   useUpdateWithSetter(payments, onLoaderStart, (comp, val) => {
@@ -41,7 +42,7 @@ export const ConnectPayments = ({
 export const ConnectPayouts = ({
   onLoadError,
   onLoaderStart,
-}: CommonComponentProps): JSX.Element => {
+}: CommonComponentProps): React.JSX.Element => {
   const {wrapper, component: payouts} = useCreateComponent('payouts');
 
   useUpdateWithSetter(payouts, onLoaderStart, (comp, val) => {
@@ -65,7 +66,7 @@ export const ConnectPaymentDetails = ({
    */
   payment: string;
   onClose: () => void;
-} & CommonComponentProps): JSX.Element | null => {
+} & CommonComponentProps): React.JSX.Element | null => {
   const {wrapper, component: paymentDetails} =
     useCreateComponent('payment-details');
 
@@ -95,13 +96,10 @@ export const ConnectPaymentDisputes = ({
    */
   payment: string;
   onDisputesLoaded?: ({total}: {total: number}) => void;
-} & CommonComponentProps): JSX.Element | null => {
-  const {wrapper, component} =
-    useCreateComponent('payment-disputes');
+} & CommonComponentProps): React.JSX.Element | null => {
+  const {wrapper, component} = useCreateComponent('payment-disputes');
 
-  useUpdateWithSetter(component, payment, (comp, val) =>
-    comp.setPayment(val)
-  );
+  useUpdateWithSetter(component, payment, (comp, val) => comp.setPayment(val));
   useUpdateWithSetter(component, onDisputesLoaded, (comp, val) =>
     comp.setOnDisputesLoaded(val)
   );
@@ -117,9 +115,8 @@ export const ConnectPaymentDisputes = ({
 export const ConnectDisputesList = ({
   onLoadError,
   onLoaderStart,
-}: CommonComponentProps): JSX.Element | null => {
-  const {wrapper, component} =
-    useCreateComponent('disputes-list');
+}: CommonComponentProps): React.JSX.Element | null => {
+  const {wrapper, component} = useCreateComponent('disputes-list');
 
   useUpdateWithSetter(component, onLoaderStart, (comp, val) => {
     comp.setOnLoaderStart(val);
@@ -148,7 +145,7 @@ export const ConnectAccountOnboarding = ({
   privacyPolicyUrl?: string;
   skipTermsOfServiceCollection?: boolean;
   collectionOptions?: CollectionOptions;
-} & CommonComponentProps): JSX.Element | null => {
+} & CommonComponentProps): React.JSX.Element | null => {
   const {wrapper, component: onboarding} =
     useCreateComponent('account-onboarding');
 
@@ -187,7 +184,7 @@ export const ConnectAccountManagement = ({
   onLoaderStart,
 }: {
   collectionOptions?: CollectionOptions;
-} & CommonComponentProps): JSX.Element | null => {
+} & CommonComponentProps): React.JSX.Element | null => {
   const {wrapper, component: accountManagement} =
     useCreateComponent('account-management');
 
@@ -212,7 +209,7 @@ export const ConnectNotificationBanner = ({
 }: {
   collectionOptions?: CollectionOptions;
   onNotificationsChange?: ({total, actionRequired}: NotificationCount) => void;
-} & CommonComponentProps): JSX.Element | null => {
+} & CommonComponentProps): React.JSX.Element | null => {
   const {wrapper, component: notificationBanner} = useCreateComponent(
     'notification-banner'
   );
@@ -245,7 +242,7 @@ export const ConnectIssuingCard = ({
   cardSwitching?: boolean;
   showSpendControls?: boolean;
   fetchEphemeralKey?: FetchEphemeralKeyFunction;
-} & CommonComponentProps): JSX.Element => {
+} & CommonComponentProps): React.JSX.Element => {
   const {wrapper, component: issuingCard} = useCreateComponent('issuing-card');
 
   useUpdateWithSetter(issuingCard, defaultCard, (comp, val) =>
@@ -280,7 +277,7 @@ export const ConnectIssuingCardsList = ({
   showSpendControls?: boolean;
   issuingProgram?: string;
   fetchEphemeralKey?: FetchEphemeralKeyFunction;
-} & CommonComponentProps): JSX.Element => {
+} & CommonComponentProps): React.JSX.Element => {
   const {wrapper, component: issuingCardsList} =
     useCreateComponent('issuing-cards-list');
 
@@ -309,7 +306,7 @@ export const ConnectFinancialAccount = ({
   onLoaderStart,
 }: {
   financialAccount: string;
-} & CommonComponentProps): JSX.Element => {
+} & CommonComponentProps): React.JSX.Element => {
   const {wrapper, component: financialAccountComponent} =
     useCreateComponent('financial-account');
 
@@ -334,7 +331,7 @@ export const ConnectFinancialAccountTransactions = ({
   onLoaderStart,
 }: {
   financialAccount: string;
-} & CommonComponentProps): JSX.Element => {
+} & CommonComponentProps): React.JSX.Element => {
   const {wrapper, component: financialAccountTransactionsComponent} =
     useCreateComponent('financial-account-transactions');
 
@@ -364,7 +361,7 @@ export const ConnectFinancialAccountTransactions = ({
 export const ConnectDocuments = ({
   onLoadError,
   onLoaderStart,
-}: CommonComponentProps): JSX.Element => {
+}: CommonComponentProps): React.JSX.Element => {
   const {wrapper, component: documents} = useCreateComponent('documents');
 
   useUpdateWithSetter(documents, onLoaderStart, (comp, val) => {
@@ -380,7 +377,7 @@ export const ConnectDocuments = ({
 export const ConnectPayoutsList = ({
   onLoadError,
   onLoaderStart,
-}: CommonComponentProps): JSX.Element => {
+}: CommonComponentProps): React.JSX.Element => {
   const {wrapper, component: payoutsList} = useCreateComponent('payouts-list');
 
   useUpdateWithSetter(payoutsList, onLoaderStart, (comp, val) => {
@@ -395,7 +392,7 @@ export const ConnectPayoutsList = ({
 export const ConnectBalances = ({
   onLoadError,
   onLoaderStart,
-}: CommonComponentProps): JSX.Element => {
+}: CommonComponentProps): React.JSX.Element => {
   const {wrapper, component: balances} = useCreateComponent('balances');
 
   useUpdateWithSetter(balances, onLoaderStart, (comp, val) => {
@@ -418,7 +415,7 @@ export const ConnectTaxRegistrations = ({
   displayCountries?: string[];
   onAfterTaxRegistrationAdded?: ({id}: {id: string}) => void;
   onAfterTaxRegistrationExpired?: ({id}: {id: string}) => void;
-} & CommonComponentProps): JSX.Element => {
+} & CommonComponentProps): React.JSX.Element => {
   const {wrapper, component: taxRegistrations} =
     useCreateComponent('tax-registrations');
 
@@ -463,7 +460,7 @@ export const ConnectTaxSettings = ({
   hideProductTaxCodeSelector?: boolean;
   displayHeadOfficeCountries?: string[];
   onTaxSettingsUpdated?: ({id}: {id: string}) => void;
-} & CommonComponentProps): JSX.Element => {
+} & CommonComponentProps): React.JSX.Element => {
   const {wrapper, component: taxSettings} = useCreateComponent('tax-settings');
 
   useUpdateWithSetter(taxSettings, onLoaderStart, (comp, val) => {
@@ -500,7 +497,7 @@ export const ConnectInstantPayoutsPromotion = ({
     promotionShown: boolean;
   }) => void;
   onInstantPayoutCreated?: ({payoutId}: {payoutId: string}) => void;
-} & CommonComponentProps): JSX.Element => {
+} & CommonComponentProps): React.JSX.Element => {
   const {wrapper, component: instantPayoutsPromotion} = useCreateComponent(
     'instant-payouts-promotion'
   );
@@ -540,7 +537,7 @@ export const ConnectPayoutDetails = ({
    */
   payout: string;
   onClose: () => void;
-} & CommonComponentProps): JSX.Element | null => {
+} & CommonComponentProps): React.JSX.Element | null => {
   const {wrapper, component: payoutDetails} =
     useCreateComponent('payout-details');
 
