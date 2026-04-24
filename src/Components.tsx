@@ -574,11 +574,11 @@ export const ConnectBalanceReport = ({
 };
 
 export const ConnectPayoutReconciliationReport = ({
-  onNotAvailable,
+  onReportAvailabilityLoaded,
   onLoadError,
   onLoaderStart,
 }: {
-  onNotAvailable?: () => void;
+  onReportAvailabilityLoaded?: () => void;
 } & CommonComponentProps): React.JSX.Element => {
   const {wrapper, component: payoutReconciliationReport} = useCreateComponent(
     'payout-reconciliation-report'
@@ -586,9 +586,9 @@ export const ConnectPayoutReconciliationReport = ({
 
   useUpdateWithSetter(
     payoutReconciliationReport,
-    onNotAvailable,
+    onReportAvailabilityLoaded,
     (comp, val) => {
-      comp.setOnNotAvailable(val);
+      comp.setOnReportAvailabilityLoaded(val);
     }
   );
   useUpdateWithSetter(payoutReconciliationReport, onLoaderStart, (comp, val) => {
