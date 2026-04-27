@@ -555,3 +555,52 @@ export const ConnectPayoutDetails = ({
   });
   return wrapper;
 };
+
+export const ConnectBalanceReport = ({
+  onLoadError,
+  onLoaderStart,
+}: CommonComponentProps): React.JSX.Element => {
+  const {wrapper, component: balanceReport} =
+    useCreateComponent('balance-report');
+
+  useUpdateWithSetter(balanceReport, onLoaderStart, (comp, val) => {
+    comp.setOnLoaderStart(val);
+  });
+  useUpdateWithSetter(balanceReport, onLoadError, (comp, val) => {
+    comp.setOnLoadError(val);
+  });
+
+  return wrapper;
+};
+
+export const ConnectPayoutReconciliationReport = ({
+  onReportAvailabilityLoaded,
+  onLoadError,
+  onLoaderStart,
+}: {
+  onReportAvailabilityLoaded?: ({
+    isReportAvailable,
+  }: {
+    isReportAvailable: boolean;
+  }) => void;
+} & CommonComponentProps): React.JSX.Element => {
+  const {wrapper, component: payoutReconciliationReport} = useCreateComponent(
+    'payout-reconciliation-report'
+  );
+
+  useUpdateWithSetter(
+    payoutReconciliationReport,
+    onReportAvailabilityLoaded,
+    (comp, val) => {
+      comp.setOnReportAvailabilityLoaded(val);
+    }
+  );
+  useUpdateWithSetter(payoutReconciliationReport, onLoaderStart, (comp, val) => {
+    comp.setOnLoaderStart(val);
+  });
+  useUpdateWithSetter(payoutReconciliationReport, onLoadError, (comp, val) => {
+    comp.setOnLoadError(val);
+  });
+
+  return wrapper;
+};
