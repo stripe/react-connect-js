@@ -561,7 +561,7 @@ export const ConnectBalanceReport = ({
   onLoaderStart,
 }: CommonComponentProps): React.JSX.Element => {
   const {wrapper, component: balanceReport} =
-    useCreateComponent('balanceReport');
+    useCreateComponent('balance-report');
 
   useUpdateWithSetter(balanceReport, onLoaderStart, (comp, val) => {
     comp.setOnLoaderStart(val);
@@ -578,10 +578,14 @@ export const ConnectPayoutReconciliationReport = ({
   onLoadError,
   onLoaderStart,
 }: {
-  onReportAvailabilityLoaded?: () => void;
+  onReportAvailabilityLoaded?: ({
+    isReportAvailable,
+  }: {
+    isReportAvailable: boolean;
+  }) => void;
 } & CommonComponentProps): React.JSX.Element => {
   const {wrapper, component: payoutReconciliationReport} = useCreateComponent(
-    'payoutReconciliationReport'
+    'payout-reconciliation-report'
   );
 
   useUpdateWithSetter(

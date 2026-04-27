@@ -26,6 +26,7 @@ export const useUpdateWithSetter = <
     | (({id}: {id: string}) => void)
     | (({promotionShown}: {promotionShown: boolean}) => void)
     | (({payoutId}: {payoutId: string}) => void)
+    | (({isReportAvailable}: {isReportAvailable: boolean}) => void)
     | undefined
 >(
   component: T | null,
