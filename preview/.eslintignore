@@ -1,0 +1,5 @@
+lib/**/*.js
+dist/**/*.js
+examples
+.yalc
+rollup.config.js
