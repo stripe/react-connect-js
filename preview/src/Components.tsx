@@ -1151,3 +1151,54 @@ export const ConnectPayoutReconciliationReport = ({
 
   return wrapper;
 };
+
+export const ConnectRecipientsList = ({
+  onLoadError,
+  onLoaderStart,
+}: CommonComponentProps): JSX.Element => {
+  const {wrapper, component: recipientsList} =
+    useCreateComponent('recipients-list');
+
+  useUpdateWithSetter(recipientsList, onLoaderStart, (comp, val) => {
+    comp.setOnLoaderStart(val);
+  });
+  useUpdateWithSetter(recipientsList, onLoadError, (comp, val) => {
+    comp.setOnLoadError(val);
+  });
+
+  return wrapper;
+};
+
+export const ConnectFinancialAccounts = ({
+  onLoadError,
+  onLoaderStart,
+}: CommonComponentProps): JSX.Element => {
+  const {wrapper, component: financialAccounts} =
+    useCreateComponent('financial-accounts');
+
+  useUpdateWithSetter(financialAccounts, onLoaderStart, (comp, val) => {
+    comp.setOnLoaderStart(val);
+  });
+  useUpdateWithSetter(financialAccounts, onLoadError, (comp, val) => {
+    comp.setOnLoadError(val);
+  });
+
+  return wrapper;
+};
+
+export const ConnectFinancialAccountsTransactions = ({
+  onLoadError,
+  onLoaderStart,
+}: CommonComponentProps): JSX.Element => {
+  const {wrapper, component: financialAccountsTransactions} =
+    useCreateComponent('financial-accounts-transactions');
+
+  useUpdateWithSetter(financialAccountsTransactions, onLoaderStart, (comp, val) => {
+    comp.setOnLoaderStart(val);
+  });
+  useUpdateWithSetter(financialAccountsTransactions, onLoadError, (comp, val) => {
+    comp.setOnLoadError(val);
+  });
+
+  return wrapper;
+};
