@@ -1,0 +1,8 @@
+.DS_Store
+node_modules
+dist
+es
+lib
+*.log
+.yalc
+yalc.lock
