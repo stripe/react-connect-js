@@ -1,9 +1,9 @@
 name: build
 on:
   push:
-    branches: [master, preview]
+    branches: [master]
   pull_request:
-    branches: [master, preview]
+    branches: [master]
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -12,5 +12,13 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 18.20.2
+      # GA validations
       - run: yarn install --frozen-lockfile
+        working-directory: ./ga
       - run: yarn run validate-change
+        working-directory: ./ga
+      # Preview validations
+      - run: yarn install --frozen-lockfile
+        working-directory: ./preview
+      - run: yarn run validate-change
+        working-directory: ./preview
