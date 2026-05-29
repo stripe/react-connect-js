@@ -18,6 +18,7 @@ on:
           - patch
           - minor
           - major
+          - prerelease
       connect_js_version:
         description: 'Update @stripe/connect-js peer dep to this version (e.g. 3.4.6). Leave blank to keep current.'
         required: false
@@ -40,6 +41,13 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+
+      - name: Validate inputs
+        run: |
+          if [ "${{ inputs.package }}" = "./ga" ] && [ "${{ inputs.version_bump }}" = "prerelease" ]; then
+            echo "❌ Cannot use 'prerelease' bump type with GA package"
+            exit 1
+          fi
 
       - uses: actions/setup-node@v4
         with:
@@ -65,13 +73,26 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          echo "old_version=$(node -p "require('./package.json').version")" >> "$GITHUB_OUTPUT"
+
+          BUMP="${{ inputs.version_bump }}"
+          if [ "${{ inputs.package }}" = "./preview" ]; then
+            if [ "$BUMP" = "prerelease" ]; then
+              BUMP="prerelease --preid=preview"
+            else
+              BUMP="pre${BUMP} --preid=preview"
+            fi
+          fi
+
           if [ "${{ inputs.dry_run }}" = "true" ]; then
-            npm version ${{ inputs.version_bump }} --no-git-tag-version
+            npm version $BUMP --no-git-tag-version
           else
-            npm version ${{ inputs.version_bump }} -m "Release %s (${{ inputs.package }})"
+            npm version $BUMP -m "Release %s (${{ inputs.package }})"
           fi
           echo "version=$(node -p "require('./package.json').version")" >> "$GITHUB_OUTPUT"
           echo "package_name=$(node -p "require('./package.json').name")" >> "$GITHUB_OUTPUT"
+          echo "variant=${{ inputs.package == './preview' && 'preview' || 'GA' }}" >> "$GITHUB_OUTPUT"
 
       - name: Publish
         if: ${{ !inputs.dry_run }}
@@ -104,5 +125,5 @@ jobs:
           webhook-type: incoming-webhook
           payload: |
             {
-              "text": "${{ inputs.dry_run && '[DRY RUN] ' || '' }}${{ job.status == 'success' && '✅' || '❌' }} NPM Release: ${{ steps.version.outputs.package_name }}@${{ steps.version.outputs.version }} (${{ inputs.version_bump }}${{ inputs.connect_js_version != '' && format(', connect-js peer >={0}', inputs.connect_js_version) || '' }})\n${{ job.status == 'success' && 'Published successfully' || 'Release failed' }} • <${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|View run> • Triggered by ${{ github.actor }}"
+              "text": "${{ inputs.dry_run && '[DRY RUN] ' || '' }}${{ job.status == 'success' && (inputs.dry_run && '✅' || '✅') || '❌' }} ${{ job.status == 'success' && (inputs.dry_run && format('A {0} version of `{1}` would be published: {2} → {3} ({4})', steps.version.outputs.variant, steps.version.outputs.package_name, steps.version.outputs.old_version, steps.version.outputs.version, inputs.version_bump) || format('A {0} version of `{1}` was published! {2} → {3} ({4})', steps.version.outputs.variant, steps.version.outputs.package_name, steps.version.outputs.old_version, steps.version.outputs.version, inputs.version_bump)) || format('Failed to publish a {0} version of `{1}`! {2} → {3} ({4})', steps.version.outputs.variant, steps.version.outputs.package_name, steps.version.outputs.old_version, steps.version.outputs.version, inputs.version_bump) }}\n<${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|View run> • Triggered by ${{ github.actor }}"
             }
