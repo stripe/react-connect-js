@@ -40,7 +40,16 @@ jobs:
       id-token: write
 
     steps:
+      - uses: actions/create-github-app-token@v1
+        id: app-token
+        with:
+          app-id: ${{ secrets.RELEASE_APP_ID }}
+          private-key: ${{ secrets.RELEASE_APP_PRIVATE_KEY }}
+
       - uses: actions/checkout@v4
+        with:
+          ref: master
+          token: ${{ steps.app-token.outputs.token }}
 
       - name: Validate inputs
         run: |
@@ -51,7 +60,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: "18"
+          node-version: "24"
           registry-url: "https://registry.npmjs.org"
 
       - run: yarn install --frozen-lockfile
@@ -85,14 +94,16 @@ jobs:
             fi
           fi
 
-          if [ "${{ inputs.dry_run }}" = "true" ]; then
-            npm version $BUMP --no-git-tag-version
-          else
-            npm version $BUMP -m "Release %s (${{ inputs.package }})"
-          fi
-          echo "version=$(node -p "require('./package.json').version")" >> "$GITHUB_OUTPUT"
+          npm version $BUMP --no-git-tag-version
+
+          VERSION=$(node -p "require('./package.json').version")
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
           echo "package_name=$(node -p "require('./package.json').name")" >> "$GITHUB_OUTPUT"
           echo "variant=${{ inputs.package == './preview' && 'preview' || 'GA' }}" >> "$GITHUB_OUTPUT"
+
+          git add -A
+          git commit -m "Release v$VERSION (${{ inputs.package }})"
+          git tag "v$VERSION"
 
       - name: Publish
         if: ${{ !inputs.dry_run }}
@@ -106,7 +117,7 @@ jobs:
       - name: Push version commit and tag
         if: ${{ !inputs.dry_run }}
         run: |
-          git push origin master --follow-tags
+          git push origin HEAD --follow-tags
 
       - name: Create GitHub Release
         if: ${{ !inputs.dry_run }}
