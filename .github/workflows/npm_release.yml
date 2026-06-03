@@ -105,14 +105,14 @@ jobs:
           git commit -m "Release v$VERSION (${{ inputs.package }})"
           git tag "v$VERSION"
 
-      - name: Publish
-        if: ${{ !inputs.dry_run }}
-        run: |
-          if [ "${{ inputs.package }}" = "./preview" ]; then
-            npm publish --ignore-scripts --access public --tag preview
-          else
-            npm publish --ignore-scripts --access public
-          fi
+      # - name: Publish
+      #   if: ${{ !inputs.dry_run }}
+      #   run: |
+      #     if [ "${{ inputs.package }}" = "./preview" ]; then
+      #       npm publish --ignore-scripts --access public --tag preview
+      #     else
+      #       npm publish --ignore-scripts --access public
+      #     fi
 
       - name: Push version commit and tag
         if: ${{ !inputs.dry_run }}
