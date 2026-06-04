@@ -90,4 +90,7 @@ our [contributor guidelines](CONTRIBUTING.md).
 
 ## Preview/GA
 
-To work with the [preview](https://docs.stripe.com/connect/supported-embedded-components) version of embedded components, use the [/preview](/preview) folder. For the stable GA version, use [/ga](/ga).
+To work with the
+[preview](https://docs.stripe.com/connect/supported-embedded-components) version
+of embedded components, use the [/preview](/preview) folder. For the stable GA
+version, use [/ga](/ga).
