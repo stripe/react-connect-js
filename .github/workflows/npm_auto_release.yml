@@ -1,0 +1,201 @@
+name: NPM Auto Release
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - 'ga/package.json'
+      - 'preview/package.json'
+
+jobs:
+  detect-releases:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      ga_changed: ${{ steps.check.outputs.ga_changed }}
+      ga_version: ${{ steps.check.outputs.ga_version }}
+      preview_changed: ${{ steps.check.outputs.preview_changed }}
+      preview_version: ${{ steps.check.outputs.preview_version }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Check for version changes
+        id: check
+        run: |
+          GA_VERSION=$(node -p "require('./ga/package.json').version")
+          PREVIEW_VERSION=$(node -p "require('./preview/package.json').version")
+
+          GA_OLD_VERSION=$(git show HEAD~1:ga/package.json 2>/dev/null | node -p "JSON.parse(require('fs').readFileSync('/dev/stdin','utf8')).version" 2>/dev/null || echo "")
+          PREVIEW_OLD_VERSION=$(git show HEAD~1:preview/package.json 2>/dev/null | node -p "JSON.parse(require('fs').readFileSync('/dev/stdin','utf8')).version" 2>/dev/null || echo "")
+
+          echo "GA: $GA_OLD_VERSION → $GA_VERSION"
+          echo "Preview: $PREVIEW_OLD_VERSION → $PREVIEW_VERSION"
+
+          if [ "$GA_VERSION" != "$GA_OLD_VERSION" ]; then
+            echo "ga_changed=true" >> "$GITHUB_OUTPUT"
+            echo "ga_version=$GA_VERSION" >> "$GITHUB_OUTPUT"
+          else
+            echo "ga_changed=false" >> "$GITHUB_OUTPUT"
+          fi
+
+          if [ "$PREVIEW_VERSION" != "$PREVIEW_OLD_VERSION" ]; then
+            echo "preview_changed=true" >> "$GITHUB_OUTPUT"
+            echo "preview_version=$PREVIEW_VERSION" >> "$GITHUB_OUTPUT"
+          else
+            echo "preview_changed=false" >> "$GITHUB_OUTPUT"
+          fi
+
+  release-ga:
+    needs: detect-releases
+    if: needs.detect-releases.outputs.ga_changed == 'true'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./ga
+    permissions:
+      contents: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          registry-url: "https://registry.npmjs.org"
+
+      - run: yarn install --frozen-lockfile
+      - run: yarn test
+      - run: yarn build
+
+      - name: Publish to npm
+        run: npm publish --ignore-scripts --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Generate scoped release notes
+        id: notes
+        working-directory: .
+        run: |
+          PREV_TAG=$(git tag --list 'v*' --sort=-v:refname | grep -v preview | head -n 1 || echo "")
+
+          if [ -n "$PREV_TAG" ]; then
+            NOTES=$(git log "$PREV_TAG"..HEAD --pretty=format:"- %s (%h)" -- ga/)
+          else
+            NOTES=$(git log -20 --pretty=format:"- %s (%h)" -- ga/)
+          fi
+
+          if [ -z "$NOTES" ]; then
+            NOTES="- Version bump to ${{ needs.detect-releases.outputs.ga_version }}"
+          fi
+
+          echo "$NOTES" > "$RUNNER_TEMP/ga-release-notes.md"
+
+      - name: Create tag and GitHub Release
+        working-directory: .
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          VERSION="${{ needs.detect-releases.outputs.ga_version }}"
+          TAG="v${VERSION}"
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git tag "$TAG"
+          git push origin "$TAG"
+
+          gh release create "$TAG" \
+            --title "@stripe/react-connect-js@${VERSION}" \
+            --notes-file "$RUNNER_TEMP/ga-release-notes.md" \
+            --latest
+
+      - name: Notify Slack
+        if: always()
+        uses: slackapi/slack-github-action@v2
+        with:
+          webhook: ${{ secrets.SLACK_WEBHOOK_CONNECT_EMBEDDED }}
+          webhook-type: incoming-webhook
+          payload: |
+            {
+              "text": "${{ job.status == 'success' && '✅' || '❌' }} ${{ job.status == 'success' && format('GA release `@stripe/react-connect-js@{0}` published!', needs.detect-releases.outputs.ga_version) || format('Failed to publish GA release `@stripe/react-connect-js@{0}`', needs.detect-releases.outputs.ga_version) }}\n<${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|View run> • Triggered by ${{ github.actor }}"
+            }
+
+  release-preview:
+    needs: detect-releases
+    if: needs.detect-releases.outputs.preview_changed == 'true'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./preview
+    permissions:
+      contents: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          registry-url: "https://registry.npmjs.org"
+
+      - run: yarn install --frozen-lockfile
+      - run: yarn test
+      - run: yarn build
+
+      - name: Publish to npm
+        run: npm publish --ignore-scripts --access public --tag preview
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Generate scoped release notes
+        id: notes
+        working-directory: .
+        run: |
+          PREV_TAG=$(git tag --list 'v*-preview*' --sort=-v:refname | head -n 1 || echo "")
+
+          if [ -n "$PREV_TAG" ]; then
+            NOTES=$(git log "$PREV_TAG"..HEAD --pretty=format:"- %s (%h)" -- preview/)
+          else
+            NOTES=$(git log -20 --pretty=format:"- %s (%h)" -- preview/)
+          fi
+
+          if [ -z "$NOTES" ]; then
+            NOTES="- Version bump to ${{ needs.detect-releases.outputs.preview_version }}"
+          fi
+
+          echo "$NOTES" > "$RUNNER_TEMP/preview-release-notes.md"
+
+      - name: Create tag and GitHub Release
+        working-directory: .
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          VERSION="${{ needs.detect-releases.outputs.preview_version }}"
+          TAG="v${VERSION}"
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git tag "$TAG"
+          git push origin "$TAG"
+
+          gh release create "$TAG" \
+            --title "@stripe/react-connect-js@${VERSION} (preview)" \
+            --notes-file "$RUNNER_TEMP/preview-release-notes.md" \
+            --prerelease
+
+      - name: Notify Slack
+        if: always()
+        uses: slackapi/slack-github-action@v2
+        with:
+          webhook: ${{ secrets.SLACK_WEBHOOK_CONNECT_EMBEDDED }}
+          webhook-type: incoming-webhook
+          payload: |
+            {
+              "text": "${{ job.status == 'success' && '✅' || '❌' }} ${{ job.status == 'success' && format('Preview release `@stripe/react-connect-js@{0}` published!', needs.detect-releases.outputs.preview_version) || format('Failed to publish preview release `@stripe/react-connect-js@{0}`', needs.detect-releases.outputs.preview_version) }}\n<${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|View run> • Triggered by ${{ github.actor }}"
+            }
