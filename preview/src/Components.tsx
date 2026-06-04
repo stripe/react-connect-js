@@ -1202,3 +1202,20 @@ export const ConnectFinancialAccountsTransactions = ({
 
   return wrapper;
 };
+
+export const ConnectBills = ({
+  onLoadError,
+  onLoaderStart,
+}: CommonComponentProps): JSX.Element => {
+  const {wrapper, component: bills} =
+    useCreateComponent('bills');
+
+  useUpdateWithSetter(bills, onLoaderStart, (comp, val) => {
+    comp.setOnLoaderStart(val);
+  });
+  useUpdateWithSetter(bills, onLoadError, (comp, val) => {
+    comp.setOnLoadError(val);
+  });
+
+  return wrapper;
+};
