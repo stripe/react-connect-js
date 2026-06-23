@@ -9,6 +9,7 @@ import type {
   NotificationCount,
   StepChange,
   PaymentsListDefaultFilters,
+  SectionOpen,
 } from '@stripe/connect-js';
 
 export type {CollectionOptions};
@@ -182,8 +183,10 @@ export const ConnectAccountManagement = ({
   collectionOptions,
   onLoadError,
   onLoaderStart,
+  onSectionOpen,
 }: {
   collectionOptions?: CollectionOptions;
+  onSectionOpen?: ({sectionName}: SectionOpen) => void;
 } & CommonComponentProps): React.JSX.Element | null => {
   const {wrapper, component: accountManagement} =
     useCreateComponent('account-management');
@@ -197,6 +200,9 @@ export const ConnectAccountManagement = ({
   useUpdateWithSetter(accountManagement, onLoadError, (comp, val) => {
     comp.setOnLoadError(val);
   });
+  useUpdateWithSetter(accountManagement, onSectionOpen, (comp, val) =>
+    comp.setOnSectionOpen(val)
+  );
 
   return wrapper;
 };
