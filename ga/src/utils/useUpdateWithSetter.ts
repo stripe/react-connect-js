@@ -4,6 +4,7 @@ import type {
   LoadError,
   LoaderStart,
   NotificationCount,
+  SectionOpen,
   StepChange,
   PaymentsListDefaultFilters,
 } from '@stripe/connect-js';
@@ -23,6 +24,7 @@ export const useUpdateWithSetter = <
     | ((loaderStart: LoaderStart) => void)
     | ((loaderError: LoadError) => void)
     | ((stepChange: StepChange) => void)
+    | (({sectionName}: SectionOpen) => void)
     | (({id}: {id: string}) => void)
     | (({promotionShown}: {promotionShown: boolean}) => void)
     | (({payoutId}: {payoutId: string}) => void)

@@ -11,6 +11,7 @@ import type {
   NotificationCount,
   StepChange,
   PaymentsListDefaultFilters,
+  SectionOpen,
 } from '@stripe/connect-js';
 
 export const useUpdateWithSetter = <
@@ -31,6 +32,7 @@ export const useUpdateWithSetter = <
     | ((productType: FinancingProductType) => void)
     | ((StepChange: StepChange) => void)
     | Date
+    | (({sectionName}: SectionOpen) => void)
     | (({id}: {id: string}) => void)
     | ((taxCode: string | null, _: {analyticsName: string} | null) => void)
     | (({promotionShown}: {promotionShown: boolean}) => void)
