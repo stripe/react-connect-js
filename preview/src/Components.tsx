@@ -616,6 +616,8 @@ export const ConnectCapitalFinancingApplication = ({
   onApplicationStepChange,
   privacyPolicyUrl,
   howCapitalWorksUrl,
+  onApplicationInitiated,
+  resumeInitiatedApplication,
   onLoadError,
   onLoaderStart,
 }: {
@@ -623,6 +625,8 @@ export const ConnectCapitalFinancingApplication = ({
   onApplicationStepChange?: ({step}: StepChange) => void;
   privacyPolicyUrl?: string;
   howCapitalWorksUrl?: string;
+  onApplicationInitiated?: () => void;
+  resumeInitiatedApplication?: boolean;
 } & CommonComponentProps): JSX.Element => {
   const {wrapper, component: capitalFinancingApplication} = useCreateComponent(
     'capital-financing-application'
@@ -650,6 +654,16 @@ export const ConnectCapitalFinancingApplication = ({
     howCapitalWorksUrl,
     (comp, val) => comp.setHowCapitalWorksUrl(val)
   );
+  useUpdateWithSetter(
+    capitalFinancingApplication,
+    onApplicationInitiated,
+    (comp, val) => comp.setOnApplicationInitiated(val)
+  );
+  useUpdateWithSetter(
+    capitalFinancingApplication,
+    resumeInitiatedApplication,
+    (comp, val) => comp.setResumeInitiatedApplication(val)
+  );
 
   useUpdateWithSetter(
     capitalFinancingApplication,
@@ -673,6 +687,8 @@ export const ConnectCapitalFinancingPromotion = ({
   privacyPolicyUrl,
   howCapitalWorksUrl,
   eligibilityCriteriaUrl,
+  onAdvanceToCapitalFinancingApplication,
+  disableNestedCapitalFinancingApplication,
   onLoadError,
   onLoaderStart,
 }: {
@@ -686,6 +702,8 @@ export const ConnectCapitalFinancingPromotion = ({
   eligibilityCriteriaUrl?: string;
   onApplicationSubmitted?: () => void;
   onApplicationStepChange?: ({step}: StepChange) => void;
+  onAdvanceToCapitalFinancingApplication?: () => void;
+  disableNestedCapitalFinancingApplication?: boolean;
 } & CommonComponentProps): JSX.Element => {
   const {wrapper, component: capitalPromotion} = useCreateComponent(
     'capital-financing-promotion'
@@ -715,6 +733,16 @@ export const ConnectCapitalFinancingPromotion = ({
     capitalPromotion,
     onEligibleFinancingOfferLoaded,
     (comp, val) => comp.setOnEligibleFinancingOfferLoaded(val)
+  );
+  useUpdateWithSetter(
+    capitalPromotion,
+    onAdvanceToCapitalFinancingApplication,
+    (comp, val) => comp.setOnAdvanceToCapitalFinancingApplication(val)
+  );
+  useUpdateWithSetter(
+    capitalPromotion,
+    disableNestedCapitalFinancingApplication,
+    (comp, val) => comp.setDisableNestedCapitalFinancingApplication(val)
   );
 
   useUpdateWithSetter(capitalPromotion, onLoaderStart, (comp, val) => {
