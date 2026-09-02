@@ -490,6 +490,31 @@ export const ConnectFinancialAccount = ({
   return wrapper;
 };
 
+export const ConnectFinancialAccountRewards = ({
+  financialAccount,
+  onLoadError,
+  onLoaderStart,
+}: {
+  financialAccount: string;
+} & CommonComponentProps): JSX.Element => {
+  const {wrapper, component: financialAccountRewardsComponent} =
+    useCreateComponent('financial-account-rewards');
+
+  useUpdateWithSetter(
+    financialAccountRewardsComponent,
+    financialAccount,
+    (comp, val) => comp.setFinancialAccount(val)
+  );
+  useUpdateWithSetter(financialAccountRewardsComponent, onLoaderStart, (comp, val) => {
+    comp.setOnLoaderStart(val);
+  });
+  useUpdateWithSetter(financialAccountRewardsComponent, onLoadError, (comp, val) => {
+    comp.setOnLoadError(val);
+  });
+
+  return wrapper;
+};
+
 export const ConnectFinancialAccountTransactions = ({
   financialAccount,
   onLoadError,
