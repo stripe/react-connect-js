@@ -13,3 +13,7 @@ export type FinancingProductType = {
 };
 
 export type FinancingPromotionLayoutType = 'full' | 'banner';
+
+export type CapitalFinancingManualPaymentPresentationMode =
+  | 'inline'
+  | 'overlay';
