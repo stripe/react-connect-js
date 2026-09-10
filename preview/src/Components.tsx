@@ -1,6 +1,7 @@
 import {useCreateComponent} from './useCreateComponent';
 import {useUpdateWithSetter} from './utils/useUpdateWithSetter';
 import type {
+  CapitalFinancingManualPaymentPresentationMode,
   FetchEphemeralKeyFunction,
   FinancingProductType,
   FinancingPromotionLayoutType,
@@ -700,6 +701,37 @@ export const ConnectCapitalFinancingApplication = ({
   useUpdateWithSetter(capitalFinancingApplication, onLoadError, (comp, val) => {
     comp.setOnLoadError(val);
   });
+
+  return wrapper;
+};
+
+export const ConnectCapitalFinancingManualPayment = ({
+  presentationMode,
+  onManualPaymentSubmitted,
+  onOverlayClosed,
+}: {
+  presentationMode?: CapitalFinancingManualPaymentPresentationMode;
+  onManualPaymentSubmitted?: () => void;
+  onOverlayClosed?: () => void;
+} & CommonComponentProps): JSX.Element => {
+  const {wrapper, component: capitalFinancingManualPayment} =
+    useCreateComponent('capital-financing-manual-payment');
+
+  useUpdateWithSetter(
+    capitalFinancingManualPayment,
+    presentationMode,
+    (comp, val) => comp.setPresentationMode(val)
+  );
+  useUpdateWithSetter(
+    capitalFinancingManualPayment,
+    onManualPaymentSubmitted,
+    (comp, val) => comp.setOnManualPaymentSubmitted(val)
+  );
+  useUpdateWithSetter(
+    capitalFinancingManualPayment,
+    onOverlayClosed,
+    (comp, val) => comp.setOnOverlayClosed(val)
+  );
 
   return wrapper;
 };
