@@ -1,12 +1,12 @@
 import {useCreateComponent} from './useCreateComponent';
 import {useUpdateWithSetter} from './utils/useUpdateWithSetter';
 import type {
-  CapitalFinancingManualPaymentPresentationMode,
   FetchEphemeralKeyFunction,
   FinancingProductType,
   FinancingPromotionLayoutType,
 } from './types';
 import type {
+  CapitalFinancingManualPaymentPresentationMode,
   CollectionOptions,
   LoadError,
   LoaderStart,
