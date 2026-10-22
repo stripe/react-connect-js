@@ -1003,19 +1003,12 @@ export const ConnectReportingChart = ({
    * @param intervalStart The start date of the report interval.
    * @param intervalEnd The end date of the report interval.
    * @param intervalType The type of the report interval.
+   * @param height The exact height of the component in pixels.
    */
   reportName: ReportName;
   intervalStart?: Date;
   intervalEnd?: Date;
   intervalType?: IntervalType;
-  /**
-   * Total component height in pixels (for example, '300px'), including the
-   * title, metric value, and chart axes. Nonnegative pixel values below 200px
-   * use 200px. Omit or set to undefined to clear the override and use
-   * proportional sizing. Invalid strings, negative values, and unsupported
-   * units or keywords use default sizing. Invalid or below-minimum values
-   * produce warnings in test mode.
-   */
   height?: string;
 } & CommonComponentProps): JSX.Element | null => {
   const {wrapper, component: reportingChart} =
