@@ -994,6 +994,7 @@ export const ConnectReportingChart = ({
   intervalStart,
   intervalEnd,
   intervalType,
+  height,
   onLoadError,
   onLoaderStart,
 }: {
@@ -1002,11 +1003,13 @@ export const ConnectReportingChart = ({
    * @param intervalStart The start date of the report interval.
    * @param intervalEnd The end date of the report interval.
    * @param intervalType The type of the report interval.
+   * @param height The exact height of the component in pixels.
    */
   reportName: ReportName;
   intervalStart?: Date;
   intervalEnd?: Date;
   intervalType?: IntervalType;
+  height?: string;
 } & CommonComponentProps): JSX.Element | null => {
   const {wrapper, component: reportingChart} =
     useCreateComponent('reporting-chart');
@@ -1025,6 +1028,10 @@ export const ConnectReportingChart = ({
 
   useUpdateWithSetter(reportingChart, intervalType, (comp, val) =>
     comp.setIntervalType(val)
+  );
+
+  useUpdateWithSetter(reportingChart, height, (comp, val) =>
+    comp.setHeight(val)
   );
 
   useUpdateWithSetter(reportingChart, onLoaderStart, (comp, val) => {
