@@ -994,6 +994,7 @@ export const ConnectReportingChart = ({
   intervalStart,
   intervalEnd,
   intervalType,
+  height,
   onLoadError,
   onLoaderStart,
 }: {
@@ -1007,6 +1008,15 @@ export const ConnectReportingChart = ({
   intervalStart?: Date;
   intervalEnd?: Date;
   intervalType?: IntervalType;
+  /**
+   * Total component height in pixels (for example, '300px'), including the
+   * title, metric value, and chart axes. Nonnegative pixel values below 200px
+   * use 200px. Omit or set to undefined to clear the override and use
+   * proportional sizing. Invalid strings, negative values, and unsupported
+   * units or keywords use default sizing. Invalid or below-minimum values
+   * produce warnings in test mode.
+   */
+  height?: string;
 } & CommonComponentProps): JSX.Element | null => {
   const {wrapper, component: reportingChart} =
     useCreateComponent('reporting-chart');
@@ -1025,6 +1035,10 @@ export const ConnectReportingChart = ({
 
   useUpdateWithSetter(reportingChart, intervalType, (comp, val) =>
     comp.setIntervalType(val)
+  );
+
+  useUpdateWithSetter(reportingChart, height, (comp, val) =>
+    comp.setHeight(val)
   );
 
   useUpdateWithSetter(reportingChart, onLoaderStart, (comp, val) => {
