@@ -573,13 +573,6 @@ export const ConnectReportingChart = ({
   onLoadError,
   onLoaderStart,
 }: {
-  /**
-   * @param reportName The name of the report to render as a chart.
-   * @param intervalStart The start date of the report interval.
-   * @param intervalEnd The end date of the report interval.
-   * @param intervalType The type of the report interval.
-   * @param height The exact height of the component in pixels.
-   */
   reportName: ReportName;
   intervalStart?: Date;
   intervalEnd?: Date;
