@@ -10,6 +10,8 @@ import type {
   StepChange,
   PaymentsListDefaultFilters,
   SectionOpen,
+  IntervalType,
+  ReportName,
 } from '@stripe/connect-js';
 
 export type {CollectionOptions};
@@ -562,6 +564,56 @@ export const ConnectPayoutDetails = ({
   return wrapper;
 };
 
+export const ConnectReportingChart = ({
+  reportName,
+  intervalStart,
+  intervalEnd,
+  intervalType,
+  height,
+  onLoadError,
+  onLoaderStart,
+}: {
+  /**
+   * @param reportName The name of the report to render as a chart.
+   * @param intervalStart The start date of the report interval.
+   * @param intervalEnd The end date of the report interval.
+   * @param intervalType The type of the report interval.
+   * @param height The exact height of the component in pixels.
+   */
+  reportName: ReportName;
+  intervalStart?: Date;
+  intervalEnd?: Date;
+  intervalType?: IntervalType;
+  height?: string;
+} & CommonComponentProps): React.JSX.Element | null => {
+  const {wrapper, component: reportingChart} =
+    useCreateComponent('reporting-chart');
+
+  useUpdateWithSetter(reportingChart, reportName, (comp, val) =>
+    comp.setReportName(val)
+  );
+  useUpdateWithSetter(reportingChart, intervalStart, (comp, val) =>
+    comp.setIntervalStart(val)
+  );
+  useUpdateWithSetter(reportingChart, intervalEnd, (comp, val) =>
+    comp.setIntervalEnd(val)
+  );
+  useUpdateWithSetter(reportingChart, intervalType, (comp, val) =>
+    comp.setIntervalType(val)
+  );
+  useUpdateWithSetter(reportingChart, height, (comp, val) =>
+    comp.setHeight(val)
+  );
+  useUpdateWithSetter(reportingChart, onLoaderStart, (comp, val) => {
+    comp.setOnLoaderStart(val);
+  });
+  useUpdateWithSetter(reportingChart, onLoadError, (comp, val) => {
+    comp.setOnLoadError(val);
+  });
+
+  return wrapper;
+};
+
 export const ConnectBalanceReport = ({
   onLoadError,
   onLoaderStart,
@@ -601,9 +653,13 @@ export const ConnectPayoutReconciliationReport = ({
       comp.setOnReportAvailabilityLoaded(val);
     }
   );
-  useUpdateWithSetter(payoutReconciliationReport, onLoaderStart, (comp, val) => {
-    comp.setOnLoaderStart(val);
-  });
+  useUpdateWithSetter(
+    payoutReconciliationReport,
+    onLoaderStart,
+    (comp, val) => {
+      comp.setOnLoaderStart(val);
+    }
+  );
   useUpdateWithSetter(payoutReconciliationReport, onLoadError, (comp, val) => {
     comp.setOnLoadError(val);
   });
