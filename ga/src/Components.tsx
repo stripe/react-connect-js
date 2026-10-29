@@ -653,13 +653,9 @@ export const ConnectPayoutReconciliationReport = ({
       comp.setOnReportAvailabilityLoaded(val);
     }
   );
-  useUpdateWithSetter(
-    payoutReconciliationReport,
-    onLoaderStart,
-    (comp, val) => {
-      comp.setOnLoaderStart(val);
-    }
-  );
+  useUpdateWithSetter(payoutReconciliationReport, onLoaderStart, (comp, val) => {
+    comp.setOnLoaderStart(val);
+  });
   useUpdateWithSetter(payoutReconciliationReport, onLoadError, (comp, val) => {
     comp.setOnLoadError(val);
   });

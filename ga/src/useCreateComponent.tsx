@@ -8,10 +8,7 @@ import type {
 
 export const useCreateComponent = <T extends ConnectElementTagName>(
   tagName: T
-): {
-  wrapper: React.JSX.Element;
-  component: ConnectHTMLElementRecord[T] | null;
-} => {
+): {wrapper: React.JSX.Element; component: ConnectHTMLElementRecord[T] | null} => {
   const [component, setComponent] = React.useState<
     ConnectHTMLElementRecord[T] | null
   >(null);
@@ -20,13 +17,7 @@ export const useCreateComponent = <T extends ConnectElementTagName>(
 
   // We set width to 100% to preserve this functionality aspect of embedded components even though
   // we are introducing a wrapper div for this element
-  const wrapper = (
-    <div
-      style={{width: '100%'}}
-      data-stripe-connect-js-wrapper
-      ref={wrapperDivRef}
-    ></div>
-  );
+  const wrapper = <div style={{width: '100%'}} data-stripe-connect-js-wrapper ref={wrapperDivRef}></div>;
 
   React.useLayoutEffect(() => {
     if (wrapperDivRef.current !== null && component === null) {
