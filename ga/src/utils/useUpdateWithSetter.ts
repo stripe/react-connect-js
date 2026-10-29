@@ -16,6 +16,7 @@ export const useUpdateWithSetter = <
     | string
     | boolean
     | string[]
+    | Date
     | PaymentsListDefaultFilters
     | (() => void)
     | FetchEphemeralKeyFunction
