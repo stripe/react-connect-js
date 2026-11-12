@@ -374,22 +374,6 @@ export const ConnectAccountManagement = ({
   return wrapper;
 };
 
-export const ConnectInstantPayouts = ({
-  onLoadError,
-  onLoaderStart,
-}: CommonComponentProps): JSX.Element => {
-  const {wrapper, component: instantPayouts} =
-    useCreateComponent('instant-payouts');
-
-  useUpdateWithSetter(instantPayouts, onLoaderStart, (comp, val) => {
-    comp.setOnLoaderStart(val);
-  });
-  useUpdateWithSetter(instantPayouts, onLoadError, (comp, val) => {
-    comp.setOnLoadError(val);
-  });
-  return wrapper;
-};
-
 export const ConnectNotificationBanner = ({
   collectionOptions,
   onNotificationsChange,
