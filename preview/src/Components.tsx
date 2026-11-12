@@ -732,6 +732,8 @@ export const ConnectCapitalFinancingManualPayment = ({
   presentationMode,
   onManualPaymentSubmitted,
   onOverlayClosed,
+  onLoadError,
+  onLoaderStart,
 }: {
   presentationMode?: CapitalFinancingManualPaymentPresentationMode;
   onManualPaymentSubmitted?: () => void;
@@ -754,6 +756,20 @@ export const ConnectCapitalFinancingManualPayment = ({
     capitalFinancingManualPayment,
     onOverlayClosed,
     (comp, val) => comp.setOnOverlayClosed(val)
+  );
+  useUpdateWithSetter(
+    capitalFinancingManualPayment,
+    onLoaderStart,
+    (comp, val) => {
+      comp.setOnLoaderStart(val);
+    }
+  );
+  useUpdateWithSetter(
+    capitalFinancingManualPayment,
+    onLoadError,
+    (comp, val) => {
+      comp.setOnLoadError(val);
+    }
   );
 
   return wrapper;
