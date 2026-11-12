@@ -60,13 +60,6 @@ describe('Components', () => {
       expect(component[setter]).toHaveBeenLastCalledWith(undefined);
     });
 
-    it('forwards undefined when common callbacks are omitted', () => {
-      Components.ConnectCapitalFinancingManualPayment({});
-
-      expect(component.setOnLoadError).toHaveBeenCalledWith(undefined);
-      expect(component.setOnLoaderStart).toHaveBeenCalledWith(undefined);
-    });
-
     it('preserves the manual payment props', () => {
       const onManualPaymentSubmitted = jest.fn();
       const onOverlayClosed = jest.fn();
