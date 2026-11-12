@@ -6,6 +6,7 @@ import type {
   FinancingPromotionLayoutType,
 } from './types';
 import type {
+  BusinessProfileSavedEvent,
   CapitalFinancingManualPaymentPresentationMode,
   CollectionOptions,
   LoadError,
@@ -241,6 +242,28 @@ export const ConnectAgenticCommerceSettings = ({
   });
   useUpdateWithSetter(component, onAgreementUpdated, (comp, val) => {
     comp.setOnAgreementUpdated(val);
+  });
+  return wrapper;
+};
+
+export const ConnectBusinessProfileManagement = ({
+  onBusinessProfileSaved,
+  onLoadError,
+  onLoaderStart,
+}: {
+  onBusinessProfileSaved?: (event: BusinessProfileSavedEvent) => void;
+} & CommonComponentProps): JSX.Element | null => {
+  const {wrapper, component} =
+    useCreateComponent('business-profile-management');
+
+  useUpdateWithSetter(component, onLoaderStart, (comp, val) => {
+    comp.setOnLoaderStart(val);
+  });
+  useUpdateWithSetter(component, onLoadError, (comp, val) => {
+    comp.setOnLoadError(val);
+  });
+  useUpdateWithSetter(component, onBusinessProfileSaved, (comp, val) => {
+    comp.setOnBusinessProfileSaved(val);
   });
   return wrapper;
 };

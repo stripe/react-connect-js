@@ -4,6 +4,7 @@ import type {
   FinancingProductType,
 } from '../types';
 import type {
+  BusinessProfileSavedEvent,
   CollectionOptions,
   LoadError,
   LoaderStart,
@@ -40,6 +41,7 @@ export const useUpdateWithSetter = <
     | (({checkScanToken}: {checkScanToken: string}) => Promise<void>)
     | (({agreementId}: {agreementId: string}) => void)
     | (({isReportAvailable}: {isReportAvailable: boolean}) => void)
+    | ((event: BusinessProfileSavedEvent) => void)
     | undefined
 >(
   component: T | null,
