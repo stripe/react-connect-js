@@ -645,6 +645,7 @@ export const ConnectCapitalFinancing = ({
 };
 
 export const ConnectCapitalFinancingApplication = ({
+  defaultFinancingOffer,
   onApplicationSubmitted,
   onApplicationStepChange,
   privacyPolicyUrl,
@@ -654,6 +655,7 @@ export const ConnectCapitalFinancingApplication = ({
   onLoadError,
   onLoaderStart,
 }: {
+  defaultFinancingOffer?: string;
   onApplicationSubmitted: () => void;
   onApplicationStepChange?: ({step}: StepChange) => void;
   privacyPolicyUrl?: string;
@@ -663,6 +665,12 @@ export const ConnectCapitalFinancingApplication = ({
 } & CommonComponentProps): JSX.Element => {
   const {wrapper, component: capitalFinancingApplication} = useCreateComponent(
     'capital-financing-application'
+  );
+
+  useUpdateWithSetter(
+    capitalFinancingApplication,
+    defaultFinancingOffer,
+    (comp, val) => comp.setDefaultFinancingOffer(val)
   );
 
   useUpdateWithSetter(
