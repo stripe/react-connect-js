@@ -181,6 +181,33 @@ export const ConnectAccountOnboarding = ({
   return wrapper;
 };
 
+export const ConnectPaymentMethodSettings = ({
+  paymentMethodConfiguration,
+  onLoadError,
+  onLoaderStart,
+}: {
+  paymentMethodConfiguration?: string;
+} & CommonComponentProps): React.JSX.Element => {
+  const {wrapper, component: paymentMethodSettings} = useCreateComponent(
+    'payment-method-settings'
+  );
+
+  useUpdateWithSetter(
+    paymentMethodSettings,
+    paymentMethodConfiguration,
+    (comp, val) => comp.setPaymentMethodConfiguration(val)
+  );
+
+  useUpdateWithSetter(paymentMethodSettings, onLoaderStart, (comp, val) => {
+    comp.setOnLoaderStart(val);
+  });
+  useUpdateWithSetter(paymentMethodSettings, onLoadError, (comp, val) => {
+    comp.setOnLoadError(val);
+  });
+
+  return wrapper;
+};
+
 export const ConnectAccountManagement = ({
   collectionOptions,
   onLoadError,
